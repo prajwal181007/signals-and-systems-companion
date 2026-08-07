@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signals Companion</title>
+<link rel="stylesheet" href="app/styles/app.css">
+<!-- KaTeX CSS is large (fonts inlined as data URIs); load async, engine gates math render on it -->
+<link rel="preload" as="style" href="app/styles/katex.css" onload="this.onload=null;this.rel='stylesheet';window.SC&&SC._cssReady&&SC._cssReady('katex')">
+<noscript><link rel="stylesheet" href="app/styles/katex.css"></noscript>
+<script>
+/* Bootstrap registry: data files may load before the engine. Queue everything;
+   the engine drains the queue when it boots. Classic scripts only — file:// safe. */
+window.SC = { _q: [], register: function (kind, payload) { this._q.push([kind, payload]); } };
+</script>
+</head>
+<body>
+<div id="app"><div class="boot-screen"><div class="boot-mark">∫</div><div>Signals Companion</div><div class="boot-sub">loading…</div></div></div>
+<noscript><div style="padding:2rem;font-family:sans-serif">Signals Companion needs JavaScript enabled. No network access is ever required.</div></noscript>
+<script src="data/manifest.js" defer></script>
+<script src="data/search-index.js" defer></script>
+<script src="app/engine.js" defer></script>
+<script src="app/widgets.js" defer></script>
+</body>
+</html>

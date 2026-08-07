@@ -1,0 +1,18 @@
+{
+  "name": "signals-companion",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Offline learning companion for EC2102 Signals and Systems",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "audit": "node tooling/no-network-audit.mjs",
+    "test": "node --test tooling/tests/"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "js-yaml": "^4.1.0",
+    "katex": "^0.16.11",
+    "marked": "^14.1.2"
+  }
+}

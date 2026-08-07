@@ -1,0 +1,99 @@
+# Course structure — the syllabus backbone. Concepts listed here in teaching
+# order; the manifest keeps only those that exist, so this doubles as roadmap.
+course:
+  code: EC2102
+  name: Signals and Systems
+  institution: Mahindra University
+  term: Fall 2026
+
+exams:
+  minor1: { modules: [1, 2], label: "Minor I" }
+  minor2: { modules: [3, 4], label: "Minor II" }
+  major:  { modules: [1, 2, 3, 4, 5], label: "Major" }
+
+tombstones: []
+
+modules:
+  - num: 0
+    title: "Foundations toolkit (bridge from 10+2 math)"
+    short: "Toolkit"
+    concepts:
+      - primers/complex-numbers
+      - primers/integration-toolkit
+      - primers/partial-fractions
+      - primers/linear-algebra
+      - primers/expectation
+
+  - num: 1
+    title: "Module 1 — Introduction to Signals and Systems"
+    short: "Signals & Systems"
+    concepts:
+      - m1/what-is-a-signal
+      - m1/energy-and-power
+      - m1/periodicity
+      - m1/even-and-odd
+      - m1/elementary-signals
+      - m1/impulse
+      - m1/signal-operations
+      - m1/system-properties
+      - m1/lti-systems
+      - m1/impulse-response
+      - m1/convolution
+      - m1/convolution-properties
+
+  - num: 2
+    title: "Module 2 — Fourier Analysis and White Noise"
+    short: "Fourier & Noise"
+    concepts:
+      - m2/orthogonality
+      - m2/walsh-hadamard
+      - m2/fourier-series
+      - m2/fourier-series-properties
+      - m2/gibbs
+      - m2/fourier-transform
+      - m2/ft-properties
+      - m2/parseval
+      - m2/frequency-response
+      - m2/bandwidth-uncertainty
+      - m2/white-noise-psd
+      - m2/hilbert-transform
+
+  - num: 3
+    title: "Module 3 — Laplace Transform and Z-Transform"
+    short: "Laplace & Z"
+    concepts:
+      - m3/s-plane
+      - m3/laplace-transform
+      - m3/roc
+      - m3/laplace-properties
+      - m3/inverse-laplace
+      - m3/transfer-function
+      - m3/solving-odes
+      - m3/ivt-fvt
+      - m3/z-transform
+      - m3/z-roc
+      - m3/inverse-z
+      - m3/difference-equations
+
+  - num: 4
+    title: "Module 4 — Interconnection of Systems and Sampling"
+    short: "Systems & Sampling"
+    concepts:
+      - m4/interconnections
+      - m4/feedback
+      - m4/sampling
+      - m4/reconstruction
+      - m4/dt-systems
+      - m4/dtft
+
+  - num: 5
+    title: "Module 5 — State-Space and Stability Analysis"
+    short: "State-Space & Stability"
+    concepts:
+      - m5/state-space
+      - m5/phase-portraits
+      - m5/controllability
+      - m5/ss-tf
+      - m5/bode-plots
+      - m5/stability-margins
+      - m5/nyquist
