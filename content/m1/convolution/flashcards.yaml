@@ -1,0 +1,16 @@
+cards:
+  - id: c-def
+    front: "Convolution integral — write it, and name what τ and t each do."
+    back: "$y(t)=\\int_{-\\infty}^{\\infty} x(\\tau)h(t-\\tau)d\\tau$. τ sweeps input moments (gone after integrating); t is the frozen output instant."
+  - id: c-support
+    front: "x lives on [a,b], h on [c,d]. Support of x∗h? DT length rule?"
+    back: "$[a+c,\\; b+d]$. DT: $N+M-1$ samples."
+  - id: c-identity
+    front: "x ∗ δ(t−t₀) = ?"
+    back: "$x(t-t_0)$ — convolving with a shifted impulse just copies and shifts. δ itself is the identity."
+  - id: c-why
+    front: "Why is convolution THE input–output law for LTI systems (one sentence)?"
+    back: "Write x as a weighted sum of impulses (sifting), push each through by linearity, shift each response by time-invariance — the sum of scaled shifted h's IS the convolution."
+  - id: c-step
+    front: "Step response s(t) in terms of h?"
+    back: "$s(t) = \\int_{-\\infty}^{t} h(\\tau)d\\tau$ — convolution with u(t) is a running integral. And $h = ds/dt$."

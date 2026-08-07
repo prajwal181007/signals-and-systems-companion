@@ -1,0 +1,75 @@
+predict:
+  kind: choice
+  prompt: |
+    Two rectangular pulses — one of width 1, one of width 2 — pass through the convolution
+    machine. **Commit before you watch:** what shape is $y = x * h$?
+  choices:
+    - "A rectangle again (width 3)"
+    - "A triangle"
+    - "A trapezoid — ramp up, flat top, ramp down"
+    - "Two separate rectangles"
+  answer: 2
+  resolution: |
+    While the shorter pulse slides *inside* the longer one the overlap area stays constant — that
+    plateau is the trapezoid's flat top. Equal widths would kill the plateau and give a triangle.
+    If you predicted "rectangle", you multiplied instead of convolving — the most common instinct
+    and precisely the one this concept repairs.
+
+quiz:
+  - id: q-shape
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "x(t) is nonzero on $[0,1]$, h(t) on $[0,2]$. Where can $y = x*h$ be nonzero, and what is y(0.5) doing?"
+    choices:
+      - "Support $[0,1]$; y(0.5) = x(0.5)·h(0.5)"
+      - "Support $[0,3]$; y(0.5) is an *area* — the integral of the overlap at t = 0.5"
+      - "Support $[0,2]$; y(0.5) = h(0.5)"
+      - "Support $[-1,3]$; y(0.5) = 0"
+    answer: 1
+    explanation: "Supports add: $[0+0, 1+2] = [0,3]$. And every output value is an overlap *area*, never a pointwise product — that distinction is the whole concept."
+  - id: q-echo
+    kind: expression
+    tags: [checkpoint]
+    prompt: "An echo channel has $h(t) = \\delta(t) + \\tfrac{1}{2}\\delta(t-3)$. For input $x(t)$, write $y(t)$ in terms of x. (Use x(t) etc.)"
+    answer: "x(t) + 0.5 x(t-3)"
+    vars: [t]
+    explanation: "Convolving with a shifted impulse copies and shifts: $x * \\delta(t-t_0) = x(t-t_0)$. The channel outputs the direct path plus a half-strength copy 3 s later."
+  - id: q-limits
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "For $x = u(t)-u(t-1)$, $h = u(t)-u(t-2)$, which integral computes y(t) in the regime $2 \\le t < 3$?"
+    choices:
+      - "$\\int_{0}^{t} d\\tau$"
+      - "$\\int_{t-2}^{1} d\\tau$"
+      - "$\\int_{0}^{1} d\\tau$"
+      - "$\\int_{t-2}^{t} d\\tau$"
+    answer: 1
+    explanation: "In the last overlap regime the flipped pulse's left edge $t-2$ has entered $[0,1]$ but x's right edge 1 is still the upper limit: $y = \\int_{t-2}^{1} d\\tau = 3-t$. Writing limits per regime is exactly the exam skill."
+  - id: q-dtlen
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "In DT, x[n] has 5 samples and h[n] has 4. How many samples can y = x∗h have at most?"
+    answer: 8
+    tolerance: 0
+    explanation: "$N + M - 1 = 5 + 4 - 1 = 8$. The −1 is because both first samples land on the same output index."
+  - id: q-start
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "x starts at t = 1 (zero before), h starts at t = 2. At what time can y first become nonzero?"
+    answer: 3
+    tolerance: 0
+    explanation: "Start times add: the earliest input moment (1) meets the earliest memory response (2) at output time 3. Both delays stack — outputs do NOT start when x starts."
+  - id: q-smooth
+    kind: mcq
+    prompt: "Which h(t) smooths (blurs) the input most?"
+    choices:
+      - "$h = \\delta(t)$"
+      - "$h = $ narrow tall pulse (width 0.01)"
+      - "$h = $ wide rect (width 2)"
+      - "$h = \\delta(t) - \\delta(t-0.01)$"
+    answer: 2
+    explanation: "Convolution averages the input over h's span — the wider the memory, the stronger the blur. δ is the identity (no change); the last one is a differencer, which *sharpens*."
+
+drills:
+  - generator: conv-rect-rect
+    label: "Regime-by-regime convolution of two rects (exam pattern)"

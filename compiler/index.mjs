@@ -48,10 +48,24 @@ export async function compileContent({ contentDir, outDir }) {
   }
 
   // ---------- cross-validation ----------
+  // During construction a forward reference (prereq/crosslink to a concept not
+  // yet written) warns and is dropped from the emitted unit — the runtime never
+  // sees a dead link. `--strict` (final hardening) turns these into errors.
+  const strict = process.argv.includes('--strict');
   const ids = new Set(concepts.map((c) => c.id));
   for (const c of concepts) {
-    for (const p of c.prereqs) if (!ids.has(p)) fail(`${c.id}: prereq "${p}" does not resolve`);
-    for (const l of c.crossLinks) if (!ids.has(l.target)) fail(`${c.id}: crossLink "${l.target}" does not resolve`);
+    for (const p of c.prereqs.slice()) {
+      if (!ids.has(p)) {
+        (strict ? fail : warn)(`${c.id}: prereq "${p}" does not resolve${strict ? '' : ' (dropped for now)'}`);
+        c.prereqs = c.prereqs.filter((x) => x !== p);
+      }
+    }
+    for (const l of c.crossLinks.slice()) {
+      if (!ids.has(l.target)) {
+        (strict ? fail : warn)(`${c.id}: crossLink "${l.target}" does not resolve${strict ? '' : ' (dropped for now)'}`);
+        c.crossLinks = c.crossLinks.filter((x) => x !== l);
+      }
+    }
   }
   // Stable-ID registry: removing an id strands SRS state — hard error unless tombstoned.
   const regPath = path.join(contentDir, '..', 'tooling', 'id-registry.json');

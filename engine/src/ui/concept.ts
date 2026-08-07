@@ -193,8 +193,9 @@ function renderArc(app: App, c: any, content: HTMLElement, host: WidgetHost) {
         } else { nextStage(); }
         break;
       }
-      case 1: { // Predict — commit before learning; never graded.
-        if (!c.predict) { nextStage(); break; }
+      case 1: { // Predict — commit before learning; never graded. Asked once:
+        // a stored commitment (e.g. from an interrupted first pass) is honored.
+        if (!c.predict || app.store.state.predictions[c.id]) { nextStage(); break; }
         const sec = el('section', { class: 'panel', style: 'border-color:var(--accent)' },
           el('h2', { style: 'margin-top:0' }, 'Before we start — commit to a guess'),
           el('div', { class: 'prose', html: c.predict.promptHtml }));

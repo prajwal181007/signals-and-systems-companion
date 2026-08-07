@@ -1,0 +1,9 @@
+widgets:
+  - id: conv-machine
+    type: ConvolutionMachine
+    title: "The Convolution Machine — flip & slide, or superposition of echoes"
+    params: { x: rect1, h: rect1, view: slide, t: 0.4 }
+    presets:
+      - { label: "rect ∗ rect → triangle", params: { x: rect1, h: rect1, view: slide } }
+      - { label: "why it works: echoes", params: { x: rect1, h: exp, view: echo } }
+      - { label: "echo channel (δ + ½δ)", params: { x: impulsePair, h: exp, view: slide } }
