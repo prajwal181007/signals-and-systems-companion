@@ -1,0 +1,9 @@
+widgets:
+  - id: explorer
+    type: PhasePortrait
+    title: "The portrait lab — drop marbles, find the rails, feel the funneling"
+    params: { a11: 0, a12: 1, a21: -2, a22: -0.6 }
+    presets:
+      - { label: "stable node: two rails, one funnel", params: { a11: 0, a12: 1, a21: -2, a22: -3 } }
+      - { label: "saddle: one rail home, an ocean of escape", params: { a11: 1, a12: 0, a21: 0, a22: -2 } }
+      - { label: "center: undamped orbits (marginal)", params: { a11: 0, a12: 1, a21: -4, a22: 0 } }

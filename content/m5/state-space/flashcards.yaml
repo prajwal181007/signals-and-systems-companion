@@ -1,0 +1,13 @@
+cards:
+  - id: c-eqs
+    front: "The state equations + what each matrix does."
+    back: "ẋ = Ax + Bu (A: drift of the memory; B: where input pushes); y = Cx + Du (C: what the sensor reads; D: feedthrough)."
+  - id: c-solution
+    front: "Full solution of ẋ = Ax + Bu."
+    back: "x(t) = e^{At}x(0) + ∫₀ᵗ e^{A(t−τ)}Bu(τ)dτ — zero-input + zero-state (matrix convolution)."
+  - id: c-stm
+    front: "State-transition matrix: computation + properties."
+    back: "e^{At} = L⁻¹{(sI−A)⁻¹}; Φ(0)=I, Φ̇=AΦ, Φ(t₁+t₂)=Φ(t₁)Φ(t₂). NEVER elementwise."
+  - id: c-bridge
+    front: "Poles vs eigenvalues; state choice recipes."
+    back: "Poles = eig(A) (det(sI−A) = both polynomials), modulo cancellations. States: derivatives (companion) or physical v_C, i_L — one per storage element."

@@ -1,0 +1,13 @@
+cards:
+  - id: c-why
+    front: "Why do Bode plots use dB and log frequency?"
+    back: "log turns the product of factors into a SUM: each pole/zero contributes a simple stencil; the sketch is their graphical sum. Phases add outright."
+  - id: c-stencils
+    front: "The magnitude stencils: real pole / zero / origin pole / quadratic."
+    back: "Pole: flat → −20 dB/dec past corner (−3 dB exact at it). Zero: mirror (+20). Origin pole: −20 dB/dec from the start (× type). Quadratic: −40 + peak ≈ −20log(2ζ)."
+  - id: c-phasestencil
+    front: "The phase stencil for a real pole."
+    back: "0° → −90° smeared over ±1 decade around the corner; −45° AT the corner. Never a step."
+  - id: c-arith
+    front: "Slope arithmetic (the numeric skill)."
+    back: "ΔdB = slope × decades. Crossover at 2 falling −20/dec ⇒ −20 dB at 20, −40 dB at 200. Slopes quantized to ±20n."

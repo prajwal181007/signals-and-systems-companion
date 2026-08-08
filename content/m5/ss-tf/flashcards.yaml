@@ -1,0 +1,13 @@
+cards:
+  - id: c-sstf
+    front: "SS → TF formula + the 2×2 execution route."
+    back: "H = C(sI−A)⁻¹B + D; invert by adjugate/det — det(sI−A) becomes the denominator (poles = eigenvalues iff minimal)."
+  - id: c-canonical
+    front: "Controllable canonical form for H = (b₁s+b₀)/(s²+a₁s+a₀)."
+    back: "A = [[0,1],[−a₀,−a₁]] (NEGATED bottom row), B = [0,1]ᵀ, C = [b₀, b₁], D = 0. Improper H: divide first, quotient → D."
+  - id: c-family
+    front: "Are realizations unique? What is 'minimal'?"
+    back: "No — similarity transforms give a family with the same H. Minimal ⇔ controllable + observable ⇔ order of H = dim A (no hidden modes)."
+  - id: c-audit
+    front: "The conversion audit."
+    back: "det(sI−A) = H's denominator; order gap ⇒ cancelled hidden mode (check controllability/observability)."

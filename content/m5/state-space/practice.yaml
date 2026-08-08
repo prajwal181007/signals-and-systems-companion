@@ -1,0 +1,78 @@
+predict:
+  kind: choice
+  prompt: |
+    You photograph a swinging pendulum at one instant — position captured perfectly.
+    **Commit:** can you predict its future motion from the photo?
+  choices:
+    - "Yes — position is everything"
+    - "No — two pendulums at the same position with different VELOCITIES have different futures; the state needs both"
+    - "Yes, if the photo is sharp"
+    - "Only for small swings"
+  answer: 1
+  resolution: |
+    The state is the MINIMAL memory that, with future inputs, determines the future. For 2nd-order
+    dynamics that is position AND velocity — the photo holds half the state. This "what must I know
+    now?" question is the entire idea of state-space; everything else is matrix bookkeeping.
+
+quiz:
+  - id: q-convert
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "For ÿ + 5ẏ + 6y = u with states x₁ = y, x₂ = ẏ, the A matrix is:"
+    choices:
+      - "[[0, 1], [−6, −5]]"
+      - "[[0, 1], [6, 5]]"
+      - "[[−5, −6], [1, 0]]"
+      - "[[1, 0], [0, 1]]"
+    answer: 0
+    explanation: "ẋ₁ = x₂; ẋ₂ = −6x₁ − 5x₂ + u. Companion form: 0/1 top row, NEGATED coefficients across the bottom. Check: det(sI−A) = s²+5s+6 ✓."
+  - id: q-eig
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The eigenvalues of A relate to the system's poles how?"
+    choices:
+      - "unrelated"
+      - "poles = eigenvalues (det(sI−A) is the characteristic AND pole polynomial) — up to hidden-mode cancellations"
+      - "poles = 1/eigenvalues"
+      - "eigenvalues are the zeros"
+    answer: 1
+    explanation: "The bridge between Modules 3 and 5. The 'up to cancellations' caveat is the doorway to controllability — H(s) can hide modes A still carries."
+  - id: q-stm
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The state-transition matrix e^{At} is computed by hand as:"
+    choices:
+      - "elementwise exponentials e^{a_{ij}t}"
+      - "$\\mathcal{L}^{-1}\\{(sI - A)^{-1}\\}$ — invert, partial-fraction each entry, audit Φ(0) = I"
+      - "A·e^{t}"
+      - "I + At only"
+    answer: 1
+    explanation: "The Laplace route is the exam method. Elementwise fails instantly (Φ(0) ≠ I unless A is diagonal) — the classic wrong turn."
+  - id: q-audit
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "You computed a candidate e^{At}. The two instant audits are:"
+    choices:
+      - "trace and determinant"
+      - "Φ(0) = I, and every entry is a combination of the eigen-modes e^{λt}"
+      - "symmetry and positivity"
+      - "rank and norm"
+    answer: 1
+    explanation: "Set t = 0 (must give I); scan entries (only e^{λᵢt} mixtures allowed). Ten seconds; catches most partial-fraction slips."
+  - id: q-storage
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "A circuit has 2 capacitors and 1 inductor (all independent). The state dimension n = ?"
+    answer: 3
+    tolerance: 0
+    explanation: "One state per independent energy-storage element (each v_C and i_L). The physical recipe for choosing states — and for predicting the order of the dynamics."
+  - id: q-hidden
+    kind: mcq
+    prompt: "H(s) computed from (A,B,C) came out FIRST order, but A is 2×2. What happened?"
+    choices:
+      - "Arithmetic error, always"
+      - "A pole-zero cancellation hid one mode: the transfer function forgets dynamics the state still carries (possibly unstable ones!)"
+      - "The system is nonlinear"
+      - "D was ignored"
+    answer: 1
+    explanation: "H ⊆ state description. The hidden mode is uncontrollable or unobservable — the next concepts make this precise, and the cancellation-hazard demo showed why it bites."

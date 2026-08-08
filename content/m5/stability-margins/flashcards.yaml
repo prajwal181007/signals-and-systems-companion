@@ -1,0 +1,13 @@
+cards:
+  - id: c-defs
+    front: "GM and PM — definitions with their landmark frequencies."
+    back: "PM = 180° + ∠L at the GAIN crossover (|L| = 0 dB). GM = −|L|_dB at the PHASE crossover (∠L = −180°). Never swap the landmarks."
+  - id: c-cliff
+    front: "What physically happens at L = 1∠−180°?"
+    back: "The returned signal reinforces itself at full strength: sustained oscillation (closed-loop poles ON the axis). PM=0 ⇒ constant ring at ω_gc; negative margins ⇒ runaway."
+  - id: c-rules
+    front: "Design norms + the two rules of thumb."
+    back: "PM 45–60°, GM 6–12 dB; ζ ≈ PM/100; ring frequency ≈ ω_gc; cross 0 dB on a −20 dB/dec segment (−40 ⇒ PM ≈ 0)."
+  - id: c-k
+    front: "Effect of K×2 on the margins; 'max K before instability'?"
+    back: "+6 dB vertical shift: GM −6 dB, crossover right, PM down. Max K = the GM spent exactly (GM 10 dB ⇒ K can grow ×3.16)."

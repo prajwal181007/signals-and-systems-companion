@@ -1,0 +1,84 @@
+predict:
+  kind: choice
+  prompt: |
+    A loop has PM exactly 0°. **Commit:** what does the closed-loop step response do?
+  choices:
+    - "Explodes exponentially"
+    - "Rings forever at constant amplitude — at the crossover frequency (marginal, poles on the axis)"
+    - "Settles slowly"
+    - "Nothing unusual"
+  answer: 1
+  resolution: |
+    PM = 0 puts the closed-loop pole pair exactly ON the jω axis: sustained oscillation at ω_gc —
+    the ring's pitch IS the crossover frequency. NEGATIVE margin is the runaway. Ring vs runaway is
+    the one-mark discriminator papers love, and the workbench lets you hear the difference coming.
+
+quiz:
+  - id: q-defs
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Phase margin is measured at the frequency where:"
+    choices:
+      - "∠L = −180° (phase crossover)"
+      - "|L| = 0 dB (gain crossover) — PM = 180° + ∠L there"
+      - "|L| peaks"
+      - "ω = ω_n"
+    answer: 1
+    explanation: "PM lives at the GAIN crossover; GM lives at the PHASE crossover. Swapping the landmarks is the classic exam slip."
+  - id: q-read
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "At gain crossover the phase reads −155°. PM (degrees)?"
+    answer: 25
+    tolerance: 0
+    explanation: "180 − 155 = 25° — thin: expect hard ringing near the crossover frequency (ζ ≈ 0.25 by the PM/100 rule)."
+  - id: q-gm
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "At the phase crossover, |L| = −10 dB. By what FACTOR can the gain grow before marginal instability?"
+    answer: 3.16
+    tolerance: 0.1
+    explanation: "GM = 10 dB = factor 10^{10/20} ≈ 3.16. 'Find K for marginal stability' = spend exactly the GM."
+  - id: q-k2
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Doubling the loop gain K does what to the Bode picture and margins?"
+    choices:
+      - "Shifts phase down 6°"
+      - "Raises |L| by 6 dB everywhere: GM drops 6 dB, gain crossover slides right into worse phase, PM falls"
+      - "Nothing until instability"
+      - "Improves both margins"
+    answer: 1
+    explanation: "Gain is a pure vertical shift in dB, phase untouched — both margins spend predictably. One knob, arithmetic consequences."
+  - id: q-slope
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A loop crosses 0 dB on a −40 dB/dec segment. The heuristic verdict:"
+    choices:
+      - "Excellent — steep is strong"
+      - "Trouble — −40 dB/dec goes with phase near −180°, so PM ≈ 0; reshape to cross on a −20 segment"
+      - "GM is infinite"
+      - "No conclusion possible"
+    answer: 1
+    explanation: "Slope and phase travel together (~−90° per −20 dB/dec). Crossing on −20 keeps healthy PM — this heuristic is most of classical loop-shaping."
+  - id: q-inf
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "For L = 10/((s+1)(s+5)) the phase never reaches −180°. The gain margin is:"
+    choices:
+      - "0 dB"
+      - "infinite — no phase crossover exists; say so rather than inventing a number"
+      - "6 dB"
+      - "undefined, so the loop is unstable"
+    answer: 1
+    explanation: "Two poles max out at −180° asymptotically, never crossing. GM = ∞: gain alone can't destabilize this loop (PM still finite — quote it)."
+  - id: q-openloop
+    kind: mcq
+    prompt: "Margins are computed from measurements of:"
+    choices:
+      - "the closed-loop step response"
+      - "the OPEN-loop L(jω) — certifying the closed loop before it is ever closed"
+      - "the plant alone without the controller"
+      - "the reference signal"
+    answer: 1
+    explanation: "That is their magic and their lab utility: sweep the open loop safely, predict the closed loop's fate. (Open-loop UNSTABLE plants void the simple reading — Nyquist decides there.)"

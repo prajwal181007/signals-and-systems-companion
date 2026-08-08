@@ -1,0 +1,7 @@
+widgets:
+  - id: steering
+    type: PhasePortrait
+    title: "The steering game — drag B, watch rank[B AB] live"
+    params: { a11: 0, a12: 1, a21: -2, a22: -0.6, mode: control }
+    presets:
+      - { label: "diagonal A: snap B to an eigenvector and lose", params: { a11: -1, a12: 0, a21: 0, a22: -2, mode: control } }

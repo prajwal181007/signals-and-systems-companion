@@ -1,0 +1,78 @@
+predict:
+  kind: choice
+  prompt: |
+    Your actuator pushes only along direction B, but you have unlimited time and unlimited gain.
+    The rank of [B  AB] is 1. **Commit:** can you reach a state off the B–AB line?
+  choices:
+    - "Yes — enough time reaches everything"
+    - "Yes — enough gain reaches everything"
+    - "No — the reachable set IS span{B, AB}; time and gain never add directions"
+    - "Only if A is stable"
+  answer: 2
+  resolution: |
+    Every reachable state is a combination of e^{Aσ}B = (I + Aσ + …)B — trapped in span{B, AB, …}.
+    Rank 1 means that span is a line, permanently. Gain scales along the line; time slides along it.
+    The steering game is not hard — it is UNWINNABLE, and the rank test is how you know in advance.
+
+quiz:
+  - id: q-compute
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "A = [[0,1],[−2,−3]], B = [0,1]ᵀ. Compute det[B AB] (the 2×2 controllability determinant)."
+    answer: -1
+    tolerance: 0.001
+    explanation: "AB = [1,−3]ᵀ; [B AB] = [[0,1],[1,−3]]; det = 0·(−3) − 1·1 = −1 ≠ 0 ⇒ controllable. Five lines on paper: B, AB, matrix, det, verdict."
+  - id: q-eigfail
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "When exactly does the 2×2 rank test fail?"
+    choices:
+      - "When A is unstable"
+      - "When B is (parallel to) an eigenvector of A — then AB ∥ B and the span collapses to a line"
+      - "When B is small"
+      - "When A is symmetric"
+    answer: 1
+    explanation: "Eigenvectors are the directions A refuses to rotate; a push along one stays along it. The orthogonal mode never hears the actuator."
+  - id: q-obs
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The observability matrix for (A, C) is:"
+    choices:
+      - "[B  AB]"
+      - "[C; CA; …; CA^{n-1}] stacked as rows — full rank ⇔ the output history pins down the state"
+      - "[C  B]"
+      - "A^{n-1}C"
+    answer: 1
+    explanation: "The sensor reads Cx now, CA x through the drift next, etc. B is irrelevant to inference. Duality: (A,B) controllable ⇔ (Aᵀ,Bᵀ) observable."
+  - id: q-ghost
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A system is unobservable. Concretely this means:"
+    choices:
+      - "the output is always zero"
+      - "two different initial states produce IDENTICAL output forever — the sensor cannot tell those worlds apart"
+      - "the system is unstable"
+      - "C = 0"
+    answer: 1
+    explanation: "Some x₀ ≠ 0 with O·x₀ = 0 gives y ≡ 0; add it to any trajectory invisibly. The ghost-room picture — and why observers need full rank."
+  - id: q-hidden
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "An uncontrollable mode shows up in the transfer function as:"
+    choices:
+      - "an extra pole"
+      - "a pole–zero CANCELLATION — the mode vanishes from H(s) but still evolves internally (dangerous if unstable)"
+      - "a bigger gain"
+      - "nothing changes in H"
+    answer: 1
+    explanation: "H shows only the controllable-and-observable part. Module 4's cancellation hazard — the diverging internal wire behind a placid output — was a hidden mode wearing its true name."
+  - id: q-3x3
+    kind: mcq
+    prompt: "For a 3-state system, the controllability matrix is:"
+    choices:
+      - "[B  AB]"
+      - "[B  AB  A²B] — the powers scale with n (Cayley–Hamilton caps them at n−1)"
+      - "[B  AB  AB]"
+      - "[B  A  B]"
+    answer: 1
+    explanation: "n blocks, powers 0…n−1. Papers escalate to 3×3 exactly to check you know the test grows by POWERS, then it's a 3×3 rank by row reduction."

@@ -1,0 +1,13 @@
+cards:
+  - id: c-ledger
+    front: "The Nyquist criterion, fully pinned."
+    back: "Z = N + P: N = CLOCKWISE encirclements of −1 (CCW negative), P = STRICTLY-RHP open-loop poles (axis poles detoured, excluded), Z = closed-loop RHP poles. Stable ⇔ Z = 0 ⇔ N = −P."
+  - id: c-raison
+    front: "Why Nyquist exists (what Bode margins can't do)."
+    back: "It certifies stability for OPEN-LOOP-UNSTABLE plants: P = 1 requires exactly one CCW encirclement of −1 — the wrap is the cure, not the disease."
+  - id: c-arcs
+    front: "What do origin poles of L produce on the Nyquist plot?"
+    back: "One 180° giant arc each (image of the detour semicircle), through the right half for the standard right-detour. Not counted into P."
+  - id: c-geometry
+    front: "GM and PM on the Nyquist plot."
+    back: "Negative-real-axis crossing at distance d ⇒ GM = 1/d; unit-circle crossing angle past −180° ⇒ PM. Robustness = distance from −1. Through −1 = marginal K."

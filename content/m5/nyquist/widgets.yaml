@@ -1,0 +1,8 @@
+widgets:
+  - id: voyage
+    type: NyquistVoyage
+    title: "The Nyquist voyage — march the contour, count before you reveal"
+    params: { preset: stable2 }
+    presets:
+      - { label: "axis pole: the giant arc", params: { preset: integrator } }
+      - { label: "P = 1: the encirclement that CURES", params: { preset: unstable1 } }

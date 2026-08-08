@@ -1,0 +1,63 @@
+predict:
+  kind: choice
+  prompt: |
+    A type-1 loop crosses 0 dB at ω = 2 rad/s, falling at −20 dB/dec there. **Commit:** what is the
+    gain at ω = 20 rad/s, read straight off the asymptote?
+  choices:
+    - "−10 dB"
+    - "−20 dB — one decade above crossover at −20 dB/dec"
+    - "−3 dB"
+    - "0 dB — crossover means flat"
+  answer: 1
+  resolution: |
+    Straight lines in (log ω, dB) are pure arithmetic: ΔdB = slope × decades = −20 × 1. This
+    slope-arithmetic — reading gains, finding crossovers, projecting margins — is half of every
+    Bode question's marks, and the whole reason the log axes exist.
+
+quiz:
+  - id: q-stencil
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A real pole with corner at ω_c contributes (magnitude):"
+    choices:
+      - "−40 dB/dec from ω = 0"
+      - "flat until ω_c, then −20 dB/dec; the exact curve is −3 dB at the corner"
+      - "−20 dB/dec everywhere"
+      - "a resonant peak"
+    answer: 1
+    explanation: "The one-pole stencil, derived once, reused forever. The −3 dB corner error is the known, bounded price of the sketch."
+  - id: q-type
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "H(s) = 50/(s²(s+10)). At very low frequency, the Bode magnitude slope is (dB/dec):"
+    answer: -40
+    tolerance: 0
+    explanation: "Two poles at the origin (type 2) ⇒ starting slope −40 dB/dec. The starting slope = −20 × type is the first thing examiners check."
+  - id: q-slopes
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "H = 100(s+1)/(s(s+10)(s+100)). What is the magnitude slope (dB/dec) for ω between 10 and 100?"
+    answer: -20
+    tolerance: 0
+    explanation: "Engaged: origin pole (−20), zero at 1 (+20), pole at 10 (−20) ⇒ net −20. Count engaged corners; multiply by 20 — slopes are quantized."
+  - id: q-phase
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The phase contribution of a real pole at its OWN corner frequency is:"
+    choices: ["0°", "−45°, with the −90° smeared over about a decade each side", "−90° exactly", "−180°"]
+    answer: 1
+    explanation: "Phase is a ramp, not a step: −45° at the corner, tails reaching ±1 decade. The smear is why margins erode BEFORE a pole's corner arrives."
+  - id: q-resonance
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "A quadratic pole pair has ζ = 0.05. The resonant peak above the asymptote is about (dB):"
+    answer: 20
+    tolerance: 1
+    explanation: "Peak ≈ −20log(2ζ) = −20log(0.1) = +20 dB. The asymptotes miss the bump entirely — annotate it or lose the physics of every lightly damped plant."
+  - id: q-read
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "From the worked sketch: level ≈ −20 dB at the corner ω = 100, then −40 dB/dec. Gain at ω = 1000 (dB)?"
+    answer: -60
+    tolerance: 1
+    explanation: "One decade at −40: −20 − 40 = −60 dB. State it as slope-arithmetic — one line, full credit."

@@ -1,0 +1,82 @@
+predict:
+  kind: choice
+  prompt: |
+    A 2×2 system has one positive and one negative eigenvalue (a saddle). You drop a marble at a
+    random point. **Commit:** what happens?
+  choices:
+    - "It converges — there's a stable direction after all"
+    - "It escapes along the unstable direction — only the measure-zero stable rail survives, and randomness never lands exactly there"
+    - "It orbits"
+    - "It freezes"
+  answer: 1
+  resolution: |
+    The stable eigenline is a knife's edge: a set of area zero. Every real start (noise exists!)
+    picks up an unstable-mode component that grows exponentially. This is why inverted pendulums
+    and rockets need ACTIVE feedback — the geometry of the saddle is the argument.
+
+quiz:
+  - id: q-tracedet
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A has tr = −3, det = 2, so tr² − 4det = 1. The portrait is a:"
+    choices:
+      - "stable node (real negative eigenvalues −1, −2)"
+      - "stable spiral"
+      - "saddle"
+      - "center"
+    answer: 0
+    explanation: "det > 0 rules out saddle; positive discriminant ⇒ real eigenvalues ⇒ node; tr < 0 ⇒ stable. Two numbers + one discriminant classify everything."
+  - id: q-saddle
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The instant saddle test is:"
+    choices:
+      - "tr < 0"
+      - "det(A) < 0 — eigenvalues of opposite sign"
+      - "tr² < 4det"
+      - "A symmetric"
+    answer: 1
+    explanation: "det = λ₁λ₂ < 0 forces opposite signs. The fastest classification in the whole topic."
+  - id: q-rails
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Why do trajectories funnel toward the SLOW eigenvector in a stable node?"
+    choices:
+      - "It attracts by force"
+      - "The fast mode e^{λ_fast·t} dies first, leaving motion along the slow rail — dominant-pole behavior made visible"
+      - "Numerical artifact"
+      - "They don't"
+    answer: 1
+    explanation: "x = c₁e^{λ₁t}v₁ + c₂e^{λ₂t}v₂: the bigger-|λ| term vanishes early. The funnel IS the dominant-pole approximation."
+  - id: q-center
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Closed orbits (a center) indicate:"
+    choices:
+      - "asymptotic stability"
+      - "MARGINAL stability — poles on the axis, energy circulating undamped; any perturbation tips it either way"
+      - "instability"
+      - "a saddle"
+    answer: 1
+    explanation: "Orbits neither approach nor leave. 'Bounded' ≠ 'asymptotically stable' — the word 'marginal' carries the mark."
+  - id: q-match
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A step response rings at ≈2 rad/s inside a decaying envelope. The matching portrait is:"
+    choices:
+      - "a node"
+      - "a stable spiral, winding ≈2 rad/s, pitch set by the envelope decay"
+      - "a saddle"
+      - "a center"
+    answer: 1
+    explanation: "Ringing ⇔ complex pair ⇔ spiral; the three-way matching (portrait ↔ poles ↔ response) is the exam's favorite format."
+  - id: q-crossing
+    kind: mcq
+    prompt: "Your sketched trajectories cross each other away from the origin. Verdict:"
+    choices:
+      - "Fine if the field is strong"
+      - "Impossible — one trajectory through each point (uniqueness); the sketch is wrong"
+      - "Allowed at eigenvectors"
+      - "Allowed for unstable systems"
+    answer: 1
+    explanation: "A crossing would mean two futures from one state — contradicting determinism of ẋ = Ax. Instant self-check for any portrait sketch."

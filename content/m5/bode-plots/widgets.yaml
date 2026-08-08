@@ -1,0 +1,8 @@
+widgets:
+  - id: workbench
+    type: BodeWorkbench
+    title: "The Bode workbench — asymptotes first, reality on toggle"
+    params: { preset: motor }
+    presets:
+      - { label: "resonant plant: the bump asymptotes miss", params: { preset: resonant } }
+      - { label: "non-minimum phase: same |H|, worse phase", params: { preset: rhpz } }

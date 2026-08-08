@@ -1,0 +1,7 @@
+widgets:
+  - id: margins
+    type: BodeWorkbench
+    title: "Spend the margins — crank K, watch PM shrink and the closed loop ring"
+    params: { preset: resonant }
+    presets:
+      - { label: "motor loop: the classic margins exercise", params: { preset: motor } }

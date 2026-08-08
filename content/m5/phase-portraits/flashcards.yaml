@@ -1,0 +1,13 @@
+cards:
+  - id: c-classify
+    front: "Trace–determinant portrait classification (2×2)."
+    back: "det<0: saddle. det>0: tr²≥4det ⇒ node, tr²<4det ⇒ spiral; stable iff tr<0; tr=0 (det>0) ⇒ center (MARGINAL)."
+  - id: c-rails
+    front: "What are eigenvectors in the phase plane, and which one dominates?"
+    back: "Invariant rails (motion stays on them, scaling as e^{λt}). The SLOW |λ| dominates the long run — trajectories funnel to it (dominant-pole behavior)."
+  - id: c-rules
+    front: "Two iron rules of portrait sketching."
+    back: "Trajectories NEVER cross (uniqueness); every arrow follows Ax. Rails + funneling + arrowheads = the full-marks sketch."
+  - id: c-saddle
+    front: "Saddle: geometry and practical verdict."
+    back: "One stable rail (measure zero) in an ocean of escape — practically unstable; why inverted equilibria need feedback."

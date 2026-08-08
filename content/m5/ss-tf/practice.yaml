@@ -1,0 +1,78 @@
+predict:
+  kind: choice
+  prompt: |
+    Two engineers model the same circuit. One uses states (v_C, i_L); the other uses phase variables.
+    Their (A, B, C) matrices look completely different. **Commit:** who is wrong?
+  choices:
+    - "The first — physical states are outdated"
+    - "The second — canonical forms are approximations"
+    - "Neither — realizations related by a similarity transform share the SAME transfer function"
+    - "Both — matrices must be unique"
+  answer: 2
+  resolution: |
+    Any invertible coordinate change z = Tx gives another valid realization of the same H(s).
+    State descriptions are a family; H is the invariant. "THE state-space form" doesn't exist —
+    "a minimal realization" is the phrase that means something.
+
+quiz:
+  - id: q-formula
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The transfer function from (A, B, C, D) is:"
+    choices:
+      - "$B(sI-A)^{-1}C + D$"
+      - "$C(sI-A)^{-1}B + D$ — row C, then the inverse, then column B"
+      - "$C A^{-1} B$"
+      - "$(sI-A)^{-1}BC$"
+    answer: 1
+    explanation: "The sandwich order matters (dimensions force it: 1×n · n×n · n×1). Zero-IC transform of the state equation, solved for Y/U."
+  - id: q-compute
+    kind: expression
+    tags: [checkpoint]
+    prompt: "A = [[0,1],[−2,−3]], B = [0,1]ᵀ, C = [1,0]. Compute H(s). (function of s)"
+    answer: "1/(s^2+3s+2)"
+    vars: [s]
+    explanation: "adj(sI−A) top-right entry is 1; sandwich picks it; denominator = det = s²+3s+2. The standard 2×2 exercise — audit: poles −1, −2 = eig(A) ✓."
+  - id: q-canonical
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Controllable canonical form of H = (3s+5)/(s² + 4s + 6): the A matrix is"
+    choices:
+      - "[[0,1],[−6,−4]] with C = [5, 3]"
+      - "[[0,1],[6,4]] with C = [5, 3]"
+      - "[[0,1],[−4,−6]] with C = [3, 5]"
+      - "[[−6,−4],[0,1]] with C = [5, 3]"
+    answer: 0
+    explanation: "Bottom row = NEGATED denominator coefficients in ascending order (−a₀, −a₁) = (−6, −4); C = ascending numerator (b₀, b₁) = (5, 3). The negation is where the marks die."
+  - id: q-improper
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "H = (s² + 3s + 4)/(s² + 3s + 2). Before the canonical form:"
+    choices:
+      - "proceed directly"
+      - "long-divide: H = 1 + 2/(s²+3s+2); the quotient 1 becomes D"
+      - "flip numerator and denominator"
+      - "differentiate"
+    answer: 1
+    explanation: "The canonical recipe needs strict properness; the divided-out constant is exactly the feedthrough D. The same degree-check discipline as partial fractions."
+  - id: q-ordergap
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A 3-state model produces a 2nd-order H(s). This reveals:"
+    choices:
+      - "an arithmetic mistake, necessarily"
+      - "a pole–zero cancellation: one mode is uncontrollable or unobservable — hidden from the terminals but alive inside"
+      - "D ≠ 0"
+      - "the system is nonlinear"
+    answer: 1
+    explanation: "Order gap = hidden-mode alarm. Minimal (controllable + observable) realizations have no gap. If the hidden mode is unstable, H is lying about internal stability."
+  - id: q-audit
+    kind: mcq
+    prompt: "The 10-second audit after ANY conversion in either direction:"
+    choices:
+      - "simulate both"
+      - "check det(sI−A) equals H's denominator (and eig(A) = poles)"
+      - "check B = C"
+      - "there is none"
+    answer: 1
+    explanation: "The determinant/denominator identity catches negation slips, ordering slips, and most arithmetic — the cheapest insurance in Module 5."

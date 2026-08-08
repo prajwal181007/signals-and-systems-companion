@@ -1,0 +1,82 @@
+predict:
+  kind: choice
+  prompt: |
+    A rocket's loop function has ONE open-loop RHP pole (P = 1). For the closed loop to be stable,
+    the Nyquist curve must… **Commit:**
+  choices:
+    - "Stay far away from −1 — encirclements are always bad"
+    - "Encircle −1 exactly once counter-clockwise: N = −1 so Z = N + P = 0"
+    - "Pass through −1"
+    - "Encircle the origin"
+  answer: 1
+  resolution: |
+    Z = N + P demands N = −P for stability. With P = 1, one CCW wrap of −1 is REQUIRED — the
+    encirclement is the signature of taming the unstable plant, not a danger sign. This inversion of
+    the "stay away from −1" folklore is precisely why Nyquist exists (and why Bode margins alone
+    cannot certify open-loop-unstable systems).
+
+quiz:
+  - id: q-ledger
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "In Z = N + P, the three symbols are:"
+    choices:
+      - "zeros, poles, points"
+      - "Z = closed-loop RHP poles; N = clockwise encirclements of −1; P = STRICTLY-RHP open-loop poles"
+      - "Z = open-loop zeros; N = crossings; P = all poles with Re ≥ 0"
+      - "Z = stability index; N = loop count; P = plant order"
+    answer: 1
+    explanation: "Stable ⇔ Z = 0. And P excludes axis poles (the contour detours around them) — counting an integrator into P is THE classic Nyquist error."
+  - id: q-p0
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "Open-loop stable (P = 0); the plot encircles −1 twice clockwise. How many closed-loop RHP poles (Z)?"
+    answer: 2
+    tolerance: 0
+    explanation: "Z = N + P = 2 + 0 = 2: unstable with two runaway modes. For P = 0 the only stable count is zero net encirclements."
+  - id: q-axis
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "L has a pole at the ORIGIN. In the Nyquist procedure it:"
+    choices:
+      - "counts into P"
+      - "is excluded from P; the contour detours around it, and the detour's image is a 180° giant arc (through the RIGHT half for the standard detour)"
+      - "makes the criterion inapplicable"
+      - "adds a zero"
+    answer: 1
+    explanation: "Axis poles are outside the (detoured) contour. Each origin pole ⇒ one giant arc; drawing it on the correct side decides these problems."
+  - id: q-classic
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "L = K/((s−1)(s+2)). L(0) = −K/2. For what K does the curve first reach −1 (the stability threshold)?"
+    answer: 2
+    tolerance: 0.01
+    explanation: "−K/2 = −1 at K = 2: below it N = 0 ⇒ Z = 1 (still unstable); above it the CCW wrap appears, N = −1, Z = 0 — STABLE. High gain cures this plant; the threshold is the classic Major computation."
+  - id: q-through
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "For some K the trace passes exactly THROUGH −1. Verdict:"
+    choices:
+      - "stable (rounding down)"
+      - "marginal: a closed-loop pole ON the axis — sustained oscillation; the count is undefined at exactly this K"
+      - "unstable, always"
+      - "the plot is wrong"
+    answer: 1
+    explanation: "Through −1 ⇔ 1 + L = 0 on the axis. Name it 'the marginal K' with its oscillation frequency — that phrasing is the mark."
+  - id: q-margins
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "The Nyquist curve crosses the negative real axis at −0.4. The gain margin as a FACTOR is:"
+    answer: 2.5
+    tolerance: 0.05
+    explanation: "GM = 1/0.4 = 2.5 (≈ 8 dB): the gain that stretches the crossing out to −1. Margins are literally distances from −1 — Bode and Nyquist agree by construction."
+  - id: q-mirror
+    kind: mcq
+    prompt: "You computed the plot for ω > 0 only. Before counting encirclements you must:"
+    choices:
+      - "count on the half-curve"
+      - "mirror it (conjugate symmetry) to close the curve — encirclements are only defined for the CLOSED contour image"
+      - "add the origin"
+      - "rotate 90°"
+    answer: 1
+    explanation: "L(−jω) = L*(jω): draw top, reflect, close with the arcs, THEN count. Half-curve counting silently halves N — a wrecked ledger."

@@ -1,0 +1,7 @@
+widgets:
+  - id: portrait
+    type: PhasePortrait
+    title: "The drift field of A — drop states, watch futures unroll"
+    params: { a11: 0, a12: 1, a21: -2, a22: -3 }
+    presets:
+      - { label: "underdamped: spiral home", params: { a11: 0, a12: 1, a21: -2, a22: -0.6 } }

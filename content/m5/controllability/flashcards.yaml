@@ -1,0 +1,13 @@
+cards:
+  - id: c-ctest
+    front: "The Kalman controllability test."
+    back: "rank[B AB … A^{n−1}B] = n (2×2: det[B AB] ≠ 0). Columns = the push + every direction the dynamics carry it; fails when B ∥ an eigenvector."
+  - id: c-otest
+    front: "The observability test + duality."
+    back: "rank[C; CA; …; CA^{n−1}] = n. Duality: (A,B) controllable ⇔ (Aᵀ,Bᵀ) observable — one proof, two theorems."
+  - id: c-hidden
+    front: "What do hidden (uncontrollable/unobservable) modes do to H(s)?"
+    back: "Pole–zero cancellation: the mode disappears from H but evolves internally — internal stability = eig(A), never poles of H alone."
+  - id: c-nofix
+    front: "Can time or gain fix a rank deficiency?"
+    back: "Never. Reachable set = span{B, AB, …}: a subspace. Gain scales within it, time moves within it; neither adds directions."
