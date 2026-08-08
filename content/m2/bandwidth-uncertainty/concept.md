@@ -53,7 +53,7 @@ with equality **only** for the Gaussian pulse $x(t) = Ce^{-t^2/2\sigma^2}$.
 
 **The exclusion theorem:** a signal cannot be both time-limited (exactly zero outside a finite interval) and band-limited (spectrum exactly zero outside $[-W, W]$), except $x \equiv 0$. Sketch of why: if $X$ vanishes outside $[-W,W]$, then $x(t) = \frac{1}{2\pi}\int_{-W}^{W} X(j\omega)e^{j\omega t} d\omega$; expanding $e^{j\omega t}$ as its (everywhere-convergent) power series and integrating term by term over the *finite* band shows $x(t)$ is one power series in $t$, valid for all $t$ — an "infinite polynomial," like the series for $e^x$ you met in 10+2. A power series that is zero over any interval is zero everywhere. So a band-limited signal cannot vanish on any time interval — it cannot be time-limited. By the symmetry of the FT, the argument runs both ways. **Consequence:** the ideal low-pass filter's $h(t) = \frac{W}{\pi}\,\mathrm{sinc}(Wt)$ is band-limited, hence eternal in time and nonzero for $t<0$: it must start responding *before* the input arrives. Real filters only approximate it.
 
-**Exam conventions:** if a problem says "bandwidth" of a low-pass filter without qualification, Mahindra convention is 3-dB. Always state your ruler, and watch units: $\omega$ [rad/s] $= 2\pi f$ [Hz].
+**Exam conventions:** if a problem says "bandwidth" of a low-pass filter without qualification, the usual exam convention is 3-dB. Always state your ruler, and watch units: $\omega$ [rad/s] $= 2\pi f$ [Hz].
 
 ## @derivation
 

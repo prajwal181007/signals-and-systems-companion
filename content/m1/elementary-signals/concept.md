@@ -35,7 +35,7 @@ Here is the exam payoff. Every piecewise-linear sketch is steps and ramps in dis
 
 ## @definition
 
-The six letters, with the conventions Mahindra papers use:
+The six letters, with the conventions exam papers use:
 
 $$u(t) = \begin{cases} 1, & t > 0 \\ 0, & t < 0 \end{cases} \qquad\qquad r(t) = t\,u(t) = \begin{cases} t, & t \ge 0 \\ 0, & t < 0 \end{cases}$$
 
@@ -49,7 +49,7 @@ $$\operatorname{rect}\!\left(\frac{t}{T}\right) = u\!\left(t+\tfrac{T}{2}\right)
 
 **Reading the symbols.** A step (or any letter) turns on where its **argument** crosses zero: $u(t-t_0)$ switches at $t = t_0$ — solve the argument, never guess from the sign. The ramp's slope is exactly 1; a ramp of slope $m$ is $m\,r(t)$. In rect, $T$ is the **full width**, centered at 0; a pulse that is on for $a < t < b$ is $u(t-a) - u(t-b)$. In the exponential, $\tau$ is the time to fall to $e^{-1} \approx 37\%$ of the start; after $5\tau$ the signal is below 1% — "gone" by engineering standards. In the sinusoid, $\omega_0$ is in rad/s, $f_0 = \omega_0/2\pi$ in Hz, period $T_0 = 2\pi/\omega_0$.
 
-**Exam conventions.** The value $u(0)$ may be taken as $0$, $\tfrac12$, or $1$ — it changes no integral and Mahindra papers leave it unspecified; do not spend time on it. Sketches must label corner times and levels. The complex exponential $e^{j\omega_0 t}$ waits for the complex-numbers primer and the Fourier module; everything here is real.
+**Exam conventions.** The value $u(0)$ may be taken as $0$, $\tfrac12$, or $1$ — it changes no integral and exam papers leave it unspecified; do not spend time on it. Sketches must label corner times and levels. The complex exponential $e^{j\omega_0 t}$ waits for the complex-numbers primer and the Fourier module; everything here is real.
 
 ## @derivation
 

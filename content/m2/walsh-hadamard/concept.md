@@ -59,7 +59,7 @@ with the energy check $\sum_n x[n]^2 = N\sum_k c_k^2$.
 
 **Reading the symbols:** $c_k$ is the projection recipe from the previous concept, verbatim: $\langle x, w_k\rangle / \langle w_k, w_k\rangle$. The numerator $\sum x[n]w_k[n]$ is pure adds and subtracts (that was the whole sales pitch), and the divisor is $\lVert w_k\rVert^2 = N$ because each row has $N$ entries of squared value 1.
 
-**Exam conventions:** state which ordering you are using — **natural (Hadamard) order** is what the recursion produces; **sequency order** sorts rows by sign-change count. For $N=4$ the natural rows have sequencies $0, 3, 1, 2$. Mahindra problems usually say "using the Hadamard matrix," which means natural order unless sequency is explicitly requested.
+**Exam conventions:** state which ordering you are using — **natural (Hadamard) order** is what the recursion produces; **sequency order** sorts rows by sign-change count. For $N=4$ the natural rows have sequencies $0, 3, 1, 2$. Exam problems usually say "using the Hadamard matrix," which means natural order unless sequency is explicitly requested.
 
 ## @derivation
 

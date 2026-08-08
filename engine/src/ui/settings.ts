@@ -49,6 +49,6 @@ export function renderSettings(app: App) {
   content.appendChild(el('div', { class: 'panel' },
     el('strong', {}, 'About'),
     el('p', { class: 'muted' },
-      'Signals Companion for EC2102 (Mahindra University, Fall 2026). Fully offline — this app never touches the network. ' +
+      'Signals Companion — an offline Signals & Systems course companion (EC2102 syllabus). Fully offline — this app never touches the network. ' +
       'Built around the official syllabus; standard treatment follows Oppenheim & Willsky, Signals & Systems (2e).')));
 }

@@ -68,7 +68,7 @@ original, written against the published algorithm descriptions:
 
 All explanatory prose, examples, quiz items, and flashcards in `content/` were
 written for this project. The topic structure follows the EC2102 course
-syllabus (Mahindra University). The mathematical results presented are the
+syllabus. The mathematical results presented are the
 standard, long-established material of every signals-and-systems curriculum;
 the canonical textbook treatments consulted as references are:
 

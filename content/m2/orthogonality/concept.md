@@ -58,7 +58,7 @@ and the minimum error energy is $E_N = \lVert x\rVert^2 - \sum_{n=1}^N |c_n|^2 \
 
 **Reading the symbols:** $\langle x, \varphi_n\rangle$ measures agreement — how much signed area $x$ shares with $\varphi_n$. The divisor $\langle\varphi_n,\varphi_n\rangle$ is a units-fixer: it converts "raw agreement" into "how many copies of $\varphi_n$," and equals 1 only for orthonormal sets. The conjugate $(\cdot)^*$ does nothing for real signals but is mandatory for complex ones — it is what makes self-agreement come out as energy.
 
-**Exam conventions:** orthogonality is a property of the pair *and the interval* — always state the interval. Mahindra problems mostly use real signals on one period; the conjugate becomes load-bearing the moment $e^{jk\omega_0 t}$ enters (next concepts).
+**Exam conventions:** orthogonality is a property of the pair *and the interval* — always state the interval. Exam problems mostly use real signals on one period; the conjugate becomes load-bearing the moment $e^{jk\omega_0 t}$ enters (next concepts).
 
 ## @derivation
 

@@ -38,7 +38,7 @@ crosslinks:
   `?why: <one-line justification of legality>`; then the math. 3–7 steps. End with a
   "notice what was NOT assumed" style step where it teaches something.
 - `## @examples` — REQUIRED. 2–3 fully worked examples, at least one in exact
-  Mahindra-exam style (regime tables, partial fractions, etc.), one with an
+  university-exam style (regime tables, partial fractions, etc.), one with an
   engineering skin (circuits, audio, comms). Show the METHOD ritual explicitly.
 - `## @misconceptions` — YAML list: `- wrong:` / `tempting:` / `correction:` / optional `probe: <quiz-id>`.
   2–4 entries. These power distractors and repair content — make them the real errors.
