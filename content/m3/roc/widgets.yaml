@@ -1,0 +1,8 @@
+widgets:
+  - id: explorer
+    type: ROCExplorer
+    title: "Paint the ROC — and meet the two signals hiding in one formula"
+    params: { mode: s, signal: rightexp }
+    presets:
+      - { label: "the left-sided twin (same X!)", params: { mode: s, signal: leftexp } }
+      - { label: "two-sided: the strip", params: { mode: s, signal: twosided } }

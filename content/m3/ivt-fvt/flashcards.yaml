@@ -1,0 +1,10 @@
+cards:
+  - id: c-both
+    front: "IVT and FVT — statements and directions."
+    back: "x(0⁺) = lim_{s→∞} sX(s) (X strictly proper). x(∞) = lim_{s→0} sX(s). Large s ↔ small t; small s ↔ long run."
+  - id: c-condition
+    front: "The FVT validity condition (and the trap)."
+    back: "ALL poles of sX(s) strictly in the LHP (one origin pole in X is cancelled by the s). The formula computes a number even when invalid — sin ω₀t gives a meaningless '0'. Check poles FIRST."
+  - id: c-usage
+    front: "What control-theory quantity is a standard FVT application?"
+    back: "Steady-state error: e_ss = lim_{s→0} sE(s) for a step — after the pole check."

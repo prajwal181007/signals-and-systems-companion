@@ -1,0 +1,66 @@
+predict:
+  kind: choice
+  prompt: |
+    Signal A is $x(t-2)u(t-2)$ (delayed). Signal B is $e^{-2t}x(t)$ (damped). **Commit:** which one
+    moves the poles of X(s)?
+  choices:
+    - "A — 'shift' moves things"
+    - "B — damping slides every pole left by 2; delay only multiplies by e^{−2s}"
+    - "Both"
+    - "Neither"
+  answer: 1
+  resolution: |
+    Delay is a transcendental FACTOR e^{−2s} bolted outside the algebra — poles frozen (delay changes
+    when, not what). Damping merges into s: X(s+2), the whole constellation slides. The two "shift"
+    rows are the most-swapped pair in the Laplace table; separating them by consequence fixes it.
+
+quiz:
+  - id: q-deriv
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The unilateral transform of x''(t) is:"
+    choices:
+      - "$s^2X$"
+      - "$s^2X - s\\,x(0^-) - x'(0^-)$"
+      - "$s^2X - x(0^-) - x'(0^-)$"
+      - "$s^2X - s\\,x'(0^-) - x(0^-)$"
+    answer: 1
+    explanation: "Each derivative peels one s and one IC, in order: position rides with s, velocity without. Getting this row wrong sinks entire ODE questions."
+  - id: q-sshift
+    kind: expression
+    tags: [checkpoint]
+    prompt: "Using the seed cos(3t)u ↔ s/(s²+9) and the s-shift property: L{e^{-t}cos(3t)u(t)} = ? (function of s)"
+    answer: "(s+1)/((s+1)^2+9)"
+    vars: [s]
+    explanation: "Damping by e^{−t} substitutes s → s+1 everywhere. Poles moved from ±j3 to −1±j3 — the atlas agrees: the waveform now decays as it spins."
+  - id: q-delay
+    kind: expression
+    tags: [checkpoint]
+    prompt: "Transform of the pulse u(t−1) − u(t−4)? (function of s; use e^(...))"
+    answer: "(e^(-s) - e^(-4s))/s"
+    vars: [s]
+    explanation: "Each delayed step: e^{−st₀}/s. Piecewise-constant signals transform by inspection with delay factors — no integration."
+  - id: q-tmul
+    kind: expression
+    tags: [checkpoint]
+    prompt: "Using t·x ↔ −dX/ds on the seed 1/(s+2): L{t e^{-2t}u(t)} = ? (function of s)"
+    answer: "1/(s+2)^2"
+    vars: [s]
+    explanation: "−d/ds[1/(s+2)] = 1/(s+2)². The whole tⁿ family regenerates from this rule — the table compresses to seeds + properties."
+  - id: q-checksum
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "For x = e^{-at}u(t), the derivative rule uses x(0⁻) = ?"
+    choices:
+      - "1 — the value the exponential 'starts' at"
+      - "0 — before the switch, the signal is zero; the jump at t=0 shows up as δ(t) in x'"
+      - "e^{-a}"
+      - "undefined"
+    answer: 1
+    explanation: "0⁻ means BEFORE the jump. The jump itself surfaces as an impulse in the derivative — and the bookkeeping only balances with the 0⁻ convention."
+  - id: q-conv
+    kind: mcq
+    prompt: "Two causal systems H₁(s), H₂(s) in cascade. The overall transfer function:"
+    choices: ["$H_1 + H_2$", "$H_1 H_2$ — convolution became multiplication", "$H_1/H_2$", "$H_1 * H_2$ in s"]
+    answer: 1
+    explanation: "x∗h ↔ XH survives from Fourier. Cascade = product; this is why 'transfer function' analysis is arithmetic."

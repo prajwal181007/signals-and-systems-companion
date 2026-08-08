@@ -1,0 +1,8 @@
+widgets:
+  - id: taming
+    type: ROCExplorer
+    title: "The taming machine — slide σ until the weighted signal has finite area"
+    params: { mode: s, signal: growright }
+    presets:
+      - { label: "the classic: e^{−t}u(t)", params: { mode: s, signal: rightexp } }
+      - { label: "two-sided: a strip appears", params: { mode: s, signal: twosided } }

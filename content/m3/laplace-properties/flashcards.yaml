@@ -1,0 +1,13 @@
+cards:
+  - id: c-deriv
+    front: "The differentiation rules (1st and 2nd order, unilateral)."
+    back: "x' ↔ sX − x(0⁻);  x'' ↔ s²X − s·x(0⁻) − x'(0⁻). ICs manufactured by integration by parts — the ODE engine."
+  - id: c-shifts
+    front: "Time shift vs s-shift — rules and consequences."
+    back: "Delay x(t−t₀)u(t−t₀) ↔ e^{−st₀}X (poles FROZEN). Damping e^{−at}x ↔ X(s+a) (poles slide left by a)."
+  - id: c-tmul
+    front: "t-multiplication property + what it regenerates."
+    back: "t·x ↔ −dX/ds. Applied to 1/(s+a): the whole tⁿe^{−at} ↔ n!/(s+a)^{n+1} family."
+  - id: c-int
+    front: "Integration property (unilateral)."
+    back: "∫₀ᵗ x dτ ↔ X(s)/s — division by s accumulates, the mirror of multiplication differentiating."

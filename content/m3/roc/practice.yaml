@@ -1,0 +1,81 @@
+predict:
+  kind: choice
+  prompt: |
+    $X(s) = \dfrac{1}{s+1}$. **Commit:** what signal is this the transform of?
+  choices:
+    - "e^{−t}u(t), obviously"
+    - "−e^{−t}u(−t)"
+    - "Cannot say — two different signals share this X; the ROC decides"
+    - "δ(t) − e^{−t}"
+  answer: 2
+  resolution: |
+    Both the decaying right-sided exponential (ROC: Re s > −1) and the growing left-sided one
+    (ROC: Re s < −1) produce exactly 1/(s+1). The algebra alone is an unflipped coin. This is the
+    single most important idea in Module 3 — the region is half the transform.
+
+quiz:
+  - id: q-shapes
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A two-sided signal's ROC (when it exists) is always:"
+    choices:
+      - "a right half-plane"
+      - "a vertical strip between pole lines"
+      - "the whole plane"
+      - "a disk"
+    answer: 1
+    explanation: "Each infinite tail imposes one inequality: future tail ⇒ lower bound on σ, past tail ⇒ upper bound. Both ⇒ strip (possibly empty — e^{|t|} has no transform)."
+  - id: q-three
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "X = 1/((s+1)(s−2)). Which ROC corresponds to a STABLE signal?"
+    choices:
+      - "Re(s) > 2"
+      - "Re(s) < −1"
+      - "−1 < Re(s) < 2 — the strip containing the jω-axis"
+      - "none of them"
+    answer: 2
+    explanation: "Stable ⇔ axis ∈ ROC. Only the strip qualifies — and that reading is two-sided, hence NONcausal. Stability and causality can't both be had with a RHP pole."
+  - id: q-causstable
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A CAUSAL system is stable iff:"
+    choices:
+      - "its ROC is a strip"
+      - "all poles lie strictly in the left half-plane"
+      - "it has no zeros in the RHP"
+      - "X(0) is finite"
+    answer: 1
+    explanation: "Causal ⇒ ROC right of the rightmost pole; axis inside ⇔ rightmost pole has Re < 0. This is ∫|h|<∞ in s-plane clothing — and the criterion Bode/Nyquist will keep revisiting."
+  - id: q-boundary
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Which ROC statement can EVER be correct?"
+    choices:
+      - "Re(s) ≥ −1"
+      - "Re(s) > −1 — open, pole line excluded"
+      - "Re(s) = −1"
+      - "the ROC includes the pole at −1"
+    answer: 1
+    explanation: "At a pole the integral diverges; the ROC is open. '≥' is never legal — a one-character error that examiners spot instantly."
+  - id: q-infer
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "x is known stable; X has poles at −2 and +1. Then x is:"
+    choices:
+      - "causal"
+      - "two-sided (ROC is the strip −2 < Re s < 1 containing the axis)"
+      - "left-sided"
+      - "impossible — stable signals can't have RHP poles"
+    answer: 1
+    explanation: "The axis must be inside, and it only fits in the strip. RHP poles don't forbid stability — they forbid CAUSAL stability. The inference chain (property → region → sidedness) is the exam pattern."
+  - id: q-ft
+    kind: mcq
+    prompt: "X = 1/(s−3), ROC Re(s) > 3. Does x have an ordinary Fourier transform?"
+    choices:
+      - "Yes — substitute s = jω"
+      - "No — the axis is outside the ROC; e^{3t}u(t) grows"
+      - "Yes, after taming"
+      - "Only its magnitude exists"
+    answer: 1
+    explanation: "FT = the σ = 0 line of the Laplace picture; here that line isn't in the region. Substituting anyway produces a formula that means nothing — the classic silent error."

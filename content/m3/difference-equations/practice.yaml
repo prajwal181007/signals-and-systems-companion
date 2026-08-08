@@ -1,0 +1,78 @@
+predict:
+  kind: choice
+  prompt: |
+    The recursion $y[n] = y[n-1] + y[n-2]$ (Fibonacci) is fed a single impulse. **Commit:** what does
+    the z-transform say about its long-run growth?
+  choices:
+    - "It grows linearly"
+    - "It grows like φⁿ — the golden ratio 1.618… is literally a pole of the system"
+    - "It stays bounded"
+    - "It oscillates"
+  answer: 1
+  resolution: |
+    Characteristic polynomial z² − z − 1 = 0 has roots φ ≈ 1.618 and −0.618. The pole outside the
+    unit circle dominates: y[n] ~ φⁿ. Growth rates ARE pole locations — the crank shows the numbers,
+    the poles explain them, and the rabbit-population legend turns out to be an eigenvalue story.
+
+quiz:
+  - id: q-shift
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The UNILATERAL z-transform of y[n−1] is:"
+    choices:
+      - "$z^{-1}Y(z)$"
+      - "$z^{-1}Y(z) + y[-1]$ — the pre-start sample rides in with the shift"
+      - "$zY(z) - y[0]$"
+      - "$z^{-1}Y(z) - y[0]$"
+    answer: 1
+    explanation: "The IC-carrying shift is THE mark-bearing line of this topic — the DT mirror of sX − x(0⁻). Second order: y[n−2] → z⁻²Y + z⁻¹y[−1] + y[−2]."
+  - id: q-h
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "For y[n] = 0.5y[n−1] + x[n] + x[n−1], H(z) = ?"
+    choices:
+      - "$\\frac{1 + z^{-1}}{1 - 0.5z^{-1}}$ — coefficients read off by inspection"
+      - "$\\frac{1 - 0.5z^{-1}}{1 + z^{-1}}$"
+      - "$\\frac{0.5}{1+z^{-1}}$"
+      - "$1 + 0.5z^{-1}$"
+    answer: 0
+    explanation: "Output taps → denominator (with sign flip onto the LHS), input taps → numerator. The equation and H are the same object in two notations."
+  - id: q-firiir
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "y[n] = x[n] − 2x[n−1] + x[n−2] (no output taps). This system is:"
+    choices:
+      - "IIR and possibly unstable"
+      - "FIR: h = {1, −2, 1}, finite, automatically stable"
+      - "IIR and stable"
+      - "marginally stable"
+    answer: 1
+    explanation: "No feedback ⇒ h IS the coefficient list, done after 3 samples. FIR filters can't be unstable — no loop to echo in."
+  - id: q-stability
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "y[n] = 1.2y[n−1] + x[n]: stable or not, and why?"
+    choices:
+      - "Stable — coefficient close to 1"
+      - "Unstable — the pole at z = 1.2 lies outside the unit circle; its echo 1.2ⁿ diverges"
+      - "Stable for small inputs"
+      - "Marginal"
+    answer: 1
+    explanation: "Stability is the system's poles, not the input's size. One feedback tap of 1.2 dooms every input to an exploding echo."
+  - id: q-solve
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "Solve by cranking: y[n] = 0.5y[n−1] + u[n], y[−1] = 2. Compute y[1]."
+    answer: 2
+    tolerance: 0.001
+    explanation: "y[0] = 0.5·2 + 1 = 2; y[1] = 0.5·2 + 1 = 2. (These ICs start the system at steady state — the transform solve gives y[n] = 2u[n] exactly.) The two-tick crank audits any transform answer."
+  - id: q-transfer
+    kind: mcq
+    prompt: "Why can a 3-coefficient IIR filter have an infinite impulse response?"
+    choices:
+      - "It can't"
+      - "Feedback: the output re-enters the sum, so one impulse echoes around the loop forever (aⁿ)"
+      - "Because x is infinite"
+      - "Rounding errors"
+    answer: 1
+    explanation: "The loop is memory. Three multiplies buy infinite echo — cheap filters, real stability questions. That bargain is the whole IIR industry."

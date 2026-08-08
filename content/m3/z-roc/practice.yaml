@@ -1,0 +1,71 @@
+predict:
+  kind: choice
+  prompt: |
+    In the s-plane, a right-sided signal's ROC is "to the right of the rightmost pole."
+    **Commit:** what is the z-plane version of that statement?
+  choices:
+    - "To the right of the rightmost pole, same words"
+    - "OUTSIDE the outermost pole circle: |z| > r_max"
+    - "Inside the unit circle"
+    - "Above the real axis"
+  answer: 1
+  resolution: |
+    z = e^{sT} rolls the s-plane's vertical lines into circles: "more taming" (bigger σ) becomes
+    "bigger radius r". Right-sidedness ⇒ outside a circle. Every s-plane ROC instinct ports over
+    with exactly this one substitution — lines become rings.
+
+quiz:
+  - id: q-shape
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The ROC of a two-sided sequence (when nonempty) is:"
+    choices:
+      - "a half-plane"
+      - "an annulus r₁ < |z| < r₂"
+      - "the whole plane"
+      - "a diagonal strip"
+    answer: 1
+    explanation: "Each tail bounds r on one side: future tail ⇒ outside r₁, past tail ⇒ inside r₂. Rings, always centered at the origin."
+  - id: q-twins
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "aⁿu[n] and −aⁿu[−n−1] both transform to z/(z−a). What distinguishes them?"
+    choices:
+      - "the gain"
+      - "the ROC: |z| > |a| (right-sided) vs |z| < |a| (left-sided)"
+      - "the pole location"
+      - "nothing — they are equal"
+    answer: 1
+    explanation: "The z-domain twin trap: identical algebra, disjoint rings. An inverse-z answer without its ring is ambiguous — and marked so."
+  - id: q-stable
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A CAUSAL DT system has poles at 0.5 and 0.8. Is it stable, and why?"
+    choices:
+      - "Yes — all poles strictly inside the unit circle, so the ROC |z| > 0.8 contains |z| = 1"
+      - "No — poles exist at all"
+      - "Cannot tell"
+      - "Only if there are no zeros outside"
+    answer: 0
+    explanation: "Causal + poles in the open unit disk ⇔ stable (Σ|h| converges at r = 1). The DT twin of 'all poles in the LHP'."
+  - id: q-classify
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "X(z) has poles at 0.5 and 2. Which ROC gives a STABLE reading?"
+    choices:
+      - "|z| > 2"
+      - "|z| < 0.5"
+      - "0.5 < |z| < 2 — the ring containing the unit circle"
+      - "none"
+    answer: 2
+    explanation: "Stability ⇔ circle inside the ROC. That ring is two-sided ⇒ noncausal — with a pole outside the disk, stability costs causality (same trade as the s-plane)."
+  - id: q-causaltell
+    kind: mcq
+    prompt: "X(z) = 2z + 3 + z^{-1}. Quick check: is x[n] causal?"
+    choices:
+      - "Yes"
+      - "No — the positive power 2z means x[−1] = 2 ≠ 0 (equivalently X(∞) diverges)"
+      - "Only if the ROC is a ring"
+      - "Cannot tell from X"
+    answer: 1
+    explanation: "Causal sequences have no positive powers of z (X finite at ∞). A five-second test worth running before any longer classification."

@@ -1,0 +1,8 @@
+widgets:
+  - id: machine
+    type: DifferenceEquationMachine
+    title: "The hand-crank — run the program, then let the poles predict it"
+    params: { a1: 1.0, a2: -0.5, b0: 1 }
+    presets:
+      - { label: "Fibonacci: the φ pole", params: { a1: 1, a2: 1, b0: 1, input: delta } }
+      - { label: "unstable: pole outside the circle", params: { a1: 1.9, a2: -0.88, b0: 1 } }

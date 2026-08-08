@@ -1,0 +1,13 @@
+cards:
+  - id: c-trick
+    front: "The z-specific first step of partial-fraction inversion."
+    back: "Expand X(z)/z, then multiply back by z — aligns pieces with the table pair z/(z−a) ↔ aⁿu[n], avoiding off-by-one shifts."
+  - id: c-branches
+    front: "Branch choice per pole in inverse-z."
+    back: "ROC outside the pole ⇒ aⁿu[n]; inside ⇒ −aⁿu[−n−1]. Each pole decides independently by where the ring sits."
+  - id: c-division
+    front: "What does long division of X(z) produce, and what picks the direction?"
+    back: "The sample values (X = Σx[n]z^{−n} unrolled). ROC picks direction: z⁻¹ powers for right-sided, z powers for left-sided."
+  - id: c-pairs
+    front: "Key inverse pairs: z/(z−a), az/(z−a)², and causal x[0]."
+    back: "aⁿu[n];  naⁿu[n] (double pole ⇒ ×n);  x[0] = lim_{z→∞}X(z) for causal x."

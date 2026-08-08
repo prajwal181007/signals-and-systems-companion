@@ -1,0 +1,59 @@
+predict:
+  kind: choice
+  prompt: |
+    To invert $X(z) = \dfrac{z}{(z-1)(z-0.5)}$ by partial fractions, what is the correct FIRST move?
+  choices:
+    - "Expand X(z) directly into A/(z−1) + B/(z−0.5)"
+    - "Divide by z first: expand X(z)/z, then multiply back — the table pairs carry z upstairs"
+    - "Long division only"
+    - "Complete the square"
+  answer: 1
+  resolution: |
+    The z-table's natural pair is z/(z−a) ↔ aⁿu[n]. Direct expansion strands you with 1/(z−a) pieces
+    — shifted pairs that breed off-by-one errors. Expanding X/z and restoring the z is the z-specific
+    ritual every exam question silently expects.
+
+quiz:
+  - id: q-ritual
+    kind: expression
+    tags: [checkpoint]
+    prompt: "X(z) = z/((z−1)(z−0.5)), ROC |z| > 1. After the /z trick and cover-up, x[n] for n ≥ 0 is: (answer as a function of n, e.g. using 0.5^n)"
+    answer: "2 - 2 (0.5)^n"
+    vars: [n]
+    explanation: "X/z = 2/(z−1) − 2/(z−0.5); restore z; right-sided branches: x[n] = 2u[n] − 2(0.5)ⁿu[n]. Audit: x[0] = 0 ✓."
+  - id: q-branch
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Same X, but ROC 0.5 < |z| < 1. The pole at z = 1 now contributes:"
+    choices:
+      - "$2u[n]$ still"
+      - "$-2u[-n-1]$ — the ROC sits INSIDE that pole, forcing its left-sided branch"
+      - "nothing"
+      - "$2\\delta[n]$"
+    answer: 1
+    explanation: "Each pole takes its branch by which side of it the ring lies. The 0.5-pole stays right-sided (ring outside it); the 1-pole flips. Two-sided sequence, same algebra."
+  - id: q-division
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "X(z) = z/(z − 0.5), causal. Using long division (or the pair), x[2] = ?"
+    answer: 0.25
+    tolerance: 0.001
+    explanation: "X = 1 + 0.5z⁻¹ + 0.25z⁻² + …: coefficients ARE samples. (It's (0.5)ⁿu[n].) Three division terms audit any closed form."
+  - id: q-repeated
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The inverse of $\\frac{0.8z}{(z-0.8)^2}$ (causal) is:"
+    choices:
+      - "$(0.8)^n u[n]$"
+      - "$n(0.8)^n u[n]$ — the double pole buys the factor of n"
+      - "$0.8^{2n}u[n]$"
+      - "$u[n]$"
+    answer: 1
+    explanation: "Repeated poles multiply by n — the DT twin of 1/(s+a)² ↔ t·e^{−at}. Cascaded identical filters ring with exactly this envelope."
+  - id: q-x0
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "For causal x, x[0] = lim_{z→∞} X(z). Compute x[0] for X = (2z² + z)/(z² − 0.25)."
+    answer: 2
+    tolerance: 0
+    explanation: "Divide leading terms: 2z²/z² = 2. The z-domain initial-value shortcut — a free consistency check before/after inversion."

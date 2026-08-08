@@ -1,0 +1,13 @@
+cards:
+  - id: c-def
+    front: "Laplace transform in one sentence + the two flavors."
+    back: "The FT of the exponentially tamed signal x(t)e^{−σt}, with s = σ + jω. Bilateral: ∫ over all t (needs ROC). Unilateral: from 0⁻ (carries ICs via sX − x(0⁻))."
+  - id: c-pairs
+    front: "The five core LT pairs (+ ROCs)."
+    back: "δ↔1 (all s); u↔1/s (Re s>0); e^{−at}u↔1/(s+a) (Re s>−a); tⁿu↔n!/s^{n+1}; e^{−at}cos/sin(bt)u ↔ (s+a) or b over (s+a)²+b²."
+  - id: c-ft
+    front: "Relation between X(s) and the Fourier transform."
+    back: "X(jω) = X(s) on the axis IFF the ROC contains the jω-axis. Otherwise the FT needs distributional patches (u(t): +πδ(ω))."
+  - id: c-zerominus
+    front: "Why 0⁻ (not 0⁺) in the unilateral lower limit?"
+    back: "To catch impulses AT the origin and use pre-switch initial conditions x(0⁻) — the values circuits actually store."

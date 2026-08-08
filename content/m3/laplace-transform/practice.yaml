@@ -1,0 +1,74 @@
+predict:
+  kind: choice
+  prompt: |
+    $x(t) = e^{+2t}u(t)$ grows without bound — its Fourier transform diverges. **Commit:** can ANY
+    amount of exponential taming give it a transform?
+  choices:
+    - "No — growth is growth"
+    - "Yes — any σ > 2 outruns the growth; the transform exists on that half-plane"
+    - "Only σ = 2 exactly"
+    - "Yes, for σ < 2"
+  answer: 1
+  resolution: |
+    The weighted signal e^{2t}e^{−σt} = e^{(2−σ)t} decays whenever σ > 2. The set of working σ —
+    Re(s) > 2 — is the ROC, and 1/(s−2) lives there. The Laplace transform exists precisely to hold
+    signals Fourier can't; the price is carrying the region along with the algebra.
+
+quiz:
+  - id: q-def
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Computing $\\mathcal{L}\\{e^{-3t}u(t)\\}$ from the definition yields 1/(s+3) valid for:"
+    choices:
+      - "all s"
+      - "Re(s) > −3 — the condition that made the upper limit vanish"
+      - "Re(s) < −3"
+      - "s ≠ −3"
+    answer: 1
+    explanation: "The integral ∫e^{−(s+3)t}dt needs Re(s+3) > 0. The ROC isn't imposed; it EMERGES from convergence — and must be stated with the answer."
+  - id: q-table
+    kind: expression
+    tags: [checkpoint]
+    prompt: "Using the table: what is $\\mathcal{L}\\{t^2 u(t)\\}$? Answer as a function of s."
+    answer: "2/s^3"
+    vars: [s]
+    explanation: "tⁿu ↔ n!/s^{n+1}: 2!/s³ = 2/s³, ROC Re(s) > 0."
+  - id: q-intersect
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "X of $e^{-t}u(t) + e^{-5t}u(t)$ has ROC:"
+    choices:
+      - "Re(s) > −5"
+      - "Re(s) > −1 — the intersection; the slower-decaying term is the bottleneck"
+      - "−5 < Re(s) < −1"
+      - "all s"
+    answer: 1
+    explanation: "Linearity intersects ROCs: Re(s)>−1 ∩ Re(s)>−5 = Re(s)>−1. The laziest tail dictates."
+  - id: q-unilateral
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Why is the UNILATERAL transform the exam workhorse for circuits?"
+    choices:
+      - "It's easier to integrate"
+      - "Its derivative rule sX − x(0⁻) carries initial conditions automatically"
+      - "It has no ROC issues ever"
+      - "It works for two-sided signals"
+    answer: 1
+    explanation: "Pre-switch history compresses into x(0⁻), which the differentiation property injects into the algebra. ODE + ICs → pure algebra: Module 3's payoff."
+  - id: q-ftlink
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "When is X(jω) = X(s)|_{s=jω} legal?"
+    choices:
+      - "always"
+      - "when the ROC contains the jω-axis"
+      - "for causal signals"
+      - "for periodic signals"
+    answer: 1
+    explanation: "The axis must be a place where the (untamed) integral converges. u(t) fails it — hence its distributional FT with the πδ(ω) patch."
+  - id: q-damped
+    kind: expression
+    prompt: "From the table: $\\mathcal{L}\\{e^{-2t}\\sin(3t)u(t)\\}$ as a function of s."
+    answer: "3/((s+2)^2+9)"
+    vars: [s]
+    explanation: "The damped-sine pair with a = 2, b = 3; poles at −2 ± j3 — the s-plane atlas points of that decaying oscillation."

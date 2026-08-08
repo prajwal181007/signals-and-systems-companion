@@ -1,0 +1,13 @@
+cards:
+  - id: c-shapes
+    front: "ROC shapes by sidedness (the four cases)."
+    back: "Right-sided: right of rightmost pole. Left: left of leftmost. Two-sided: strip (maybe empty). Finite-duration: all s. Always open, never contains poles."
+  - id: c-twin
+    front: "The two-signals-one-formula fact for 1/(s+a)."
+    back: "e^{−at}u(t) (ROC right of −a) and −e^{−at}u(−t) (ROC left of −a) share the algebra. The ROC IS the disambiguation — always state it."
+  - id: c-theorems
+    front: "The two theorems that read off the ROC."
+    back: "Ordinary FT exists ⇔ jω-axis ⊂ ROC. Causal + stable ⇔ all poles strictly LHP (axis inside the right-region)."
+  - id: c-indep
+    front: "Causal vs stable in ROC language — independent how?"
+    back: "Causal fixes the region's SHAPE (rightmost); stable fixes a MEMBER (the axis). 1/(s−2): causal-unstable OR noncausal-stable — choose your region."

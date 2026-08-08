@@ -1,0 +1,60 @@
+predict:
+  kind: choice
+  prompt: |
+    Apply the final value theorem to $X(s) = \dfrac{\omega_0}{s^2 + \omega_0^2}$ (which is
+    $\sin\omega_0 t$). The formula gives 0. **Commit:** is that the final value?
+  choices:
+    - "Yes — the sine averages to zero"
+    - "No — sin never settles; the poles of sX sit ON the axis, so the theorem is void and its 0 is garbage"
+    - "Yes — FVT is always valid for bounded signals"
+    - "No — the true answer is 1"
+  answer: 1
+  resolution: |
+    The FVT computes a number unconditionally; VALIDITY needs all poles of sX strictly in the LHP.
+    Here they're at ±jω₀ — on the axis — so x(t) has no limit and the clean-looking 0 means nothing.
+    This exact illegal application appears on papers; the pole check IS the theorem.
+
+quiz:
+  - id: q-legal
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "$X(s) = \\frac{10(s+2)}{s(s+5)}$. After checking legality, the FINAL value of x(t) is:"
+    answer: 4
+    tolerance: 0.01
+    explanation: "sX = 10(s+2)/(s+5): pole at −5, LHP ✓. Limit at s→0: 20/5 = 4. State the check — it carries a mark."
+  - id: q-ivt
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "Same X. The INITIAL value x(0⁺) = ?"
+    answer: 10
+    tolerance: 0.01
+    explanation: "lim_{s→∞} 10(s+2)/(s+5) = 10. Large s is a microscope on t = 0⁺."
+  - id: q-step
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "X = 1/s (the unit step). FVT: is it legal, and what is the final value?"
+    answer: 1
+    tolerance: 0
+    explanation: "sX = 1 — no poles at all: legal. Final value 1 ✓. A SINGLE origin pole in X is fine (it's the settled DC); a double one (ramp) is not."
+  - id: q-illegal
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "For which X is the FVT application ILLEGAL?"
+    choices:
+      - "$\\frac{1}{s(s+2)}$"
+      - "$\\frac{1}{s-3}$ — pole of sX in the RHP; the signal runs away"
+      - "$\\frac{s+1}{s(s+1)(s+4)}$"
+      - "$\\frac{2}{s+7}$"
+    answer: 1
+    explanation: "e^{3t} has no final value; the formula would still hand you 0. RHP or axis poles of sX (besides the cancelled origin) void the theorem."
+  - id: q-which-zero
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "IVT returns which value for a signal that jumps at t = 0?"
+    choices:
+      - "x(0⁻) — the stored initial condition"
+      - "x(0⁺) — just after the jump"
+      - "the jump's midpoint"
+      - "the average of both"
+    answer: 1
+    explanation: "IVT reads the post-jump value; ICs in the derivative rule use 0⁻. The pair brackets the discontinuity — different tools, different sides."

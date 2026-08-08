@@ -1,0 +1,13 @@
+cards:
+  - id: c-shapes
+    front: "z-ROC shapes by sidedness."
+    back: "Right-sided: |z| > r_max (outside outermost pole). Left: |z| < r_min. Two-sided: annulus. Finite: all z (maybe minus 0/∞). Lines→circles from the s-plane."
+  - id: c-twins
+    front: "The z-domain two-signals trap."
+    back: "aⁿu[n] and −aⁿu[−n−1] share z/(z−a); ROC |z|>|a| vs |z|<|a| decides. State the ring with every answer."
+  - id: c-theorems
+    front: "Unit-circle theorems (DTFT + stability)."
+    back: "DTFT exists ⇔ unit circle ∈ ROC. Causal+stable ⇔ all poles strictly INSIDE the unit circle."
+  - id: c-causal
+    front: "Instant causality check on X(z)?"
+    back: "No positive powers of z / X(∞) finite ⇔ ROC includes ∞ ⇔ causal-compatible."

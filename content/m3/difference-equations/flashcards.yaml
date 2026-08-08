@@ -1,0 +1,13 @@
+cards:
+  - id: c-shifts
+    front: "Unilateral z shift properties (1st & 2nd order) — the IC carriers."
+    back: "y[n−1] → z⁻¹Y + y[−1];  y[n−2] → z⁻²Y + z⁻¹y[−1] + y[−2]. The DT mirror of sX − x(0⁻)."
+  - id: c-h
+    front: "Recursion ↔ H(z) by inspection."
+    back: "H(z) = (Σbₖz⁻ᵏ)/(Σaₖz⁻ᵏ): input taps upstairs, output taps downstairs. Two-way street."
+  - id: c-firiir
+    front: "FIR vs IIR — definition and stability."
+    back: "FIR: no feedback, h = coefficient list, always stable. IIR: feedback ⇒ infinite h; stable ⇔ characteristic roots strictly inside the unit circle."
+  - id: c-ritual
+    front: "The difference-equation solve ritual (5 steps)."
+    back: "Transform with IC baggage → collect Y → Y/z partial fractions → invert (causal branch) → AUDIT by cranking two ticks."

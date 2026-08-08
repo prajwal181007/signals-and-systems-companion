@@ -1,0 +1,7 @@
+widgets:
+  - id: z-explorer
+    type: ROCExplorer
+    title: "The geometric leash — which r tames x[n]?"
+    params: { mode: z, signal: rightexp }
+    presets:
+      - { label: "the left-sided twin", params: { mode: z, signal: leftexp } }
