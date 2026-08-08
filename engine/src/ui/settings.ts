@@ -1,12 +1,42 @@
 // Settings: exam dates, backup export/import, storage status, diagnostics.
 import { el, clear, fmtDate, download } from './dom';
 import type { App } from '../main';
+import { applyAppearance } from '../appearance';
 
 export function renderSettings(app: App) {
   const { store, main } = app;
   const content = el('div', { class: 'content' });
   clear(main).appendChild(content);
   content.appendChild(el('h1', {}, 'Settings'));
+
+  // ---- appearance ----
+  const appearancePanel = el('div', { class: 'panel' }, el('strong', {}, 'Appearance'));
+  const themeSel = el('select', {},
+    el('option', { value: 'light' }, 'Light'),
+    el('option', { value: 'dark' }, 'Dark'),
+    el('option', { value: 'system' }, 'System')) as HTMLSelectElement;
+  themeSel.value = (store.state.settings.theme as string) || 'light';
+  themeSel.addEventListener('change', () => {
+    store.update((st) => { st.settings.theme = themeSel.value; });
+    applyAppearance(store);
+    app.router.dispatch(); // re-render so plots repaint in the new palette
+  });
+  const fontSel = el('select', {},
+    el('option', { value: 'system' }, 'San Francisco (system)'),
+    el('option', { value: 'helvetica' }, 'Helvetica Neue'),
+    el('option', { value: 'palatino' }, 'Palatino')) as HTMLSelectElement;
+  fontSel.value = (store.state.settings.font as string) || 'system';
+  fontSel.addEventListener('change', () => {
+    store.update((st) => { st.settings.font = fontSel.value; });
+    applyAppearance(store);
+  });
+  appearancePanel.appendChild(el('div', { style: 'display:flex;gap:1rem;align-items:center;margin:.5rem 0' },
+    el('span', { style: 'width:8rem' }, 'Theme'), themeSel));
+  appearancePanel.appendChild(el('div', { style: 'display:flex;gap:1rem;align-items:center;margin:.5rem 0' },
+    el('span', { style: 'width:8rem' }, 'Typeface'), fontSel));
+  appearancePanel.appendChild(el('p', { class: 'muted' },
+    'Three faces, all already on your machine: the system face, the Helvetica the Mac grew up on, and the Palatino from the calligraphy class that started it all.'));
+  content.appendChild(appearancePanel);
 
   // ---- exam dates ----
   const examPanel = el('div', { class: 'panel' }, el('strong', {}, 'Exam dates'),

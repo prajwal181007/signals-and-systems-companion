@@ -2,6 +2,7 @@
 import { Registry, Concept } from './registry';
 import { Store } from './store';
 import { Router } from './router';
+import { applyAppearance, watchSystemTheme } from './appearance';
 import { buildFrame, refreshSidebar } from './ui/layout';
 import { renderToday } from './ui/today';
 import { renderConcept } from './ui/concept';
@@ -70,6 +71,8 @@ function boot() {
 
   const store = new Store();
   const router = new Router();
+  applyAppearance(store);
+  watchSystemTheme(() => router.dispatch());
   const { main } = buildFrame(registry, store, router);
   const app: App = { registry, store, router, main };
   live.app = app;

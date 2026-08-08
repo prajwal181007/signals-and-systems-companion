@@ -2,6 +2,7 @@
 import { el, clear } from './dom';
 import type { App } from '../main';
 import { conceptHash } from '../router';
+import { renderTimerSection } from './timer';
 
 export function buildFrame(registry: any, store: any, router: any) {
   const appRoot = clear(document.getElementById('app')!);
@@ -41,7 +42,8 @@ function renderSidebar(app: App) {
       nav('#/atlas', 'Atlas'),
       nav('#/formulas', 'Formulas'),
       el('a', { class: 'nav-item', href: '#', onclick: (e: Event) => { e.preventDefault(); (window as any).SC?.app && openSearch(); } },
-        'Search ', el('kbd', {}, navigator.platform.includes('Mac') ? '⌘K' : 'Ctrl K'))),
+        'Search ', el('kbd', {}, navigator.platform.includes('Mac') ? '⌘K' : 'Ctrl K')),
+      nav('#/settings', 'Settings')),
   );
 
   const currentConceptId = app.router?.current?.view === 'concept' ? app.router.current.params.id : null;
@@ -64,6 +66,9 @@ function renderSidebar(app: App) {
     }
     sidebar.appendChild(details);
   }
+
+  // Study timer, pinned to the sidebar's foot.
+  sidebar.appendChild(renderTimerSection());
 }
 
 function openSearch() {

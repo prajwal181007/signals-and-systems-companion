@@ -201,3 +201,25 @@ hr { border: none; border-top: 1px solid var(--line); margin: 1.2rem 0; }
   .widget { display: none; }
   .print-space { border-bottom: 1px dashed #999; }
 }
+
+/* ---------- appearance: explicit theme choice (light is home) ---------- */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #16181b; --ink: #e8e8e5; --ink-soft: #a6aab0; --ink-faint: #74787e;
+  --line: #2b2e33; --accent: #7d9dee; --good: #4caf7d; --bad: #e57373; --warn: #d0a04a;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="system"] {
+    color-scheme: dark;
+    --bg: #16181b; --ink: #e8e8e5; --ink-soft: #a6aab0; --ink-faint: #74787e;
+    --line: #2b2e33; --accent: #7d9dee; --good: #4caf7d; --bad: #e57373; --warn: #d0a04a;
+  }
+}
+
+/* ---------- typeface choice: three faces, all locally installed ---------- */
+:root[data-font="helvetica"] { --sans: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+:root[data-font="palatino"] { --sans: Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif; }
+:root[data-font="palatino"] body { font-size: 17.5px; }
+
+/* sidebar becomes a column so the timer can sit at the bottom */
+.sidebar { display: flex; flex-direction: column; }

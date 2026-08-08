@@ -14,19 +14,32 @@ export interface PlotOpts {
 // Trace colours CARRY INFORMATION and are stable app-wide: 0 = the primary
 // signal (the app's one accent blue), 1 = the sliding/secondary object
 // (amber — τ, by convention), 2 = the result (green). Everything else in the
-// plot chrome is monochrome: hairline grid, grey axes, grey text.
-// One theme: light ground, always (the design's home; no auto-dark variant).
-export const palette = () => ({
-  bg: 'transparent',
-  grid: 'rgba(0,0,0,.05)',
-  axis: 'rgba(0,0,0,.30)',
-  text: '#6b6f75',
-  traces: ['#2451cc', '#9a6700', '#177245', '#82868c', '#b3261e', '#5c626a'],
-  fill: 'rgba(36,81,204,.09)',
-  fillWarm: 'rgba(154,103,0,.11)',
-  good: '#177245',
-  bad: '#b3261e',
-});
+// plot chrome is monochrome. Light is the design's home; dark exists only as
+// an explicit user choice (Settings → Appearance).
+import { isDarkNow } from '../appearance';
+export const palette = () => isDarkNow()
+  ? {
+      bg: 'transparent',
+      grid: 'rgba(255,255,255,.06)',
+      axis: 'rgba(255,255,255,.32)',
+      text: '#a6aab0',
+      traces: ['#7d9dee', '#d0a04a', '#4caf7d', '#9aa2ad', '#e57373', '#7c8590'],
+      fill: 'rgba(125,157,238,.16)',
+      fillWarm: 'rgba(208,160,74,.18)',
+      good: '#4caf7d',
+      bad: '#e57373',
+    }
+  : {
+      bg: 'transparent',
+      grid: 'rgba(0,0,0,.05)',
+      axis: 'rgba(0,0,0,.30)',
+      text: '#6b6f75',
+      traces: ['#2451cc', '#9a6700', '#177245', '#82868c', '#b3261e', '#5c626a'],
+      fill: 'rgba(36,81,204,.09)',
+      fillWarm: 'rgba(154,103,0,.11)',
+      good: '#177245',
+      bad: '#b3261e',
+    };
 
 export class Plot {
   canvas: HTMLCanvasElement;
