@@ -8,6 +8,9 @@ import { renderConcept } from './ui/concept';
 import { renderModule } from './ui/module';
 import { renderSettings } from './ui/settings';
 import { renderReview } from './ui/review';
+import { renderExam } from './ui/exam';
+import { renderAtlas } from './ui/atlas';
+import { renderFormulas } from './ui/formulas';
 import { renderNotFound } from './ui/notfound';
 import { initSearchOverlay } from './ui/search';
 
@@ -78,6 +81,9 @@ function boot() {
     .on('concept', (p) => renderConcept(app, p.id, p.facet))
     .on('module', (p) => renderModule(app, +p.num))
     .on('review', () => renderReview(app))
+    .on('exam', () => renderExam(app))
+    .on('atlas', () => renderAtlas(app))
+    .on('formulas', () => renderFormulas(app))
     .on('settings', () => renderSettings(app))
     .otherwise(() => renderNotFound(app));
 

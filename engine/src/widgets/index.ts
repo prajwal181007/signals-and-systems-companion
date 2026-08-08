@@ -6,4 +6,10 @@
 import './convolution';
 import './fourier-series';
 import './polezero';
+import './m1-widgets';
+import './system-tester';
+import './m2-widgets';
+import './m3-widgets';
+import './m4-widgets';
+import './m5-widgets';
 export {};

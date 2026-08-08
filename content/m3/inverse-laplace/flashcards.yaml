@@ -1,0 +1,16 @@
+cards:
+  - id: c-basic-pairs
+    front: "Inverse of $\\frac{1}{s+a}$ and $\\frac{1}{(s+a)^2}$ (causal)?"
+    back: "$e^{-at}u(t)$ and $t\\,e^{-at}u(t)$. Each extra power of the pole factor buys one more factor of $t$ (with $n!$: $\\frac{n!}{(s+a)^{n+1}} \\leftrightarrow t^n e^{-at}u(t)$)."
+  - id: c-coverup
+    front: "Cover-up formula for the residue at a distinct pole $p_i$ — and its one limitation?"
+    back: "$A_i = [(s-p_i)F(s)]_{s=p_i}$. At a repeated pole it yields ONLY the highest-order coefficient; lower ones need the derivative $\\frac{d}{ds}[(s-p)^2F]_{s=p}$ or matching."
+  - id: c-quad-pairs
+    front: "Completed-square rows: $\\frac{s+a}{(s+a)^2+\\omega^2}$ and $\\frac{\\omega}{(s+a)^2+\\omega^2}$ invert to?"
+    back: "$e^{-at}\\cos(\\omega t)u(t)$ and $e^{-at}\\sin(\\omega t)u(t)$. The sin row needs $\\omega$ (not 1) in the numerator — scale to match."
+  - id: c-complex-pair
+    front: "Conjugate poles $-a \\pm j\\omega$ with residues $A, A^*$ — combined real waveform?"
+    back: "$2|A|\\,e^{-at}\\cos(\\omega t + \\angle A)\\,u(t)$ — always real when $F(s)$ has real coefficients."
+  - id: c-improper
+    front: "Condition for partial fractions to apply — and what to do when it fails?"
+    back: "$F$ must be STRICTLY proper ($\\deg N < \\deg D$). Otherwise long-divide first; the polynomial quotient inverts to $\\delta(t)$ and its derivatives ($1 \\to \\delta$, $s \\to \\delta'$)."

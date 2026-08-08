@@ -1,0 +1,16 @@
+cards:
+  - id: c-def
+    front: "E[X] — discrete formula, continuous formula, and the one-phrase meaning?"
+    back: "$E[X] = \\sum_i x_i p_i = \\int x f(x)\\,dx$ — the long-run average (balance point), not the likeliest value and not necessarily attainable."
+  - id: c-var
+    front: "Variance shortcut, and the units of σ vs σ²?"
+    back: "$\\sigma^2 = E[X^2] - \\mu^2$ (square first, THEN average). σ in volts; σ² in volts² — for zero-mean noise, σ² IS the average power, $R(0)$."
+  - id: c-uncorr
+    front: "Uncorrelated vs independent — definitions and which implies which?"
+    back: "Uncorrelated: $E[XY] = E[X]E[Y]$. Independent: knowing X says nothing about Y. Independent ⇒ uncorrelated; converse FALSE (X uniform on {−1,0,1}, Y = X²)."
+  - id: c-rootn
+    front: "Average N uncorrelated readings, each with wiggle σ. Wiggle of the average?"
+    back: "$\\sigma/\\sqrt{N}$ — variance divides by N, visible wiggle only by √N. 10× cleaner costs 100× data. Correlated samples cancel slower."
+  - id: c-timeens
+    front: "Time average vs ensemble average — who computes which, and the word for 'they agree'?"
+    back: "Scope measures the time average of one recording; theory computes the ensemble average across imagined copies. Signals where they agree: ergodic — the course's noise is assumed to be."

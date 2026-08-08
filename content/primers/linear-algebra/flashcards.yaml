@@ -1,0 +1,16 @@
+cards:
+  - id: c-det
+    front: "det of [[a,b],[c,d]] — formula and geometric meaning?"
+    back: "ad − bc. The area-scale factor (sign = orientation flip). det = 0 ⇔ plane collapses onto a line ⇔ no inverse exists."
+  - id: c-charpoly
+    front: "Characteristic polynomial of a 2×2 matrix A — the exam shortcut?"
+    back: "λ² − tr(A)·λ + det(A) = 0. Roots = eigenvalues. tr(A) = a + d."
+  - id: c-eigdef
+    front: "Eigenvalue/eigenvector — defining equation, and the one rule about v?"
+    back: "Av = λv with v ≠ 0. Any nonzero multiple of v is equally valid — eigenvectors are whole directions, not single arrows."
+  - id: c-rank
+    front: "Rank — what it counts, and when you may count rows?"
+    back: "The number of independent columns (= rows). Count nonzero rows only AFTER row-reduction — rows can hide dependence."
+  - id: c-kalman
+    front: "Kalman controllability test for a 2-state system?"
+    back: "rank[B  AB] = 2 ⇔ the input can steer the state anywhere. For 2×2: nonzero det of [B  AB] settles it."

@@ -1,0 +1,10 @@
+widgets:
+  - id: modes
+    type: PoleZeroExplorer
+    title: "Residues as mode weights — drag poles, watch the recipe of h(t) change"
+    params: { preset: overdamped, k: 1 }
+    presets:
+      - { label: "two real poles → two decaying exponentials", params: { preset: overdamped, k: 1 } }
+      - { label: "complex pair → one damped cosine", params: { preset: resonator, k: 1 } }
+      - { label: "single pole → the atomic table row", params: { preset: lp1, k: 1 } }
+      - { label: "RHP pole → a mode that grows", params: { preset: unstable, k: 1 } }

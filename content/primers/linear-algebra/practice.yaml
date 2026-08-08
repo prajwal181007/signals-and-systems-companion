@@ -1,0 +1,87 @@
+predict:
+  kind: choice
+  prompt: |
+    The matrix [[3,6],[2,4]] — healthy, medium-sized entries — is applied to every point
+    of a unit square. **Commit before you compute:** what happens to the square's area?
+  choices:
+    - "Scaled by 12"
+    - "Scaled by 24"
+    - "Scaled by 0 — the square is crushed flat onto a line"
+    - "Scaled by 6"
+  answer: 2
+  resolution: |
+    det = 3·4 − 6·2 = 0. The second column [6,4] is exactly twice the first [3,2]: both
+    unit arrows land on the same line, so every point of the plane does too — area gone,
+    dimension destroyed, no inverse possible. "24" is the ad + bc sign slip (the most
+    common determinant error), and "12" comes from multiplying only the diagonal. If big
+    entries made you expect a big determinant, that is the instinct this primer repairs:
+    det measures independence of the columns, not their size.
+
+quiz:
+  - id: q-det-meaning
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A 2×2 matrix A has det(A) = −2. What does this tell you geometrically?"
+    choices:
+      - "Areas are scaled by 2 and orientation is flipped; A is invertible"
+      - "Areas shrink to zero — the plane collapses onto a line"
+      - "All entries of A are negative"
+      - "A rotates every vector by 180°"
+    answer: 0
+    explanation: "|det| is the area-scale factor and the sign records an orientation flip (a mirror). Since det ≠ 0, no direction is killed — A is invertible. The entries' signs and sizes are not readable from det."
+  - id: q-charpoly
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Which is the characteristic polynomial of A = [[0,1],[−2,−3]]?"
+    choices:
+      - "λ² + 3λ + 2"
+      - "λ² − 3λ + 2"
+      - "λ² + 3λ − 2"
+      - "λ² − 2λ + 3"
+    answer: 0
+    explanation: "Shortcut: λ² − tr(A)λ + det(A) with tr = 0 + (−3) = −3 and det = 0·(−3) − 1·(−2) = +2. The distractors are the two classic slips: dropping the minus in −tr(A)λ, and losing the double negative in det."
+  - id: q-eig-compute
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "Compute BY HAND the larger eigenvalue of [[1,2],[2,1]]."
+    answer: 3
+    tolerance: 0
+    explanation: "tr = 2, det = 1 − 4 = −3, so λ² − 2λ − 3 = (λ − 3)(λ + 1) = 0 → λ = 3 and −1. The larger is 3. Trace/det shortcut, factor, done — no cofactor expansion needed."
+  - id: q-eigvec
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "For A = [[0,1],[−2,−3]] and λ = −1, which are valid eigenvectors?"
+    choices:
+      - "[1, −1] only — eigenvectors are unique"
+      - "Both [1, −1] and [5, −5] — any nonzero multiple works"
+      - "[1, −2]"
+      - "[0, 0]"
+    answer: 1
+    explanation: "(A + I)v = 0 reads v₁ + v₂ = 0 — a whole line of solutions, so every nonzero multiple of [1,−1] qualifies. [1,−2] belongs to λ = −2, and the zero vector is banned by definition (it 'works' for every λ, so it certifies nothing)."
+  - id: q-rank
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "Rank of [[1,2,3],[2,4,6],[1,1,1]]? (Row-reduce before you answer.)"
+    answer: 2
+    tolerance: 0
+    explanation: "R₂ − 2R₁ zeroes the middle row (it was the first row doubled); R₃ − R₁ gives [0,−1,−2]. Two nonzero rows remain: rank 2. Counting nonzero rows before reducing would have said 3 — the exact trap."
+  - id: q-ritual
+    kind: steporder
+    prompt: "Order the full-marks eigen ritual for a 2×2 matrix A."
+    choices:
+      - "Solve the quadratic for the two λ's"
+      - "Form det(A − λI) via the shortcut λ² − tr(A)λ + det(A)"
+      - "For each λ, solve (A − λI)v = 0 using ONE row"
+      - "Write A − λI (subtract λ down the diagonal)"
+    answer: [3, 1, 0, 2]
+    explanation: "Write A − λI, expand its determinant (trace/det shortcut), solve for the eigenvalues, then plug each back in and read the eigenvector off one row. Eigenvectors cannot come first — you need λ before (A − λI) has numbers in it."
+  - id: q-complex-mode
+    kind: mcq
+    prompt: "A = [[0,1],[−1,0]] has characteristic polynomial λ² + 1 = 0. Using the complex-numbers primer, its eigenvalues are…"
+    choices:
+      - "λ = ±j — no real eigen-direction exists; the matrix is a pure rotation, and in Module 5 this mode oscillates"
+      - "λ = ±1 — a stretch and a flip"
+      - "λ = 0 (twice) — the matrix collapses the plane"
+      - "It has no eigenvalues at all"
+    answer: 0
+    explanation: "λ² = −1 has no real roots but two complex ones, ±j. Geometrically inevitable: a rotation leaves no real direction unturned. Complex pairs are not failures — they are the signature of oscillatory modes, with the real part setting decay or growth."

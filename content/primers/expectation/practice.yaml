@@ -1,0 +1,87 @@
+predict:
+  kind: choice
+  prompt: |
+    A sensor reads 5 V plus zero-mean noise with σ = 20 mV. You average N = 100
+    uncorrelated samples. **Commit before you compute:** how much smaller is the
+    wiggle of the averaged reading?
+  choices:
+    - "100× smaller — N samples buys N× cleanliness"
+    - "10× smaller — the wiggle shrinks only by √N"
+    - "Unchanged — averaging cannot remove random noise"
+    - "20× smaller — set by σ, not by N"
+  answer: 1
+  resolution: |
+    Variances add (100 of them), then the 1/N² from averaging divides: the *variance*
+    falls by 100, but the visible wiggle σ is its square root — so only 10× smaller
+    (20 mV → 2 mV). "100×" is the natural instinct this primer repairs: amplitudes do
+    not cancel perfectly, they cancel *statistically*, and √N is the price. "Unchanged"
+    fails because the signal part reinforces while the noise part mostly cancels —
+    averaging genuinely cleans, just slower than you hoped.
+
+quiz:
+  - id: q-die-var
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A fair die has E[X] = 3.5. Which reading of that number is correct?"
+    choices:
+      - "3.5 is the long-run average of many rolls — a balance point no face needs to show"
+      - "3.5 is impossible for a die, so the computation must contain an error"
+      - "3.5 means faces 3 and 4 are the most likely outcomes"
+      - "About half of all rolls land exactly on 3.5"
+    answer: 0
+    explanation: "Expectation is the balance point of outcomes weighted by probability — not a prediction of any single trial, not the likeliest face, and not necessarily attainable. All six faces are equally likely; none of them is 3.5."
+  - id: q-var-compute
+    kind: numeric
+    tags: [checkpoint]
+    prompt: |
+      X takes the value $-1$ with probability $\tfrac12$ and $+3$ with probability
+      $\tfrac12$. Using the shortcut $\sigma^2 = E[X^2] - \mu^2$, compute Var(X).
+    answer: 4
+    tolerance: 0
+    explanation: "μ = ½(−1) + ½(3) = 1; E[X²] = ½(1) + ½(9) = 5; Var = 5 − 1 = 4. If you got 0, you computed E[(X−μ)]² — subtracting the mean before squaring always averages to zero. Square first, then average."
+  - id: q-uncorr
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "X is uniform on {−1, 0, 1} and Y = X². Which statement is true?"
+    choices:
+      - "Uncorrelated AND independent — Y carries no information about X"
+      - "Uncorrelated but NOT independent — E[XY] = E[X]E[Y], yet knowing X fixes Y completely"
+      - "Correlated but independent"
+      - "Correlated and dependent — Y is built from X, so they must correlate"
+    answer: 1
+    explanation: "E[XY] = E[X³] = 0 = E[X]E[Y], so they are uncorrelated — the cross term dies. But Y is a deterministic function of X: knowing X tells you Y exactly, the opposite of independence. Independent ⇒ uncorrelated; the converse fails, and this is the standard counterexample."
+  - id: q-avg16
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "A reading has zero-mean noise with σ = 8 mV. You average 16 uncorrelated samples. What is σ of the averaged reading, in mV?"
+    answer: 2
+    tolerance: 0
+    explanation: "σ/√N = 8/√16 = 8/4 = 2 mV. Dividing by N would claim 0.5 mV — the trap. The variance divides by 16; the wiggle you see on the scope divides only by 4."
+  - id: q-sigma-add
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "Two INDEPENDENT noise sources, σ₁ = 3 mV and σ₂ = 4 mV, add at a summing node. What is σ of the total noise, in mV?"
+    answer: 5
+    tolerance: 0
+    explanation: "Independent ⇒ uncorrelated ⇒ the cross term E[X₁X₂] vanishes, so powers add: σ² = 9 + 16 = 25, σ = 5 mV — perpendicular triangle legs, not 3 + 4 = 7. (Two copies of the SAME noise would give 7 — correlation is exactly the difference.)"
+  - id: q-two-averages
+    kind: mcq
+    prompt: |
+      $x(t) = A$ for all $t$, where $A = +1$ or $-1$ on a fair coin flip at switch-on.
+      Compare the ensemble average $E[x(t)]$ with the time average of the one recording
+      you own.
+    choices:
+      - "Ensemble average 0; time average +1 or −1 forever — they disagree, and no amount of watching one trace reveals the ensemble mean"
+      - "Both are 0 — averaging is averaging, whichever direction you do it in"
+      - "Both are +1 or −1 — the ensemble follows whatever your coin gave"
+      - "Ensemble average ±1; time average 0"
+    answer: 0
+    explanation: "Across the ensemble, half the copies sit at +1 and half at −1: E[x(t)] = 0. Along your single trace, the value never changes: the time average is whichever A you got. This is the non-ergodic cautionary tale — Module 2's noise is assumed to be the agreeing kind, which is what licenses measuring ensemble quantities with one oscilloscope."
+  - id: q-uniform-mean
+    kind: numeric
+    prompt: |
+      A continuously-valued X has density $f(x) = \tfrac12$ on $[0, 2]$ (zero elsewhere).
+      Using $E[X] = \int x f(x)\,dx$ and the integration toolkit, compute E[X].
+    answer: 1
+    tolerance: 0.01
+    explanation: "E[X] = ∫₀² x · ½ dx = ½ · [x²/2]₀² = ½ · 2 = 1 — the balance point of a flat density is its midpoint, as symmetry predicts before any integral is written. Same power-rule integration you drilled in the toolkit primer, now weighted by a density."

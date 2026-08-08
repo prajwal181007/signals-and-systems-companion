@@ -38,12 +38,15 @@ export async function compileContent({ contentDir, outDir }) {
     }
   }
 
+  const strictMode = process.argv.includes('--strict');
   const concepts = [];
   for (const { group, name, dir } of conceptDirs) {
     try {
       concepts.push(await compileConcept({ group, name, dir, fail }));
     } catch (e) {
-      fail(`${group}/${name}: ${e.message}`);
+      // Construction mode: a broken concept is skipped (app still builds with
+      // the healthy subset). --strict (final hardening) fails the build.
+      (strictMode ? fail : warn)(`${group}/${name}: ${e.message}${strictMode ? '' : ' — SKIPPED'}`);
     }
   }
 
