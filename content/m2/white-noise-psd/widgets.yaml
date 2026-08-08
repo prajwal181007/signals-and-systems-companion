@@ -1,0 +1,5 @@
+widgets:
+  - id: lab
+    type: NoisePSDLab
+    title: "The Noise PSD Lab — press replay, drag the Welch slider, then color the noise through a one-pole filter"
+    params: {}

@@ -1,0 +1,16 @@
+cards:
+  - id: c-step-ramp
+    front: "Define $u(t)$ and $r(t)$. How are they related by calculus?"
+    back: "$u(t)=1$ for $t>0$, $0$ for $t<0$. $r(t)=t\\,u(t)$. $r'(t)=u(t)$ away from the corner; $r(t)=\\int_{-\\infty}^{t}u(\\tau)\\,d\\tau$."
+  - id: c-chain
+    front: "The singularity chain — what does differentiation do to r, u, δ?"
+    back: "$r \\xrightarrow{d/dt} u \\xrightarrow{d/dt} \\delta$ (last arrow in the limit sense). Integration climbs back up: $\\delta \\to u \\to r$."
+  - id: c-identities
+    front: "sgn(t) via the step? A centered width-T rect via steps?"
+    back: "$\\operatorname{sgn}(t)=2u(t)-1$.  $\\operatorname{rect}(t/T)=u(t+\\tfrac{T}{2})-u(t-\\tfrac{T}{2})$. A pulse on $[a,b]$ is $u(t-a)-u(t-b)$."
+  - id: c-events
+    front: "Sketch → formula: what term does a jump ΔA at t₀ contribute? A slope change Δm at t₀?"
+    back: "Jump: $\\Delta A\\,u(t-t_0)$. Slope change: $\\Delta m\\,r(t-t_0)$. One term per event; ramp coefficients must sum to the final slope."
+  - id: c-tau
+    front: "Time constant τ of $e^{-t/\\tau}u(t)$: value at $t=\\tau$? When is the transient 'dead'?"
+    back: "$e^{-1}\\approx 37\\%$ of the start at $t=\\tau$; below 1% after $5\\tau$ — gone by engineering standards."

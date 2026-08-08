@@ -1,0 +1,58 @@
+predict:
+  kind: choice
+  prompt: |
+    The unit step u(t) is switched on forever. **Commit before the meters run:** how does it classify?
+  choices:
+    - "Energy signal — its amplitude is only 1"
+    - "Power signal with P = 1"
+    - "Power signal with P = 1/2"
+    - "Neither — it lasts forever"
+  answer: 2
+  resolution: |
+    Energy grows without bound (flat tail), but the average over $[-T,T]$ is $T/2T = 1/2$: a power
+    signal with $P = \tfrac12$. The ½ comes from the two-sided window that the signal only half-fills.
+    "Amplitude is small so it's energy-type" is the classic misread — classification is about tails.
+
+quiz:
+  - id: q-exp
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "Compute the energy of $x(t) = e^{-2t}u(t)$."
+    answer: 0.25
+    tolerance: 0.001
+    explanation: "$E = \\int_0^\\infty e^{-4t}dt = 1/4$. Finite ⇒ energy signal, and automatically P = 0."
+  - id: q-sinp
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "Mean power of $x(t) = 6\\cos(100t + \\pi/3)$?"
+    answer: 18
+    tolerance: 0.01
+    explanation: "$P = A^2/2 = 36/2 = 18$ — frequency and phase are irrelevant to mean power."
+  - id: q-combine
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "Mean power of $x(t) = 3\\cos(10t) + 4\\sin(10t)$? (Careful: same frequency.)"
+    answer: 12.5
+    tolerance: 0.01
+    explanation: "Same frequency ⇒ combine first: amplitude $\\sqrt{9+16}=5$, $P = 25/2 = 12.5$. Adding powers (4.5+8) is only legal for DIFFERENT frequencies, where cross-terms average out."
+  - id: q-neither
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Which signal is NEITHER an energy nor a power signal?"
+    choices:
+      - "$e^{-|t|}$"
+      - "$u(t)$"
+      - "$t\\,u(t)$"
+      - "$\\cos(5t)$"
+    answer: 2
+    explanation: "The ramp's accumulated energy grows like $T^3$ — even dividing by 2T diverges. 'Neither' is a real class."
+  - id: q-exclusive
+    kind: mcq
+    prompt: "Why can no signal have BOTH finite nonzero E and finite nonzero P?"
+    choices:
+      - "By convention"
+      - "Finite E forces P = E/∞ = 0 in the limit"
+      - "Because power signals must be periodic"
+      - "It can — e.g. a pulse"
+    answer: 1
+    explanation: "P ≤ E/2T → 0 whenever E is finite. The classes are mathematically exclusive, not conventionally."

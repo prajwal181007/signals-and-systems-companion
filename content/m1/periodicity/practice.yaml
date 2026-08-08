@@ -1,0 +1,58 @@
+predict:
+  kind: choice
+  prompt: |
+    $x[n] = \cos(0.5\,n)$ — a plain cosine, sampled at the integers. **Commit:** is it periodic?
+  choices:
+    - "Yes — every cosine is periodic"
+    - "Yes, with period N = 4π"
+    - "No — 0.5/2π is irrational, so the samples never exactly realign"
+    - "Only if we sample faster"
+  answer: 2
+  resolution: |
+    A DT period must be an INTEGER N with Ω₀N = 2πk. Here N = 4πk is never an integer. The stems ride
+    a periodic envelope but never land on the same phases twice. Most students vote "yes" the first
+    time — the eye sees the envelope, the arithmetic sees the truth.
+
+quiz:
+  - id: q-ct-lcm
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "Fundamental period T₀ of $x(t) = \\cos(4\\pi t) + \\sin(6\\pi t)$?"
+    answer: 1
+    tolerance: 0.001
+    explanation: "Periods 1/2 and 1/3; ratio rational; T₀ = lcm(1/2, 1/3) = 1 — two cycles of one, three of the other."
+  - id: q-irr
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "$x(t) = \\cos(2t) + \\cos(2\\pi t)$ is:"
+    choices:
+      - "periodic with T₀ = π"
+      - "periodic with T₀ = 2π"
+      - "aperiodic — the frequency ratio is irrational"
+      - "periodic with T₀ = 1"
+    answer: 2
+    explanation: "Ratio = π ∉ ℚ. Exactness is the definition; 'almost repeats' earns zero."
+  - id: q-dt-n
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "Fundamental period N of $x[n] = \\cos(3\\pi n/8)$?"
+    answer: 16
+    tolerance: 0
+    explanation: "Ω₀/2π = 3/16 reduced ⇒ N = 16. The phasor wraps 3 whole turns in those 16 samples — N counts samples, not turns."
+  - id: q-dt-sum
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "N for $x[n] = \\cos(0.6\\pi n) + \\cos(0.5\\pi n)$?"
+    answer: 20
+    tolerance: 0
+    explanation: "N₁ = 10 (0.6π/2π = 3/10), N₂ = 4 (1/4). N = lcm(10,4) = 20."
+  - id: q-transfer
+    kind: mcq
+    prompt: "A signal has finite energy (E < ∞). Can it be periodic (non-zero)?"
+    choices:
+      - "Yes, if the period is long"
+      - "No — a periodic signal deposits the same energy every period, forcing E = ∞ (it is a power signal)"
+      - "Yes, if its amplitude decays"
+      - "Only in discrete time"
+    answer: 1
+    explanation: "Periodic (non-zero) ⇒ power-type: energy grows linearly forever. If the amplitude decays it is no longer periodic. Two classifications, one consistency check — this cross-link is exam bait."

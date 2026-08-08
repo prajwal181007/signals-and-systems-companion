@@ -1,0 +1,9 @@
+widgets:
+  - id: atlas
+    type: SPlaneAtlas
+    title: "The s-plane as a waveform atlas — drag s and read the behavior"
+    params: { sigma: -0.4, omega: 2 }
+    presets:
+      - { label: "pure oscillation (on the axis)", params: { sigma: 0, omega: 3 } }
+      - { label: "unstable growth", params: { sigma: 0.5, omega: 2 } }
+      - { label: "pure decay (real axis)", params: { sigma: -1, omega: 0 } }

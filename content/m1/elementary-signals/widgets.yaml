@@ -1,0 +1,9 @@
+widgets:
+  - id: explorer
+    type: SignalExplorer
+    title: "Shift the ramp — set b, watch where each letter turns on, read its slope"
+    params: { signal: rampsig, a: 1, b: 0 }
+    presets:
+      - { label: "delayed ramp r(t−2) (flattens at 3)", params: { signal: rampsig, a: 1, b: 2 } }
+      - { label: "switched decay e^(−t)·u(t)", params: { signal: expdecay, a: 1, b: 0 } }
+      - { label: "teaser — flip it: which way does the ramp point?", params: { signal: rampsig, a: -1, b: 0 } }

@@ -1,0 +1,9 @@
+widgets:
+  - id: forge
+    type: ImpulseForge
+    title: "The Impulse Forge — squeeze a unit-area pulse until the circuit stops caring about its shape"
+    params: { family: rect }
+    presets:
+      - { label: "rectangle family (the textbook limit)", params: { family: rect } }
+      - { label: "triangle family — different shape, same limit", params: { family: tri } }
+      - { label: "Gaussian family — no corners at all, still the same limit", params: { family: gauss } }

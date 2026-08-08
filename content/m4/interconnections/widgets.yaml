@@ -1,0 +1,11 @@
+widgets:
+  - id: sandbox
+    type: BlockDiagramSandbox
+    title: "Block Diagram Sandbox — wire two blocks five ways and read the composite ZPK"
+    params: { topology: cascade }
+    presets:
+      - { label: "cascade — poles pool, gains multiply", params: { topology: cascade } }
+      - { label: "parallel — watch a zero be born", params: { topology: parallel } }
+      - { label: "feedback — the denominator is rewritten", params: { topology: feedback } }
+      - { label: "feed-forward — cancel before the error exists", params: { topology: feedforward } }
+      - { label: "the forbidden cancellation — watch the internal signal", params: { topology: cancelhazard } }

@@ -1,0 +1,92 @@
+predict:
+  kind: choice
+  prompt: |
+    Two first-order branches, $\frac{1}{s+1}$ and $\frac{1}{s+2}$, are wired in **parallel**
+    (same input, outputs added). Neither branch has any finite zero.
+    **Commit before you watch:** what zeros does the combined system have?
+  choices:
+    - "None — neither branch has a zero, so the combination can't either"
+    - "A brand-new zero at −1.5, created where the two branches interfere"
+    - "Zeros at −1 and −2 — the branch poles become the combination's zeros"
+    - "A zero at −3, the sum of the two pole positions"
+  answer: 1
+  resolution: |
+    Common denominator: $\frac{1}{s+1}+\frac{1}{s+2} = \frac{(s+2)+(s+1)}{(s+1)(s+2)} = \frac{2s+3}{(s+1)(s+2)}$ —
+    a zero at $s=-1.5$ that neither branch owns. At that (complex) frequency the two arrivals are
+    equal and opposite and cancel. If you predicted "none", you assumed zeros are inherited like
+    poles — but poles union because denominators *multiply*, while zeros come from the numerator
+    *sum*, a genuinely new polynomial. Parallel connection is a zero factory.
+
+quiz:
+  - id: q-cascade
+    kind: mcq
+    tags: [checkpoint]
+    prompt: |
+      Cascade $H_1 = \frac{2}{s+3}$ into $H_2 = \frac{5(s+4)}{s+7}$. The composite in ZPK form is:
+    choices:
+      - "Gain 10, zero at −4, poles at −3 and −7"
+      - "Gain 7, zero at −4, poles at −3 and −7"
+      - "Gain 10, zero at −4, single pole at −10"
+      - "Gain 10, no zeros, poles at −3, −4, and −7"
+    answer: 0
+    explanation: "Cascade merges the lists and multiplies the gains: $K = 2\\times5 = 10$, zeros $\\{-4\\}$, poles $\\{-3,-7\\}$. Poles never add their positions, and a numerator root is a zero — not a pole."
+  - id: q-parallel-zero
+    kind: numeric
+    tags: [checkpoint]
+    prompt: |
+      $\frac{1}{s+1}$ in parallel with $\frac{1}{s+2}$ produces exactly one finite zero.
+      At what value of $s$ does it sit?
+    answer: -1.5
+    tolerance: 0.01
+    explanation: "Numerator of the sum: $(s+2)+(s+1) = 2s+3 = 0$ at $s = -1.5$. New zeros are roots of $N_1D_2+N_2D_1$ — born from interference, inherited from nobody."
+  - id: q-feedback-sign
+    kind: mcq
+    tags: [checkpoint]
+    prompt: |
+      $G = \frac{10}{s+2}$ sits in a unity **negative** feedback loop. The closed-loop transfer function is:
+    choices:
+      - "$\\frac{10}{s+12}$"
+      - "$\\frac{10}{s-8}$"
+      - "$\\frac{10}{s+2}$ — feedback doesn't change a stable block"
+      - "$\\frac{1}{s+12}$"
+    answer: 0
+    explanation: "$T = \\frac{G}{1+G} = \\frac{10/(s+2)}{1+10/(s+2)} = \\frac{10}{s+12}$. The junction's minus becomes the denominator's plus; $\\frac{10}{s-8}$ is the positive-feedback formula misapplied — and it would (wrongly) declare the loop unstable."
+  - id: q-cancel
+    kind: mcq
+    tags: [checkpoint]
+    prompt: |
+      Compensator $C = \frac{s-2}{s+3}$ is cascaded with plant $P = \frac{1}{s-2}$, so on paper
+      $Y/X = \frac{1}{s+3}$. Which statement is correct?
+    choices:
+      - "The system is stable — the transfer function 1/(s+3) has its only pole in the LHP"
+      - "The x→y map is stable, but a disturbance at the plant input reaches the output through 1/(s−2): the internal mode e^{2t} is alive and the diagram is internally unstable"
+      - "The cancellation makes the system marginally stable"
+      - "The system is unstable because the compensator has a RHP zero, and RHP zeros are unstable"
+    answer: 1
+    explanation: "Cancellation sanitizes only the x→y ratio. The unstable mode remains physically present, and the disturbance-to-output path $1/(s-2)$ proves it. (And note: an RHP zero by itself never causes instability — poles decide that.)"
+  - id: q-ff
+    kind: mcq
+    prompt: |
+      A measured disturbance $d$ reaches the output through $G_d(s)$; your control signal acts
+      through $G(s)$. A feed-forward block $F(s)$ from the measurement to the control input
+      cancels the disturbance exactly when:
+    choices:
+      - "$F = -G_d/G$ — the correction retraces the disturbance's effect with opposite sign"
+      - "$F = -G/G_d$"
+      - "$F = -G_d G$"
+      - "$F = 1/(1+G_dG)$ — the feedback formula"
+    answer: 0
+    explanation: "Net disturbance effect is $(G_d + GF)D$; zero requires $F=-G_d/G$. It acts before any error exists — but demands an invertible, accurately-known $G$ (an RHP zero of G would make F unstable)."
+  - id: q-timedomain
+    kind: mcq
+    tags: [checkpoint]
+    prompt: |
+      Two LTI blocks in cascade have impulse responses $h_1(t) = \delta(t-1)$ and $h_2(t) = \delta(t-2)$
+      (pure delays). The overall impulse response is:
+    choices:
+      - "$\\delta(t-3)$ — cascade is convolution, and delays stack"
+      - "$\\delta(t-1) + \\delta(t-2)$"
+      - "$\\delta(t-2)$ — the larger delay wins"
+      - "$\\delta(t-1)\\,\\delta(t-2)$"
+    answer: 0
+    explanation: "Cascade in time is $h_1 * h_2$, and convolving shifted impulses adds the shifts (the support rule from m1/convolution: start times add). The sum answer describes PARALLEL, not cascade."

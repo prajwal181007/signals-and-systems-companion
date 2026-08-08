@@ -1,0 +1,9 @@
+widgets:
+  - id: race
+    type: EnergyPowerRace
+    title: "The integrator race — E(T) vs P(T) as the window grows"
+    params: { signal: expdecay }
+    presets:
+      - { label: "sinusoid → P = A²/2", params: { signal: sine } }
+      - { label: "u(t) → P = 1/2", params: { signal: step } }
+      - { label: "the 'neither' case: t·u(t)", params: { signal: ramp } }

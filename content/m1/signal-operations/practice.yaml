@@ -1,0 +1,63 @@
+predict:
+  kind: choice
+  prompt: |
+    $x(t)$ has a sharp peak at $t = 2$. **Commit before dragging:** where is the peak of $x(3t - 6)$?
+  choices:
+    - "t = 8/3 ≈ 2.67"
+    - "t = 8 — shift right by 6, then the peak sits at 2+6"
+    - "t = −4/3 — compress by 3, then shift left by 6"
+    - "t = 12 — scale the shift too"
+  answer: 0
+  resolution: |
+    Solve the argument: $3t - 6 = 2 \Rightarrow t = 8/3$. The "t = 8" answer forgot that the shift
+    happens on the compressed axis (shift 6 FIRST, then compress: 8/3 ✓); "t = 12" scaled the wrong
+    way. The feature equation $t = (t_0+b)/a$ never cares which order you imagined — that immunity
+    is why it is the method to trust.
+
+quiz:
+  - id: q-endpoints
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "x(t) is nonzero on [0, 2]. What is the LEFT endpoint of the support of $x(2t - 4)$?"
+    answer: 2
+    tolerance: 0
+    explanation: "Endpoints are landmarks: 2t − 4 = 0 ⇒ t = 2 (and the right endpoint: 2t − 4 = 2 ⇒ t = 3). Support [2,3], half as wide."
+  - id: q-order
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Which sequences of operations correctly build $y = x(2t - 6)$ from x(t)?"
+    choices:
+      - "Compress by 2, then shift right 6"
+      - "Shift right 6, then compress by 2 — or compress by 2, then shift right 3"
+      - "Shift right 3, then compress by 2"
+      - "Compress by 2, then shift left 3"
+    answer: 1
+    explanation: "Shift-then-scale uses b = 6; scale-then-shift uses b/a = 3. 'Compress then shift 6' lands at x(2(t−6)) = x(2t−12) — a different signal."
+  - id: q-reversal
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "x(t) is nonzero on [1, 3]. The support of $x(-t + 2) = x(-(t-2))$ is:"
+    choices:
+      - "[−1, 1]"
+      - "[1, 3]"
+      - "[−3, −1]"
+      - "[3, 5]"
+    answer: 0
+    explanation: "−t + 2 = 1 ⇒ t = 1; −t + 2 = 3 ⇒ t = −1. Endpoints map to −1 and 1 (order swapped by the reversal): support [−1, 1]."
+  - id: q-delta
+    kind: expression
+    tags: [checkpoint]
+    prompt: "Simplify $\\delta(3t)$ in terms of $\\delta(t)$. (Answer as a function of t; write delta as u'... actually enter the coefficient: what number times δ(t)?) Enter the coefficient."
+    answer: "1/3"
+    vars: [t]
+    explanation: "δ(3t) = δ(t)/3 — the impulse is defined by its unit integral, and compressing the axis shrinks the integral by |a| unless the height renormalizes. The ONLY signal that changes 'amplitude' under time scaling."
+  - id: q-transfer
+    kind: mcq
+    prompt: "Inside the convolution integral you meet $h(t - \\tau)$ as a function of τ. What two operations produced it from h(τ)?"
+    choices:
+      - "Shift only"
+      - "Reversal about τ = 0, then shift by t"
+      - "Scaling by t"
+      - "Amplitude flip"
+    answer: 1
+    explanation: "h(t − τ) = h(−(τ − t)): reversal in τ plus a shift by t. Reading this correctly is exactly why the convolution machine 'flips' — this skill and that one are the same skill."

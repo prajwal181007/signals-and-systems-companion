@@ -1,0 +1,16 @@
+cards:
+  - id: c-white
+    front: "White noise — the three equivalent faces (recite as one)."
+    back: "Flat PSD $S_x = \\frac{N_0}{2}$ ⇔ impulse autocorrelation $R(\\tau) = \\frac{N_0}{2}\\delta(\\tau)$ ⇔ samples at distinct times uncorrelated. *White = flat PSD = uncorrelated samples.* R(0) is NOT finite — infinite power, priced like δ(t)."
+  - id: c-through
+    front: "White noise through $H(j\\omega)$: output PSD and the two output-power routes."
+    back: "$S_y = \\frac{N_0}{2}|H(j\\omega)|^2$ (phase never enters). $P_y = \\frac{1}{2\\pi}\\int \\frac{N_0}{2}|H|^2 d\\omega = \\frac{N_0}{2}\\int h^2(t)dt$ — equal by Parseval; integrate the easier one."
+  - id: c-rc
+    front: "White noise ($N_0/2$) into an RC low-pass — output power, and the ideal-LPF companion result."
+    back: "$P_y = \\dfrac{N_0}{4RC}$ (noise-equivalent bandwidth $\\frac{1}{4RC}$ Hz). Ideal low-pass of $B$ Hz: $P = N_0 B$. Thermal noise into its own RC: $kT/C$ — the R cancels."
+  - id: c-wk
+    front: "Wiener–Khinchin relation, and what R(0) means."
+    back: "$S_x(\\omega) = \\mathcal{F}\\{R(\\tau)\\}$ — the PSD is the FT of the autocorrelation. $P = R(0) = \\frac{1}{2\\pi}\\int S_x d\\omega$: average power = zero-lag correlation = variance (zero-mean)."
+  - id: c-welch
+    front: "MEASURED view: single periodogram vs Welch — who converges, and how fast?"
+    back: "One periodogram: ~100% fluctuation at ANY record length (each bin is a one-shot estimate). Welch: average K segments ⇒ fluctuation ∝ $1/\\sqrt{K}$, at the price of frequency resolution. Averaging, not record length, buys smoothness."

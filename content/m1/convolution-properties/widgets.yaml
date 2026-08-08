@@ -1,0 +1,8 @@
+widgets:
+  - id: conv-props
+    type: ConvolutionMachine
+    title: "Test the algebra — swap x↔h and watch nothing change"
+    params: { x: rect1, h: exp, view: slide, t: 1.2 }
+    presets:
+      - { label: "shift identity: δ-pair copies", params: { x: impulsePair, h: tri, view: slide } }
+      - { label: "smoothing cascade preview", params: { x: rect1, h: rect2, view: slide } }

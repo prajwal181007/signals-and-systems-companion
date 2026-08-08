@@ -1,0 +1,13 @@
+cards:
+  - id: c-ct
+    front: "When is a sum of CT sinusoids periodic, and what is T₀?"
+    back: "Iff all frequency ratios are rational; T₀ = lcm of the periods (lcm(p/q, r/s) = lcm(p,r)/gcd(q,s))."
+  - id: c-dt
+    front: "When is cos(Ω₀n) periodic? Fundamental period?"
+    back: "Iff Ω₀/2π = k/N rational; reduced denominator N is the fundamental period. cos(0.5n): NEVER periodic."
+  - id: c-omega
+    front: "ω vs Ω in this course?"
+    back: "ω = CT frequency (rad/s); Ω = DT frequency (rad/sample). DT frequency lives on a circle: Ω and Ω+2π are the same."
+  - id: c-cross
+    front: "Can a nonzero periodic signal be an energy signal?"
+    back: "No — it deposits equal energy every period ⇒ E = ∞; periodic signals are power-type with P = (1/T₀)∫_{T₀}|x|²."

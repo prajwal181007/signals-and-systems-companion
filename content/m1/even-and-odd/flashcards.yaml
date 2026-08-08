@@ -1,0 +1,13 @@
+cards:
+  - id: c-formulas
+    front: "Even/odd decomposition formulas — and is it unique?"
+    back: "$x_e = \\tfrac12[x(t)+x(-t)]$, $x_o = \\tfrac12[x(t)-x(-t)]$; x = x_e + x_o, unique. Odd ⇒ x(0) = 0."
+  - id: c-classic
+    front: "Even and odd parts of $e^{-t}u(t)$?"
+    back: "$x_e = \\tfrac12 e^{-|t|}$, $x_o = \\tfrac12\\,\\mathrm{sgn}(t)e^{-|t|}$ — both nonzero on BOTH sides; they cancel for t<0."
+  - id: c-rules
+    front: "Product parity rules + the symmetric-integral shortcut."
+    back: "e·e=e, o·o=e, e·o=o.  $\\int_{-a}^{a}$odd = 0; $\\int_{-a}^{a}$even = 2∫₀ᵃ."
+  - id: c-orth
+    front: "How do the energies of x_e and x_o relate to E?"
+    back: "E = E_e + E_o exactly — the parts are orthogonal (∫x_e·x_o dt = 0)."

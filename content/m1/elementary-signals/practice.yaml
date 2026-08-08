@@ -1,0 +1,80 @@
+predict:
+  kind: choice
+  prompt: |
+    The explorer's "ramp then flat" signal is built by subtraction: $x(t) = r(t) - r(t-1)$,
+    a ramp minus a delayed copy of itself. **Commit before you watch:** what does $x(t)$
+    do for $t > 1$?
+  choices:
+    - "Returns to zero — the same way u(t) − u(t−1) makes a pulse that switches off"
+    - "Holds at height 1 forever — the subtraction cancels the slope, not the height"
+    - "Keeps climbing at slope 1 — subtracting something delayed can't stop the rise"
+    - "Goes negative with slope −1 — the second ramp eventually wins"
+  answer: 1
+  resolution: |
+    For $t > 1$ both ramps are alive: $x(t) = t - (t-1) = 1$, a constant. The delayed ramp
+    cancels the **slope**, but the first second of climbing is already banked — the height
+    stays. The tempting answer is the first one: it pattern-matches the step pair
+    $u(t)-u(t-1)$, which really does switch off. Steps subtract *values*; ramps subtract
+    *slopes*. Coming back down needs additional downhill ramps — that is exactly how the
+    trapezoid in the quiz is built.
+
+quiz:
+  - id: q-step-shift
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Where does $u(t-2)$ switch on, and where does $u(t+2)$ switch on?"
+    choices:
+      - "u(t−2) at t = −2;  u(t+2) at t = +2 — the sign tells the direction"
+      - "u(t−2) at t = +2;  u(t+2) at t = −2 — solve the argument = 0"
+      - "Both at t = 2 — the sign inside never matters"
+      - "Both at t = 0 — a step always switches at the origin"
+    answer: 1
+    explanation: "A letter turns on where its ARGUMENT crosses zero: t−2 = 0 at t = 2 (later), t+2 = 0 at t = −2 (earlier). Solving argument = 0 beats trusting the sign's 'direction' every time — the same rule runs all of signal-operations next."
+  - id: q-trapezoid
+    kind: expression
+    tags: [checkpoint]
+    prompt: |
+      A trapezoid pulse rises from 0 to 1 over $[0,1]$, holds at 1 until $t=2$, and falls
+      back to 0 at $t=3$. Express it as a sum of ramps. (Use r(t) for the unit ramp.)
+    answer: "r(t) - r(t-1) - r(t-2) + r(t-3)"
+    vars: [t]
+    explanation: "Event table: slope changes +1, −1, −1, +1 at t = 0, 1, 2, 3 — one ramp per event. Check: the ramp coefficients sum to 0 (final slope), and x(2.5) = 2.5 − 1.5 − 0.5 = 0.5, halfway down. This exact translation is the Minor I staple."
+  - id: q-exp-past
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Take $x(t) = e^{-t}$ with NO step attached. What is $x(-5)$?"
+    choices:
+      - "≈ 0 — it's a decaying signal, so it's small everywhere"
+      - "$e^{5} \\approx 148$ — toward the past the 'decay' explodes"
+      - "Exactly 1 — exponentials start at 1"
+      - "$-e^{5}$ — the negative time flips the sign"
+    answer: 1
+    explanation: "e^(−t) decays only toward the future; run time backwards and it grows without bound. The physically switched decay is e^(−t)·u(t) — the step is load-bearing, not decoration."
+  - id: q-rect
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A gate of height 5 is open exactly for $1 < t < 4$. Which formula is it?"
+    choices:
+      - "$5u(t-1) - 5u(t-4)$"
+      - "$5u(t-1) - 5u(t-3)$ — the width is 3, so subtract at 3"
+      - "$5\\,\\operatorname{rect}(t/3)$ — width 3, height 5"
+      - "$u(t-1) - u(t-4)$"
+    answer: 0
+    explanation: "Pulse on [a,b] = u(t−a) − u(t−b); the second step's argument holds the CLOSING time (4), not the width. The rect option has the right width but sits centered at 0, not on [1,4] — and option 4 forgot the height."
+  - id: q-slope
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "A ramp starts at 0 at $t=0$ and reaches height 6 at $t=2$. Writing it as $m\\,r(t)$, what is $m$?"
+    answer: 3
+    tolerance: 0
+    explanation: "m is the SLOPE, not the final height: 6 units of rise over 2 s gives m = 3. Writing 6r(t) — height where slope belongs — is one of the quiet mark-losers."
+  - id: q-sgn-parity
+    kind: mcq
+    prompt: "Interleave with even/odd symmetry: what are the parities of $\\operatorname{sgn}(t)$ and $u(t)$?"
+    choices:
+      - "sgn is odd; u is neither even nor odd"
+      - "Both are odd — they both 'point' through the origin"
+      - "sgn is even; u is odd"
+      - "Both are neither"
+    answer: 0
+    explanation: "sgn(−t) = −sgn(t): odd. u fails both tests, but sgn = 2u − 1 rearranges to u = ½ + ½sgn(t) — an even part (the constant ½) plus an odd part. The alphabet letters are the standard specimens for the decomposition."

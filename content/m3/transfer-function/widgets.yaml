@@ -1,0 +1,11 @@
+widgets:
+  - id: tf-explorer
+    type: PoleZeroExplorer
+    title: "The system's DNA — drag poles and zeros, watch h(t) and |H| answer"
+    params: { preset: lp1, k: 1 }
+    presets:
+      - { label: "one pole → the simplest personality", params: { preset: lp1, k: 1 } }
+      - { label: "complex pair → ringing (ζ is an angle)", params: { preset: resonator, k: 1 } }
+      - { label: "two real poles → overdamped, no ring possible", params: { preset: overdamped, k: 1 } }
+      - { label: "cross the axis → watch instability ignite", params: { preset: unstable, k: 1 } }
+      - { label: "zeros at work → the notch refuses one frequency", params: { preset: notch, k: 1 } }

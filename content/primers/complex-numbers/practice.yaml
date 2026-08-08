@@ -1,0 +1,86 @@
+predict:
+  kind: choice
+  prompt: |
+    You need the angle of $-1 + j$ — the kind of number that falls out of every
+    frequency-response division. The calculator offers $\tan^{-1}\!\big(\tfrac{1}{-1}\big) = -45°$.
+    **Commit before you sketch:** what is the true angle of $-1 + j$?
+  choices:
+    - "−45° — the calculator computed it, and calculators don't lie"
+    - "45° — same triangle, take the positive reference angle"
+    - "135° — the arrow lives in quadrant II: reference angle 45°, adjusted by 180°"
+    - "225° — adjust by adding 180° to +45°"
+  answer: 2
+  resolution: |
+    Real part −1 points left, imaginary part +1 points up: quadrant II. The calculator cannot
+    see that — tan⁻¹ only receives the *ratio* 1/(−1) = −1, which is identical to the ratio
+    for $1 - j$, so it answers −45° for both arrows. The repair is mechanical: sketch, read
+    the 45° reference angle, land it in the true quadrant: 180° − 45° = 135°. (225° is
+    quadrant III — the angle of $-1-j$ — and it also escapes the principal range (−180°, 180°].)
+    If you picked −45°, you just met the single most common lost mark in this course; the
+    two-second sketch is the permanent cure.
+
+quiz:
+  - id: q-quadrant
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "What is the angle of −2 + 2j (principal value)?"
+    choices: ["−45°", "45°", "135°", "−135°"]
+    answer: 2
+    explanation: "Left and up: quadrant II. Reference angle tan⁻¹(2/2) = 45°, adjusted: 180° − 45° = 135°. The raw calculator answer −45° belongs to 2 − 2j — a different arrow entirely. Sketch first, adjust always."
+  - id: q-divide-mag
+    kind: mcq
+    tags: [checkpoint]
+    prompt: |
+      Compute $\dfrac{4+6j}{2+2j}$ in rectangular form.
+    choices:
+      - "2.5 + 0.5j"
+      - "2 + 3j — divide the real parts, divide the imaginary parts"
+      - "2.5 − 0.5j"
+      - "5 + j"
+    answer: 0
+    explanation: "Multiply top and bottom by the denominator's conjugate 2 − 2j: numerator (4+6j)(2−2j) = 20 + 4j; denominator |2+2j|² = 8; result 2.5 + 0.5j. Componentwise division (2 + 3j) is the classic trap — division must undo multiplication, and multiplication mixes the components. 5 + j divided by 4 instead of 8; 2.5 − 0.5j flipped a sign in the expansion."
+  - id: q-polar-div
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "z₁ = 10∠60° and z₂ = 2∠−30°. Compute z₁/z₂."
+    choices:
+      - "5∠90° — which is exactly 5j"
+      - "5∠30°"
+      - "20∠90°"
+      - "5∠−90°"
+    answer: 0
+    explanation: "Division in polar: magnitudes divide (10/2 = 5), angles subtract (60° − (−30°) = 90°). And 5∠90° sits on the positive imaginary axis: 5j. Choosing 5∠30° added the angles — that is the multiplication rule; 20∠90° multiplied the magnitudes; 5∠−90° subtracted the angles in the wrong order."
+  - id: q-drill-H
+    kind: numeric
+    tags: [checkpoint]
+    prompt: |
+      The exam pattern itself: $H = \dfrac{6+8j}{1-j}$. Compute $|H|$.
+    answer: 7.071
+    tolerance: 0.01
+    explanation: "|6+8j| = √(36+64) = 10 and |1−j| = √2, so |H| = 10/√2 ≈ 7.071. No rectangular expansion needed — magnitudes divide on their own. (The companion drill: ∠H = 53.13° − (−45°) = 98.13°.)"
+  - id: q-euler-eval
+    kind: mcq
+    prompt: |
+      Evaluate $e^{-j\pi/2}$.
+    choices: ["−j", "j", "−1", "0"]
+    answer: 0
+    explanation: "cos(π/2) − j·sin(π/2) = 0 − j. Geometrically: start at 1 and rotate a quarter-turn clockwise (negative angle) — you land at the bottom of the unit circle. The half-turn landmark e^{jπ} = −1 is a different point."
+  - id: q-conj
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "z = 3 + 4j. Compute z·z∗ (a single real number)."
+    answer: 25
+    tolerance: 0
+    explanation: "zz∗ = |z|² = 3² + 4² = 25 — no expansion required. This identity powers the conjugate division trick, and later every |H|² power computation in Modules 2 and 4."
+  - id: q-phasor-preview
+    kind: mcq
+    prompt: |
+      Preview of m2/frequency-response: at some frequency a filter has $H = \dfrac{1}{1+j}$.
+      The input is $2\cos(\omega t)$. What comes out?
+    choices:
+      - "1.41 cos(ωt − 45°)"
+      - "2 cos(ωt − 45°)"
+      - "1.41 cos(ωt + 45°)"
+      - "Nothing real can come out — H is complex"
+    answer: 0
+    explanation: "|H| = 1/√2 scales the amplitude: 2/√2 = √2 ≈ 1.41. ∠H = −45° shifts the phase: cos(ωt − 45°). A complex H never makes the output complex — it is a two-number package (gain, shift) applied to a real cosine. You will run this exact move at every frequency in Module 2."

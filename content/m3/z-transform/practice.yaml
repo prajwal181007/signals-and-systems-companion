@@ -1,0 +1,83 @@
+predict:
+  kind: choice
+  prompt: |
+    The atlas point is parked at $z = -0.8$ — negative real axis, inside the unit circle.
+    **Commit before you drag:** what do the samples $z^n$ do as $n$ counts up?
+  choices:
+    - "Grow — the left half of the z-plane is the unstable side, like the RHP in Laplace"
+    - "Decay smoothly, exactly like 0.8ⁿ"
+    - "Alternate sign every single sample while shrinking: +, −, +, −"
+    - "Oscillate forever at constant amplitude"
+  answer: 2
+  resolution: |
+    Magnitude sets the fate, angle sets the wiggle: $|-0.8| = 0.8 < 1$ forces decay, and the
+    angle $\pi$ advances half a turn per sample — a sign flip every step. If you predicted
+    "grow", your s-plane reflex fired: in the z-plane, *left* does not mean unstable — it means
+    fastest-possible alternation. Inside/outside the unit circle is the only growth verdict.
+
+quiz:
+  - id: q-atlas
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Which region of the z-plane holds ALL the decaying geometric sequences $z^n$?"
+    choices:
+      - "The left half-plane (Re z < 0), same as the s-plane"
+      - "Inside the unit circle ($|z| < 1$), at any angle"
+      - "The negative real axis only"
+      - "Below the real axis (Im z < 0)"
+    answer: 1
+    explanation: "The map z = e^{sT} rolls the LHP into the unit disk: decay is now radial (|z| < 1), not left–right. The left half of the z-plane just means the angle is near π — alternation, which can happen at any magnitude."
+  - id: q-bridge
+    kind: mcq
+    tags: [checkpoint]
+    prompt: |
+      Sampling every $T$ seconds maps $s \mapsto z = e^{sT}$. Which set of CT poles ALL land on
+      the same z-plane point as $s = j\omega_0$?
+    choices:
+      - "$s = j(\\omega_0 + 2\\pi k/T)$ for every integer $k$"
+      - "Only $s = -j\\omega_0$, the conjugate"
+      - "$s = j\\omega_0 + k$ for every integer $k$"
+      - "None — the exponential map is one-to-one"
+    answer: 0
+    explanation: "e^{j2π} = 1, so adding j2π/T to s changes nothing after the map. Horizontal strips of height 2π/T collapse onto one z-plane — this many-to-one pileup IS aliasing, met properly in m4/sampling."
+  - id: q-poleT
+    kind: numeric
+    tags: [checkpoint]
+    prompt: |
+      A CT pole sits at $s = -50\ \mathrm{s}^{-1}$ and an ADC samples every $T = 10$ ms.
+      Where does the pole land in the z-plane? (Give $z$ to three decimals.)
+    answer: 0.6065
+    tolerance: 0.005
+    explanation: "z = e^{sT} = e^{−50·0.01} = e^{−0.5} ≈ 0.607 — a real pole inside the unit circle, as an LHP pole must be. Bridge questions always need the actual T from the problem, not a remembered one."
+  - id: q-sign
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "$x[n] = (-0.9)^n u[n]$. Its z-transform is:"
+    choices:
+      - "$\\frac{z}{z-0.9}$ with ROC $|z| > 0.9$"
+      - "$\\frac{z}{z+0.9}$ with ROC $|z| > 0.9$"
+      - "$\\frac{z}{z+0.9}$ with ROC $|z| < 0.9$"
+      - "$\\frac{-z}{z-0.9}$ with ROC $|z| > 0.9$"
+    answer: 1
+    explanation: "aⁿu[n] ↔ z/(z−a) with a = −0.9 puts the pole AT −0.9, so the denominator is z + 0.9. Convergence still needs |z| > |a| = 0.9. The sign lives in the pole position, never in the ROC direction."
+  - id: q-inspect
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "$X(z) = 3 - 2z^{-1} + 5z^{-4}$. Which sequence is $x[n]$?"
+    choices:
+      - "x[0] = 3, x[1] = −2, x[4] = 5, zero elsewhere"
+      - "x[0] = 3, x[1] = 2, x[4] = 5, zero elsewhere"
+      - "x[0] = 3, x[−1] = −2, x[−4] = 5, zero elsewhere"
+      - "x[1] = 3, x[2] = −2, x[5] = 5, zero elsewhere"
+    answer: 0
+    explanation: "Exponent of z⁻¹ = sample index, coefficient = sample value, signs included. Finite sequences invert by inspection — these are gift marks; spend under a minute on them."
+  - id: q-twin
+    kind: mcq
+    prompt: "Transfer from Laplace: which s-plane object plays the role the UNIT CIRCLE plays in the z-plane?"
+    choices:
+      - "The jω axis"
+      - "The real axis"
+      - "The origin"
+      - "The vertical line Re s = 1"
+    answer: 0
+    explanation: "Constant-magnitude oscillation lives on the jω axis in CT and on |z| = 1 in DT — and z = e^{sT} wraps the former onto the latter. Every boundary-of-stability statement you learned in Laplace transfers along this dictionary."

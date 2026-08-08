@@ -1,0 +1,19 @@
+cards:
+  - id: c-rulers
+    front: "Name the four bandwidth rulers and what each one measures."
+    back: "3-dB: |X|² falls to half its peak (|X| → 0.707). First-null: first zero of X (may not exist). 90%-energy: smallest W fencing 90% of E (Parseval). RMS: standard-deviation width of the spectral energy density — tail-sensitive, can diverge."
+  - id: c-bound
+    front: "The uncertainty principle — statement, which widths it binds, equality case?"
+    back: "$\\Delta t\\,\\Delta\\omega \\ge \\tfrac12$ — for RMS widths only (not 3-dB or first-null). Equality holds for exactly one shape: the Gaussian."
+  - id: c-diverge
+    front: "RMS bandwidth of the rect pulse and of $e^{-at}u(t)$?"
+    back: "Both **diverge**. Reason: $\\Delta\\omega^2 E = \\int (x')^2 dt$ (slope energy), and any jump puts impulses in $x'$. Compare such families by 3-dB or 90%-energy instead."
+  - id: c-exclusion
+    front: "Can a signal be both time-limited and band-limited? Consequence for ideal filters?"
+    back: "Only $x \\equiv 0$. Band-limited ⇒ x(t) is an everywhere-convergent power series, so it can't vanish on an interval. Hence the brick-wall filter's sinc impulse response is eternal and non-causal — unrealizable."
+  - id: c-radar
+    front: "Radar range resolution — the two formulas and the design lesson."
+    back: "$\\Delta R = \\dfrac{c\\tau}{2} = \\dfrac{c}{2B}$. Resolution is bought with bandwidth, not short duration — chirp radars keep the pulse long for energy and sweep it wide for resolution."
+  - id: c-scaling
+    front: "Under $x(at)$, $a>1$: duration, bandwidth, and their product do what?"
+    back: "Duration ÷ a, bandwidth × a (every ruler), product invariant. Shorter is always spectrally wider — the see-saw."

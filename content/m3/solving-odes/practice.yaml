@@ -1,0 +1,85 @@
+predict:
+  kind: choice
+  prompt: |
+    A mass-spring-damper starts completely at rest — zero position, zero velocity, no
+    stored energy anywhere. At t = 0 a constant force switches on (a step input). A
+    classmate reasons: "no initial energy means no transient — the output is just the
+    constant forced value from the first instant."
+    **Commit before you compute:** what does the zero-state response actually contain?
+  choices:
+    - "Only the constant forced term — no stored energy, no transient"
+    - "The constant forced term PLUS decaying characteristic modes of the system"
+    - "Only characteristic modes — constants belong to the zero-input part"
+    - "An impulse at t = 0, then the constant"
+  answer: 1
+  resolution: |
+    Zero-state means Y = H(s)X(s), and that product has poles from BOTH factors: the input
+    pole at s = 0 delivers the constant, and the system poles deliver decaying e^(pt) modes
+    — even with every initial condition equal to zero. Physically, the mass must still
+    TRAVEL from rest to its new equilibrium, and that journey is built from the system's own
+    modes. The tempting first choice quietly equates "zero-state" with "forced response" —
+    but those are different splits: one cuts by CAUSE (input vs stored energy), the other by
+    SHAPE (input-form vs characteristic-form). Keeping them straight is worth real marks.
+
+quiz:
+  - id: q-derivrule
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Unilateral transform, exam convention. L{y''} equals…"
+    choices:
+      - "s^2 Y(s) - s y(0-) - y'(0-)"
+      - "s^2 Y(s) - y(0-) - y'(0-)"
+      - "s^2 Y(s) - s y'(0-) - y(0-)"
+      - "s^2 Y(s) + s y(0-) + y'(0-)"
+    answer: 0
+    explanation: "Apply the first-derivative rule twice: the highest power of s multiplies the VALUE, the bare deposit is the SLOPE. Swapping them (choice three) is the module's most common two-mark loss."
+  - id: q-icslive
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Transform y'' + 4y' + 3y = x(t) with y(0-) = 2, y'(0-) = 1. The IC polynomial that joins X(s) on the right-hand side is…"
+    choices:
+      - "2s + 9"
+      - "2s + 1"
+      - "2s + 3"
+      - "9s + 2"
+    answer: 0
+    explanation: "The y'' term deposits s(2) + 1; the 4y' term deposits 4(2) = 8; total 2s + 9. Stopping at 2s + 1 — forgetting the first-derivative term's deposit — is the classic exam slip."
+  - id: q-split
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "After transforming an ODE with a step input you get Y(s) = (s+3)/(s^2+3s+2) + 4/(s(s^2+3s+2)). Which reading is correct?"
+    choices:
+      - "First term is the zero-input response (built from ICs over the characteristic polynomial); second is the zero-state response H(s)X(s)"
+      - "First term is the zero-state response, because it contains no X(s)"
+      - "Both terms together form the zero-state response; the ICs add a third term"
+      - "The second term inverts to the constant 2 alone — no modes, since it came from zero ICs"
+    answer: 0
+    explanation: "The IC-built numerator over A(s) is the zero-input piece; the piece carrying X(s) = 1/s (times 4, the input gain) is the zero-state piece. And that second piece inverts to 2 - 4e^(-t) + 2e^(-2t): characteristic modes appear even from rest, which is why zero-state is NOT a synonym for forced."
+  - id: q-zerominus
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The input contains an impulse delta(t), and the problem states pre-switch values y(0-) and y'(0-). Which values go into the derivative rules?"
+    choices:
+      - "The 0- values, exactly as given — the transform computes the jump across t = 0 itself"
+      - "First convert to 0+ values by physical reasoning, then transform"
+      - "Either — impulses never change values at t = 0"
+      - "Neither — with impulsive inputs the Laplace method fails"
+    answer: 0
+    explanation: "The unilateral transform starts at 0- precisely so that given pre-switch data plugs straight in. With an impulse present, 0+ values differ from 0- values, and using them double-counts the kick — the jump is the transform's job, not yours."
+  - id: q-zi
+    kind: expression
+    tags: [checkpoint]
+    prompt: "Solve y' + 2y = 0 for t >= 0 with y(0-) = 3 by Laplace, and write y(t)."
+    answer: "3 e^(-2t) u(t)"
+    vars: [t]
+    explanation: "Transform: sY - 3 + 2Y = 0, so Y = 3/(s+2) — a pure zero-input response: one mode, weighted by the stored value 3. Invert: 3e^(-2t)u(t)."
+  - id: q-hx
+    kind: mcq
+    prompt: "Zero ICs, H(s) = 1/(s+1), input x(t) = e^(-2t)u(t). What is y(t)?"
+    choices:
+      - "(e^(-t) - e^(-2t)) u(t)"
+      - "e^(-3t) u(t) — multiply the two exponentials"
+      - "(e^(-t) + e^(-2t)) u(t)"
+      - "t e^(-2t) u(t)"
+    answer: 0
+    explanation: "Y = H·X = 1/((s+1)(s+2)); cover-up gives residues +1 and -1. This is the inverse-Laplace predict question in its natural habitat — and the 'multiply the time functions' distractor is the same trap: products in s are convolutions in t."

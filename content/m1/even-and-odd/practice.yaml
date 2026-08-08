@@ -1,0 +1,58 @@
+predict:
+  kind: choice
+  prompt: |
+    $x(t) = e^{-t}u(t)$ lives entirely on $t \ge 0$. **Commit:** what is its even part at $t = -2$?
+  choices:
+    - "0 — the signal is zero there"
+    - "$\\tfrac12 e^{-2}$ — half the mirrored value"
+    - "$e^{-2}$"
+    - "undefined"
+  answer: 1
+  resolution: |
+    $x_e(-2) = \tfrac12[x(-2) + x(2)] = \tfrac12[0 + e^{-2}]$. The even part is nonzero on BOTH sides —
+    on the left it must be exactly cancelled by the odd part to rebuild the zero. "The parts vanish
+    where the signal does" is the standard first instinct, and it is wrong.
+
+quiz:
+  - id: q-formulas
+    kind: expression
+    tags: [checkpoint]
+    prompt: "Write the odd part of $u(t)$ as a function of t (use sgn)."
+    answer: "0.5 sgn(t)"
+    vars: [t]
+    explanation: "$u(t) = \\tfrac12 + \\tfrac12\\mathrm{sgn}(t)$: constant even part, half-signum odd part."
+  - id: q-oddzero
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Every odd signal satisfies:"
+    choices:
+      - "$x(0) = 0$"
+      - "$x(0) = 1$"
+      - "$x(t) \\ge 0$"
+      - "periodicity"
+    answer: 0
+    explanation: "x(−0) = −x(0) forces x(0) = 0. A quick sanity check on any claimed odd part."
+  - id: q-integral
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "Evaluate $\\int_{-5}^{5} t^3\\cos(2t)\\,dt$."
+    answer: 0
+    tolerance: 0
+    explanation: "odd × even = odd; odd over symmetric limits = 0. Zero computation — the symmetry IS the answer."
+  - id: q-energy
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "x has E = 8, and its even part has E_e = 5. Energy of the odd part?"
+    choices: ["3", "8", "13", "cannot tell"]
+    answer: 0
+    explanation: "Parts are orthogonal ⇒ energies add: E_o = 8 − 5 = 3. No cross term, ever."
+  - id: q-transfer
+    kind: mcq
+    prompt: "A periodic signal is even. What does that predict about its Fourier series (Module 2 preview)?"
+    choices:
+      - "Only sine terms survive"
+      - "Only cosine terms (and DC) survive"
+      - "All terms survive"
+      - "The series does not exist"
+    answer: 1
+    explanation: "Cosines are even, sines odd; an even signal has nothing for the sine (odd) basis to represent. Symmetry kills half the work before any integral."

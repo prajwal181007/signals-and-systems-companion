@@ -1,0 +1,13 @@
+cards:
+  - id: c-feature
+    front: "Where does a feature of x at t₀ land in y(t) = x(at − b)?"
+    back: "Solve at − b = t₀:  t = (t₀ + b)/a. Works for endpoints, peaks, jumps — replaces every mnemonic."
+  - id: c-orders
+    front: "The two LEGAL operation orders for x(at − b), and the illegal one."
+    back: "Shift by b then scale by a; OR scale by a then shift by b/a. ILLEGAL: scale then shift by b (that's x(at − ab))."
+  - id: c-delta
+    front: "δ(at) = ?"
+    back: "δ(t)/|a| — the impulse renormalizes because its DEFINING property is unit area, not height."
+  - id: c-minus
+    front: "Why does x(t − b), b > 0, move RIGHT?"
+    back: "y(b+s) = x(s): the machine replays x's history b seconds late — later on the axis = rightward."

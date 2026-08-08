@@ -1,0 +1,8 @@
+widgets:
+  - id: explorer
+    type: FeedbackExplorer
+    title: "Feedback relocates poles — sweep K and watch them migrate"
+    params: { plant: motor, k: 1 }
+    presets:
+      - { label: "double integrator: pinned to the axis", params: { plant: double, k: 1 } }
+      - { label: "RHP zero: gain destabilizes", params: { plant: rhpzero, k: 0.5 } }

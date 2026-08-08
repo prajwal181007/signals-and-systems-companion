@@ -1,0 +1,64 @@
+predict:
+  kind: choice
+  prompt: |
+    A system has $h(t) = \frac{u(t)}{1+t}$ — it decays to zero as $t \to \infty$.
+    **Commit:** is the system BIBO stable?
+  choices:
+    - "Yes — h decays to zero"
+    - "No — the decay is too slow: ∫|h| = ln(1+t) → ∞"
+    - "Yes — h is causal"
+    - "Cannot tell from h"
+  answer: 1
+  resolution: |
+    Stability is absolute integrability, not convergence to zero: $\int_0^\infty \frac{dt}{1+t}$
+    diverges logarithmically. A bounded input aimed at this slow tail accumulates without bound.
+    "It decays, so it's stable" is the most natural wrong instinct in this concept — the integral,
+    not the picture, decides.
+
+quiz:
+  - id: q-rc
+    kind: expression
+    tags: [checkpoint]
+    prompt: "An RC low-pass has step response $s(t) = (1 - e^{-2t})u(t)$. Write its impulse response h(t) for t > 0."
+    answer: "2 e^(-2t)"
+    vars: [t]
+    explanation: "h = ds/dt = 2e^{−2t}u(t). (The u(t) factor is understood for t > 0.) Differentiating the charging curve is the standard route from lab measurement to fingerprint."
+  - id: q-classify
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "$h(t) = e^{2t}u(-t)$. The system is:"
+    choices:
+      - "causal and stable"
+      - "causal and unstable"
+      - "non-causal and stable"
+      - "non-causal and unstable"
+    answer: 2
+    explanation: "Support on t ≤ 0 ⇒ non-causal (responds before the impulse). ∫_{−∞}^0 e^{2t}dt = 1/2 < ∞ ⇒ stable. The two properties are independent — this exact pair is exam bait."
+  - id: q-integrator
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The running integrator has h = u(t). Its BIBO verdict, by the h-test:"
+    choices:
+      - "stable: h is bounded"
+      - "unstable: ∫|h| = ∞"
+      - "stable: h is causal"
+      - "marginal: h neither grows nor decays… so stable"
+    answer: 1
+    explanation: "∫₀^∞ 1 dt = ∞. Same verdict the adversarial u(t) input gave in system-properties — now one line. Boundedness of h itself is NOT the criterion."
+  - id: q-dcgain
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "h(t) = 3e^{-3t}u(t). What does the step response settle to as t → ∞ (the DC gain)?"
+    answer: 1
+    tolerance: 0.001
+    explanation: "s(∞) = ∫₀^∞ 3e^{−3t}dt = 1. A free consistency check on any computed h: integrate it and compare with the settled step response."
+  - id: q-memoryless
+    kind: mcq
+    prompt: "An LTI system is memoryless. Its impulse response must be:"
+    choices:
+      - "a decaying exponential"
+      - "k·δ(t) — a scaled impulse, nothing else"
+      - "any causal h"
+      - "u(t)"
+    answer: 1
+    explanation: "Memoryless means the output reads only the present; any spread in h would mix in the past. Only the identity-times-gain survives."

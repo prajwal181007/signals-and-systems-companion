@@ -1,0 +1,16 @@
+cards:
+  - id: c-lti-pair
+    front: "The canonical proof that linearity ⊥ time-invariance (two systems)."
+    back: "y = t·x(t): linear, time-VARYING. y = x²(t): NONlinear, time-invariant."
+  - id: c-linear
+    front: "System linearity — definition + the instant screen."
+    back: "Superposition: ax₁+bx₂ ↦ ay₁+by₂ for ALL inputs/constants. Instant screen: 0 must map to 0 (kills y = x+1)."
+  - id: c-causal
+    front: "Causality check by inspection?"
+    back: "List the times the formula reads; all ≤ t ⇒ causal. x(2t), x(−t), x(t+1): non-causal."
+  - id: c-bibo
+    front: "How is BIBO instability established? Example."
+    back: "One designed bounded input with unbounded output. Integrator + u(t) → y = t → ∞."
+  - id: c-logic
+    front: "Tests vs proofs for system properties."
+    back: "One counterexample KILLS a property; no finite set of passes proves it — proof needs general algebra (∀ inputs)."

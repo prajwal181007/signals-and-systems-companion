@@ -1,0 +1,70 @@
+predict:
+  kind: choice
+  prompt: |
+    An equalizer (EQ) and a reverb are both LTI. Studio A applies EQ → reverb; studio B applies
+    reverb → EQ. **Commit:** how do the final recordings compare?
+  choices:
+    - "Different — the first effect shapes what the second receives"
+    - "Identical — LTI cascades commute"
+    - "Identical only if the EQ is flat"
+    - "Different unless the signals are sinusoids"
+  answer: 1
+  resolution: |
+    $h_{EQ} * h_{rev} = h_{rev} * h_{EQ}$: the cascade is one composite LTI system either way.
+    The "first effect shapes the input" intuition is exactly right for NONLINEAR chains (clip-then-
+    filter ≠ filter-then-clip) — which is why the LTI privilege is worth internalizing precisely.
+
+quiz:
+  - id: q-shift
+    kind: expression
+    tags: [checkpoint]
+    prompt: "Evaluate $y(t) = x(t) * [\\,2\\delta(t-1)\\,]$ in terms of x."
+    answer: "2 x(t-1)"
+    vars: [t]
+    explanation: "Sifting: convolution with a scaled shifted impulse copies, scales, shifts. Zero integrals — recognizing this pattern is the point."
+  - id: q-cascade
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Two LTI systems h₁ and h₂ in cascade are equivalent to one system with impulse response:"
+    choices:
+      - "$h_1 + h_2$"
+      - "$h_1 * h_2$ (either order)"
+      - "$h_1 \\cdot h_2$ (pointwise product)"
+      - "$h_2 - h_1$"
+    answer: 1
+    explanation: "Associativity: x∗h₁∗h₂ groups as x∗(h₁∗h₂). Parallel is the SUM; pointwise product is what happens in the FREQUENCY domain (Module 2 payoff)."
+  - id: q-deriv
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Which identity is correct?"
+    choices:
+      - "$(x*h)' = x' * h'$"
+      - "$(x*h)' = x' * h = x * h'$"
+      - "$(x*h)' = x' + h'$"
+      - "$(x*h)' = x * h$"
+    answer: 1
+    explanation: "The derivative moves onto ONE factor (differentiate under the integral). Both-factors is the product-rule reflex — and wrong."
+  - id: q-speedrun
+    kind: expression
+    tags: [checkpoint]
+    prompt: "Using $x' = \\delta(t) - \\delta(t-2)$ for the pulse x = u(t) − u(t−2), and h = e^{-t}u(t): what is $x' * h$ for t between 0 and 2?"
+    answer: "e^(-t)"
+    vars: [t]
+    explanation: "x'∗h = h(t) − h(t−2); for 0 < t < 2 the delayed copy hasn't started: just e^{−t}. Integrate this from 0 to t to get y — the regime-free route."
+  - id: q-delay
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "x(t−1) is convolved with h(t−2). The result equals y(t−T) where y = x∗h. T = ?"
+    answer: 3
+    tolerance: 0
+    explanation: "Delays stack: T = 1 + 2 = 3. (Same fact as 'supports add', read as timing.)"
+  - id: q-transfer
+    kind: mcq
+    prompt: "A compressor (nonlinear) and an LTI filter are chained. Does order matter?"
+    choices:
+      - "No — convolution commutes"
+      - "Yes — commutativity is an LTI-only privilege; nonlinear chains don't commute"
+      - "No, if the filter is causal"
+      - "Only in discrete time"
+    answer: 1
+    explanation: "The algebra of this concept lives entirely inside LTI-land. Filter-then-clip vs clip-then-filter sound audibly different — ask any audio engineer."

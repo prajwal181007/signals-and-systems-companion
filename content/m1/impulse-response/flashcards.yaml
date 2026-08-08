@@ -1,0 +1,13 @@
+cards:
+  - id: c-dict
+    front: "The h(t) property dictionary: memoryless / causal / BIBO stable."
+    back: "Memoryless ⇔ h = kδ(t). Causal ⇔ h(t)=0 for t<0. BIBO ⇔ ∫|h|dt < ∞ (integrability, NOT mere decay)."
+  - id: c-sh
+    front: "Step response from h, and the DC-gain check."
+    back: "s(t) = ∫_{−∞}^t h;  h = ds/dt;  s(∞) = ∫h = DC gain."
+  - id: c-rc
+    front: "Impulse response of the RC low-pass (time constant RC)?"
+    back: "$h(t) = \\frac{1}{RC}e^{-t/RC}u(t)$ — differentiate the charging curve $(1-e^{-t/RC})u(t)$."
+  - id: c-slowdecay
+    front: "Why is h = u(t)/(1+t) unstable despite decaying to 0?"
+    back: "∫|h| = ln(1+t) → ∞ — integrability fails. Decay to zero is necessary-looking but NOT sufficient."

@@ -1,0 +1,16 @@
+cards:
+  - id: c-sift
+    front: "The defining property of $\\delta(t)$ — write it, and say what δ is NOT defined by."
+    back: "$\\int_{-\\infty}^{\\infty} x(t)\\,\\delta(t-t_0)\\,dt = x(t_0)$ for x continuous at $t_0$. NOT defined by a value at 0 — δ exists only through its action under integrals."
+  - id: c-scale
+    front: "$\\delta(at-b) = ?$  And the special case $\\delta(-t)$?"
+    back: "$\\frac{1}{|a|}\\,\\delta\\!\\left(t - \\frac{b}{a}\\right)$ — compressing the clock dilutes the weight. $\\delta(-t) = \\delta(t)$: the impulse is even."
+  - id: c-product
+    front: "$x(t)\\,\\delta(t-t_0) = ?$ (a product, not an integral)"
+    back: "$x(t_0)\\,\\delta(t-t_0)$ — still an impulse, weight frozen to the value at the strike point. Only integrating collapses it to the number $x(t_0)$."
+  - id: c-step
+    front: "The δ ↔ u relationship, both directions?"
+    back: "$u(t) = \\int_{-\\infty}^{t} \\delta(\\tau)\\,d\\tau$ and $\\frac{du}{dt} = \\delta(t)$ in the distributional sense (true as a statement about behavior under integrals)."
+  - id: c-family
+    front: "Condition for a shrinking pulse family to converge to δ?"
+    back: "Area pinned at 1 while the width → 0 — ANY shape then works (rect, triangle, Gaussian). Area A ≠ 1 gives A·δ; unbounded area gives no limit."

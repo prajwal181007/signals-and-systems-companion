@@ -1,0 +1,16 @@
+cards:
+  - id: c-def
+    front: "Z-transform — write the defining sum, and say what r and Ω each control in $z = re^{j\\Omega}$."
+    back: "$X(z) = \\sum_{n=-\\infty}^{\\infty} x[n]\\, z^{-n}$. r = growth/decay per sample; Ω = radians of rotation per sample."
+  - id: c-flagship
+    front: "$a^n u[n] \\leftrightarrow$ ? (both standard forms, plus ROC)"
+    back: "$\\frac{z}{z-a} = \\frac{1}{1-az^{-1}}$, ROC $|z| > |a|$. The pole IS the geometric ratio."
+  - id: c-atlas
+    front: "z-plane atlas: what do inside / outside / on the unit circle / negative real axis mean for $z^n$?"
+    back: "Inside: decay. Outside: growth. On the circle: constant-amplitude oscillation. Negative real axis: sign alternation every sample — z = −1 is the fastest DT oscillation."
+  - id: c-bridge
+    front: "The bridge z = e^{sT}: give |z| and ∠z, and state the aliasing collapse."
+    back: "$|z| = e^{\\sigma T}$, $\\angle z = \\omega T$; jω axis wraps onto the unit circle. s and s + j2π/T land on the SAME z — strips of height 2π/T collapse (aliasing)."
+  - id: c-delay
+    front: "$\\delta[n-k] \\leftrightarrow$ ?  And what does $z^{-1}$ mean physically?"
+    back: "$z^{-k}$, ROC $z \\neq 0$. Each power of $z^{-1}$ is one sample of delay — so finite sequences transform (and invert) by inspection."

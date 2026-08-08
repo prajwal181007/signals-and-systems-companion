@@ -1,0 +1,16 @@
+cards:
+  - id: c-cascade
+    front: "Cascade of H₁ and H₂ — composite TF, ZPK bookkeeping, time-domain equivalent?"
+    back: "$H = H_1H_2$; zeros ∪ zeros, poles ∪ poles, gains multiply; $h = h_1 * h_2$. Order irrelevant (LTI only)."
+  - id: c-parallel
+    front: "Parallel connection — where do the composite's poles and zeros come from?"
+    back: "$H = \\frac{N_1D_2+N_2D_1}{D_1D_2}$: poles = union of branch poles; zeros = roots of the numerator SUM — brand new, born from branch interference."
+  - id: c-feedback
+    front: "Negative feedback loop, forward G, feedback H — closed-loop TF and its sign rule?"
+    back: "$T = \\frac{G}{1+GH}$. Junction minus ⇒ denominator plus (positive feedback would give $1-GH$). Closed-loop poles = roots of $1+GH=0$."
+  - id: c-ff
+    front: "Feed-forward disturbance cancellation — the condition, and its two prerequisites?"
+    back: "$F = -G_d/G$ (disturbance path $G_d$, control path $G$). Needs G invertible (no RHP zeros) and an accurate model — cancellation is model-deep only."
+  - id: c-internal
+    front: "Internal stability — definition, and the cancellation it outlaws?"
+    back: "Every injection-point-to-signal transfer function stable, not just x→y. Outlaws RHP pole–zero cancellation: the ratio hides the mode, disturbances still ignite $e^{at}$."

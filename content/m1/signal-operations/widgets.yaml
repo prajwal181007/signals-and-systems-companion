@@ -1,0 +1,9 @@
+widgets:
+  - id: transformer
+    type: SignalExplorer
+    title: "The x(at − b) machine — drag a and b, track the notch"
+    params: { signal: flag, a: 1, b: 0 }
+    presets:
+      - { label: "pure shift: x(t − 1.5)", params: { signal: flag, a: 1, b: 1.5 } }
+      - { label: "the exam classic: x(3t − 6)", params: { signal: flag, a: 3, b: 6 } }
+      - { label: "reversal: x(−t − 1)", params: { signal: flag, a: -1, b: 1 } }

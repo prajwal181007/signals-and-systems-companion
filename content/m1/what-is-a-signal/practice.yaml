@@ -1,0 +1,73 @@
+predict:
+  kind: choice
+  prompt: |
+    A DAC outputs a held staircase voltage: it exists at **every instant of time**, but can only
+    take 256 distinct levels. **Commit:** how is it classified?
+  choices:
+    - "Discrete-time, digital"
+    - "Continuous-time, analog"
+    - "Continuous-time, digital (quantized amplitude)"
+    - "Discrete-time, analog"
+  answer: 2
+  resolution: |
+    Time and amplitude are independent dials. The staircase is defined at every instant (CT) but its
+    values are quantized (digital amplitude). The reverse case — sampled but unquantized — is DT-analog.
+    If you answered "discrete-time", you merged the two dials; that is exactly the distinction this
+    concept exists to install.
+
+quiz:
+  - id: q-quadrant
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A switched-capacitor filter processes voltage samples that can take ANY real value. Classification?"
+    choices:
+      - "CT analog"
+      - "DT analog"
+      - "DT digital"
+      - "CT digital"
+    answer: 1
+    explanation: "Sampled ⇒ discrete time; unquantized ⇒ analog amplitude. The two dials are independent."
+  - id: q-notation
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Which statement about $x[n] = x(nT_s)$ is correct?"
+    choices:
+      - "x[n] exists between integer n by interpolation"
+      - "x[n] is defined only at integer n; between samples it is simply not defined"
+      - "x[n] is zero between samples"
+      - "x[n] must be quantized"
+    answer: 1
+    explanation: "DT signals are sequences — undefined (not zero!) between integers. 'Zero between samples' is a different object (an impulse train) that Module 4 uses deliberately."
+  - id: q-random
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Which question is well-posed for thermal noise?"
+    choices:
+      - "What is its value at t = 2.7 s?"
+      - "What is its Fourier series?"
+      - "What is its average power in the band 1–2 kHz?"
+      - "What is its fundamental period?"
+    answer: 2
+    explanation: "Individual values and periods don't replicate across runs; band power does — random signals are described by stable statistics (PSD, Module 2)."
+  - id: q-causal
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "x(t) = e^{t}u(−t). Its duration class is:"
+    choices:
+      - "causal / right-sided"
+      - "left-sided (anti-causal)"
+      - "two-sided"
+      - "finite duration"
+    answer: 1
+    explanation: "u(−t) kills everything for t > 0: the signal lives on t ≤ 0. Left-sided bookkeeping like this decides Laplace ROCs in Module 3."
+  - id: q-construct
+    kind: mcq
+    prompt: "Which is a CT, deterministic, PERIODIC, bounded signal?"
+    choices:
+      - "$e^{-t}u(t)$"
+      - "$\\cos(5t) + \\sin(7t)$"
+      - "thermal noise"
+      - "$t\\,u(t)$"
+    answer: 1
+    explanation: "Ratio 5/7 is rational ⇒ periodic (next concept makes this precise); cosines are bounded and deterministic. The exponential decays (aperiodic), the ramp is unbounded."
+

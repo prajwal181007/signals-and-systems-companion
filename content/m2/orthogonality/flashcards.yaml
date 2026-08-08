@@ -1,0 +1,16 @@
+cards:
+  - id: c-inner
+    front: "Inner product of two signals on $[t_1,t_2]$ (complex-safe form) — and what is $\\langle x,x\\rangle$?"
+    back: "$\\langle x,y\\rangle = \\int_{t_1}^{t_2} x(t)\\,y^*(t)\\,dt$. Self-agreement $\\langle x,x\\rangle = \\int |x|^2 dt$ = the signal's **energy** on the interval (real, non-negative — that is what the conjugate buys)."
+  - id: c-proj
+    front: "Best (minimum-error-energy) coefficient of $\\varphi_n$ inside $x$?"
+    back: "$c_n = \\dfrac{\\langle x,\\varphi_n\\rangle}{\\langle\\varphi_n,\\varphi_n\\rangle}$ — raw agreement divided by the norm. The divisor is 1 only for orthonormal sets; forgetting it scales every answer."
+  - id: c-error
+    front: "Minimum error energy after keeping N orthogonal terms?"
+    back: "$E_N = \\lVert x\\rVert^2 - \\sum_{k=1}^{N} |c_k|^2 \\lVert\\varphi_k\\rVert^2$ — minus sign, never plus; each added orthogonal term can only lower it. Error is ⊥ to every used axis."
+  - id: c-orthset
+    front: "When is a set $\\{\\varphi_n\\}$ orthogonal — and what must you always state alongside?"
+    back: "$\\langle\\varphi_m,\\varphi_n\\rangle = 0$ for every $m \\neq n$ — **on a stated interval**. The same pair can be orthogonal on one interval and not on another ($\\sin t$, $\\sin 2t$: yes on $[-\\pi,\\pi]$, no on $[0,\\pi/2]$)."
+  - id: c-norms
+    front: "Norms over one period T: $\\lVert\\sin k\\omega_0 t\\rVert^2$, $\\lVert\\cos k\\omega_0 t\\rVert^2$, $\\lVert 1\\rVert^2$, and $\\langle e^{jk\\omega_0 t}, e^{jm\\omega_0 t}\\rangle$?"
+    back: "$T/2$, $T/2$, $T$; and $\\langle e^{jk\\omega_0 t}, e^{jm\\omega_0 t}\\rangle = T$ if $k=m$, else 0. These divisors become the $\\tfrac{2}{T}$ and $\\tfrac{1}{T}$ of the Fourier coefficient formulas."

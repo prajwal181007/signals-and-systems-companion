@@ -1,0 +1,11 @@
+widgets:
+  - id: atlas
+    type: ZPlaneAtlas
+    title: "The z-plane atlas — drag z and watch the stems rⁿcos(Ωn) obey"
+    params: { r: 0.85, omega: 0.6 }
+    presets:
+      - { label: "gentle decay (inside the circle)", params: { r: 0.85, omega: 0.6 } }
+      - { label: "the alternating street: z = −0.8", params: { r: 0.8, omega: 3.1416 } }
+      - { label: "rim walker — oscillates forever", params: { r: 1.0, omega: 0.785 } }
+      - { label: "outside the circle: growth", params: { r: 1.15, omega: 0.6 } }
+      - { label: "z = 1: the DC point", params: { r: 1.0, omega: 0 } }

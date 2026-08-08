@@ -1,0 +1,8 @@
+widgets:
+  - id: decomposer
+    type: EvenOddDecomposer
+    title: "The decomposer — fold, average, difference, reassemble"
+    params: { signal: expu }
+    presets:
+      - { label: "shifted pulse (no symmetry at all?)", params: { signal: pulse } }
+      - { label: "ramp-then-flat", params: { signal: rampsig } }

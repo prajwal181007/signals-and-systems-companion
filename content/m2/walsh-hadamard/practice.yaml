@@ -1,0 +1,77 @@
+predict:
+  kind: choice
+  prompt: |
+    The mixer's target is a perfect ±1 square wave that flips once mid-interval. Fourier famously
+    needs an infinite series for it. **Commit before you crank the slider:** how many Walsh terms
+    until the reconstruction error is *exactly zero*?
+  choices:
+    - "About as many as Fourier — jumps are hard for every basis"
+    - "One — the square wave IS a Walsh function, so a single projection captures it"
+    - "Sixteen — you always need one term per sample"
+    - "The error never reaches exactly zero for any finite number of terms"
+  answer: 1
+  resolution: |
+    The ±1 square wave with one mid-interval flip *is* the sequency-1 Walsh function: its projection
+    onto that axis is 1 and onto every other axis is 0. One term, zero error. The tempting first
+    answer smuggles in the "Fourier is the true spectrum" misconception — jumps are only hard for
+    *smooth* bases. Hand the mixer a sine instead and the contest flips against Walsh.
+
+quiz:
+  - id: q-h4
+    kind: mcq
+    tags: [checkpoint]
+    prompt: |
+      The recursion gives $H_4 = \begin{bmatrix} H_2 & H_2 \\ H_2 & \,?\, \end{bmatrix}$.
+      What fills the bottom-right block?
+    choices:
+      - "$H_2$ — all four blocks are copies"
+      - "$-H_2$ — copy, copy, copy, negate"
+      - "$H_2^{\\mathsf T}$ — the transpose"
+      - "$2H_2$ — the blocks double in scale"
+    answer: 1
+    explanation: "Copy–copy across the top, copy–negate down the bottom: only the bottom-right block is negated. That one minus sign is what makes each new row orthogonal to its own twin — and mis-copying it is the classic exam error."
+  - id: q-c2
+    kind: numeric
+    tags: [checkpoint]
+    prompt: |
+      For $x = [6,\ 2,\ -2,\ 2]$, compute the coefficient on the Walsh row $[1,\ 1,\ -1,\ -1]$
+      (remember the divisor).
+    answer: 2
+    tolerance: 0.01
+    explanation: "$c = \\tfrac14(6 + 2 - (-2) - 2) = \\tfrac14(6+2+2-2) = 2$. Signs from the row, then divide by $N = 4$ because $\\lVert w\\rVert^2 = 4$."
+  - id: q-seq
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "What is the sequency of the Walsh row $[1,\\ -1,\\ -1,\\ 1]$?"
+    answer: 2
+    tolerance: 0
+    explanation: "Count sign changes left to right: $1 \\to -1$ (one), $-1 \\to -1$ (none), $-1 \\to 1$ (two). Sequency 2 — the Walsh world's stand-in for frequency."
+  - id: q-order
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The natural (recursion) order of $H_4$'s rows has which sequencies, top to bottom?"
+    choices:
+      - "0, 1, 2, 3 — the recursion sorts by sequency automatically"
+      - "0, 3, 1, 2 — natural order is NOT sequency order"
+      - "3, 2, 1, 0 — busiest first"
+      - "0, 2, 1, 3 — even sequencies first"
+    answer: 1
+    explanation: "Count on each row: $[1,1,1,1]\\to 0$, $[1,-1,1,-1]\\to 3$, $[1,1,-1,-1]\\to 1$, $[1,-1,-1,1]\\to 2$. Sequency ordering is a relabeling you do afterwards by counting — never assume the recursion delivers it."
+  - id: q-basis
+    kind: mcq
+    prompt: "A smooth sinusoidal vibration signal is to be compressed with as few coefficients as possible. Which basis wins, and why?"
+    choices:
+      - "Walsh — ±1 arithmetic is cheaper, so it also compresses better"
+      - "Fourier — the signal looks like one Fourier axis, so one coefficient captures it"
+      - "Walsh — square axes are more general than smooth ones"
+      - "Neither — all orthogonal bases compress every signal equally well"
+    answer: 1
+    explanation: "Compression efficiency is resemblance: a signal that looks like one of the axes needs one coefficient. A sine IS a Fourier axis; Walsh must stack many staircases to fake a curve. Cheap arithmetic (a real Walsh virtue) is a separate question from compression."
+  - id: q-energy
+    kind: numeric
+    prompt: |
+      A 4-point signal has WH coefficients $c = [1,\ 0,\ 2,\ 1]$. Using the energy check, what is
+      the signal's energy $\sum_n x[n]^2$?
+    answer: 24
+    tolerance: 0.01
+    explanation: "Orthogonality gives Pythagoras: $\\sum x^2 = N\\sum c_k^2 = 4(1 + 0 + 4 + 1) = 24$. The same '(coefficient energy) × (norm)' ledger you met with projections — and a free verification step in every exam answer."

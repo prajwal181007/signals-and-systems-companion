@@ -1,0 +1,78 @@
+predict:
+  kind: choice
+  prompt: |
+    The system $y(t) = t \cdot x(t)$ multiplies the input by the current clock reading.
+    **Commit:** which properties does it have?
+  choices:
+    - "Nonlinear and time-varying — the t ruins both"
+    - "Linear but time-varying"
+    - "Nonlinear but time-invariant"
+    - "Linear and time-invariant"
+  answer: 1
+  resolution: |
+    Superposition survives perfectly — $t(ax_1+bx_2) = a\,tx_1 + b\,tx_2$ — so it is LINEAR. But the
+    same pulse fed later gets weighted by a different clock value: time-VARYING. Most first guesses
+    say "nonlinear because of the t"; separating the two axes is exactly what this concept trains.
+
+quiz:
+  - id: q-affine
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Is $y(t) = x(t) + 1$ linear?"
+    choices:
+      - "Yes — its graph is a straight line"
+      - "No — zero input gives output 1, and superposition fails"
+      - "Yes — it's just a DC offset"
+      - "Only for positive inputs"
+    answer: 1
+    explanation: "Linear systems must map 0 → 0 (homogeneity with a = 0). This one is affine. The quickest linearity screen on any exam: feed zero."
+  - id: q-causal
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Which system is causal?"
+    choices:
+      - "$y(t) = x(2t)$"
+      - "$y(t) = x(-t)$"
+      - "$y(t) = x(t-3) + x(t)$"
+      - "$y(t) = x(t+1)$"
+    answer: 2
+    explanation: "It reads only now and 3 seconds ago. x(2t) needs x beyond t for t > 0; x(−t) reads the future for negative t; x(t+1) is openly psychic."
+  - id: q-stability
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The running integrator passed bounded-input tests with pulses and sinusoids. What settles its BIBO stability?"
+    choices:
+      - "It is stable — the tests passed"
+      - "Feed u(t): output t → ∞. One designed input kills it"
+      - "It is stable for small inputs"
+      - "Stability cannot be decided"
+    answer: 1
+    explanation: "BIBO quantifies over ALL bounded inputs; the worst case decides. The step makes everything accumulate with one sign — the adversarial input."
+  - id: q-classify
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Classify $y(t) = x(t)\\cos(t)$:"
+    choices:
+      - "linear, TI, causal"
+      - "linear, time-varying, causal, memoryless, stable"
+      - "nonlinear, TI"
+      - "nonlinear, time-varying"
+    answer: 1
+    explanation: "The multiplier cos(t) is independent of x (linear ✓) but tied to the clock (TV). Reads only the present, bounded by |x|. This is AM modulation."
+  - id: q-prove
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "To PROVE a system is linear on an exam, you must:"
+    choices:
+      - "Show it works for two example inputs"
+      - "Show superposition for ARBITRARY x₁, x₂ and constants — symbols, not examples"
+      - "Show 0 maps to 0"
+      - "Run many simulations"
+    answer: 1
+    explanation: "Examples can only kill (∀-statement). 0→0 is necessary but not sufficient. The general algebraic argument is the proof — and where the marks sit."
+  - id: q-transfer
+    kind: mcq
+    prompt: "x(t) nonzero on [1,3] enters $y(t) = x(2t)$. Where is y nonzero? (Operations concept, reused.)"
+    choices: ["[2, 6]", "[0.5, 1.5]", "[1, 3]", "[−3, −1]"]
+    answer: 1
+    explanation: "2t ∈ [1,3] ⇒ t ∈ [0.5, 1.5] — compression halves the support. And note: producing y(0.6) needs x(1.2), which is later — the non-causality you just classified."

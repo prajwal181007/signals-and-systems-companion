@@ -1,0 +1,5 @@
+widgets:
+  - id: lab
+    type: SystemTester
+    title: "The black-box lab — design probes, kill properties, then reveal"
+    params: {}

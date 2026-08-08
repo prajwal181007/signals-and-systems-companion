@@ -1,0 +1,81 @@
+predict:
+  kind: choice
+  prompt: |
+    You approximate a buoy's pressure waveform $x(t)$ using three orthogonal waveforms and
+    obtain $c_1 = 3.0$, $c_2 = -1.2$, $c_3 = 0.4$. The radio link improves, so you add a fourth
+    orthogonal waveform $\varphi_4$ to tighten the fit. **Commit before you compute:** what
+    happens to $c_1$?
+  choices:
+    - "All four coefficients must be re-solved together — adding an unknown re-opens the whole fit"
+    - "$c_1$ changes a little, because $\\varphi_4$ overlaps $\\varphi_1$ in time"
+    - "$c_1$ is exactly unchanged — each coefficient is an independent projection"
+    - "$c_1$ shrinks, because the signal's energy must now be shared among four terms"
+  answer: 2
+  resolution: |
+    With an orthogonal kit the error-energy expression splits into independent one-variable
+    parabolas: $c_1 = \langle x,\varphi_1\rangle/\langle\varphi_1,\varphi_1\rangle$ involves only
+    $x$ and $\varphi_1$, so enlarging the kit never touches it. The tempting answer is the first —
+    ordinary curve fitting really does couple its unknowns — but coupled equations are precisely
+    the signature of a *non-orthogonal* family. And time overlap is a red herring: orthogonality
+    is signed-area cancellation, not avoidance.
+
+quiz:
+  - id: q-meaning
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "$\\int_{-\\pi}^{\\pi} \\sin t\\,\\sin 2t\\,dt = 0$. What does this orthogonality actually say about the two signals?"
+    choices:
+      - "Wherever one is nonzero, the other must be zero"
+      - "The *signed area* of their product over this interval cancels to exactly zero"
+      - "Their product is zero at every instant"
+      - "They carry equal energy on the interval"
+    answer: 1
+    explanation: "The two sines overlap at almost every instant. What vanishes is the integral of their product — every patch of positive area is matched by a negative patch. Disjoint support is one rare way to be orthogonal; cancellation is the common one."
+  - id: q-coeff
+    kind: numeric
+    tags: [checkpoint]
+    prompt: |
+      A receiver sees $r(t) = 5\sin t - 3\sin 2t$ on $[-\pi,\pi]$ and projects onto $\varphi(t) = \sin 2t$
+      (recall $\lVert\sin 2t\rVert^2 = \pi$ on this interval). What coefficient does it recover?
+    answer: -3
+    tolerance: 0.01
+    explanation: "$\\langle r, \\sin 2t\\rangle = 5\\cdot 0 + (-3)\\cdot\\pi = -3\\pi$ by orthogonality, then divide by the norm $\\pi$: $c = -3$. The $\\sin t$ component contributes nothing — zero crosstalk is the whole point."
+  - id: q-independent
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "You fit $x$ with a family of basis signals. Which observation proves the family is NOT orthogonal?"
+    choices:
+      - "The best coefficients can only be found by solving coupled simultaneous equations"
+      - "The basis signals overlap in time"
+      - "The error energy keeps decreasing as terms are added"
+      - "Some coefficients come out negative"
+    answer: 0
+    explanation: "Orthogonality kills every cross term, splitting the fit into independent one-variable problems. If the coefficients couple, some $\\langle\\varphi_m,\\varphi_n\\rangle \\neq 0$ survived. Overlap, decreasing error, and negative coefficients are all perfectly normal for orthogonal kits."
+  - id: q-interval
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "$\\sin t \\perp \\sin 2t$ on $[-\\pi,\\pi]$, yet $\\int_0^{\\pi/2}\\sin t\\,\\sin 2t\\,dt = \\tfrac{2}{3} \\neq 0$. What is the correct conclusion?"
+    choices:
+      - "One of the two computations must contain an algebra error"
+      - "Orthogonality is a property of the pair AND the interval — always state the interval"
+      - "The pair is orthogonal only for even-length intervals"
+      - "Orthogonality holds only for orthonormal (unit-norm) signals"
+    answer: 1
+    explanation: "Both integrals are correct. Cancellation needs the full pattern of positive and negative lobes; chop the interval and the balance breaks. Writing the interval explicitly is the first line of the exam ritual."
+  - id: q-error
+    kind: numeric
+    tags: [checkpoint]
+    prompt: |
+      On some interval, $\lVert x\rVert^2 = 14$ and an *orthonormal* pair gives $c_1 = 3$, $c_2 = -2$.
+      What is the minimum error energy $E_2$ of the two-term approximation?
+    answer: 1
+    tolerance: 0.01
+    explanation: "$E_2 = \\lVert x\\rVert^2 - |c_1|^2 - |c_2|^2 = 14 - 9 - 4 = 1$ (norms are 1 for an orthonormal set). Never re-integrate the residual — this identity is faster and is what the mark scheme expects."
+  - id: q-evenodd
+    kind: numeric
+    prompt: |
+      On $[-1,1]$ a signal's even part has energy 2 and its odd part has energy $\tfrac{2}{3}$.
+      What is the total energy of the signal? (Answer to 2 decimals.)
+    answer: 2.667
+    tolerance: 0.01
+    explanation: "Even ⊥ odd on a symmetric interval — (even)×(odd) is odd, so its integral vanishes. Perpendicular components obey Pythagoras: $E = E_e + E_o = 2 + \\tfrac{2}{3} = \\tfrac{8}{3} \\approx 2.67$. The Module 1 decomposition was your first orthogonal split."

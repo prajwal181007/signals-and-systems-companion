@@ -1,0 +1,89 @@
+predict:
+  kind: choice
+  prompt: |
+    A pulse is played back at double speed: $y(t) = x(2t)$, half the duration.
+    **Commit before you drag the width slider:** what happens to its bandwidth
+    (measured by any ruler you like)?
+  choices:
+    - "It halves too — compressing the signal shrinks everything about it"
+    - "It is unchanged — bandwidth is a fixed property of the pulse's shape"
+    - "It doubles — time compression stretches the spectrum by the same factor"
+    - "It depends on the ruler — some bandwidths grow, others shrink"
+  answer: 2
+  resolution: |
+    Time-scaling is a theorem, not a tendency: $x(at) \leftrightarrow \frac{1}{|a|}X(j\omega/a)$,
+    so halving the duration doubles every frequency feature. And note what the last
+    distractor gets wrong: the *choice of ruler* changes the number you quote, but every
+    ruler scales the same way — 3-dB, first-null, 90%-energy, and RMS all double together.
+    The "smaller signal, smaller everything" instinct is the misconception this see-saw
+    exists to break: shorter is always spectrally *wider*.
+
+quiz:
+  - id: q-ruler
+    kind: mcq
+    tags: [checkpoint]
+    prompt: |
+      Your lab partner computes the bandwidth of $x(t) = e^{-1000t}u(t)$ and reports
+      1000 rad/s. You compute 6310 rad/s. Who made the error?
+    choices:
+      - "You — bandwidth is a unique number, and the smaller answer is it"
+      - "Neither: 1000 is the 3-dB reading and 6310 the 90%-energy reading — a bandwidth means nothing until the ruler is named"
+      - "Your partner — the larger number is always the safe engineering answer"
+      - "Both — the true bandwidth is the RMS value, which lies between the two"
+    answer: 1
+    explanation: "Same signal, two legitimate rulers, a factor of 6.3 apart. The last choice is doubly wrong: this signal's RMS bandwidth doesn't lie between anything — it diverges (the jump at t = 0)."
+  - id: q-3db
+    kind: numeric
+    tags: [checkpoint]
+    prompt: |
+      For $x(t) = e^{-500t}u(t)$, $|X(j\omega)|^2 = \dfrac{1}{500^2 + \omega^2}$.
+      Find the 3-dB bandwidth in rad/s.
+    answer: 500
+    tolerance: 1
+    explanation: "Half power: $\\frac{1}{500^2+\\omega^2} = \\frac{1}{2}\\cdot\\frac{1}{500^2}$ gives $\\omega = 500$. General rule worth keeping: a one-pole spectrum's 3-dB bandwidth equals its decay rate $a$."
+  - id: q-rms-rect
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The RMS bandwidth of a rectangular pulse of width $T$ is —"
+    choices:
+      - "$2\\pi/T$, the first-null value"
+      - "$\\approx 2.78/T$, the 3-dB value"
+      - "It diverges: $\\omega^2|X|^2$ tends to a constant, so the second moment is infinite"
+      - "$1/(2T)$, by the uncertainty principle"
+    answer: 2
+    explanation: "The sinc² spectrum decays only like $1/\\omega^2$ — a jump in time puts impulses in $x'$, and RMS bandwidth is (normalized) slope energy. Writing **diverges** is the full-marks answer; compare rects with 3-dB or 90%-energy rulers instead."
+  - id: q-seesaw
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "A pulse has 3-dB bandwidth 2 kHz. It is played back at double speed, $y(t) = x(2t)$. What is the new 3-dB bandwidth in kHz?"
+    answer: 4
+    tolerance: 0.01
+    explanation: "Time-scaling: $x(2t) \\leftrightarrow \\tfrac12 X(j\\omega/2)$ — every spectral feature, the half-power point included, moves out by the factor 2. Duration ÷2, bandwidth ×2, product stubborn."
+  - id: q-tlbl
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Why can no circuit realize the ideal brick-wall low-pass filter?"
+    choices:
+      - "Its passband gain of 1 is too large for passive components"
+      - "Its impulse response is a sinc: band-limited, hence alive for all time and nonzero before t = 0 — it would have to respond before the input arrives"
+      - "Its phase response is nonlinear, which physical systems forbid"
+      - "It can be realized, given enough op-amp stages"
+    answer: 1
+    explanation: "Band-limited ⇒ the time signal is an everywhere-convergent power series — it cannot vanish on any interval, so it cannot be causal. Real filters only approximate the brick wall, ever more expensively as the wall steepens."
+  - id: q-radar
+    kind: numeric
+    prompt: |
+      A radar waveform has bandwidth $B = 50$ MHz. Best achievable range resolution
+      $\Delta R = \dfrac{c}{2B}$ with $c = 3\times 10^8$ m/s — in metres?
+    answer: 3
+    tolerance: 0.05
+    explanation: "$\\Delta R = 3\\times10^8 / (2 \\cdot 5\\times10^7) = 3$ m. Resolution is bought with bandwidth, not duration — which is why chirp radars keep the pulse long (energy) but sweep it wide (resolution)."
+  - id: q-energy-3db
+    kind: numeric
+    prompt: |
+      Parseval fences band energy: for $x(t) = e^{-at}u(t)$ the fraction of energy inside
+      $|\omega| \le W$ is $\dfrac{2}{\pi}\arctan(W/a)$. What fraction lies inside the
+      3-dB bandwidth $W = a$?
+    answer: 0.5
+    tolerance: 0.01
+    explanation: "$\\frac{2}{\\pi}\\arctan(1) = \\frac{2}{\\pi}\\cdot\\frac{\\pi}{4} = \\frac12$. The 3-dB fence holds only half this signal's energy — a concrete reason the 3-dB and 90%-energy rulers must disagree (here by a factor of 6.3)."

@@ -1,0 +1,8 @@
+widgets:
+  - id: conv-echo
+    type: ConvolutionMachine
+    title: "Every input is a train of claps — h answers each one"
+    params: { x: rect1, h: exp, view: echo, t: 3 }
+    presets:
+      - { label: "pure delay: h = δ(t−3) echoes", params: { x: rect1, h: impulsePair, view: slide } }
+      - { label: "wide h smooths (RC-flavored)", params: { x: halfsin, h: exp, view: slide } }

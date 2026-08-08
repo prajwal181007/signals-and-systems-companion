@@ -1,0 +1,16 @@
+cards:
+  - id: c-euler
+    front: "Euler's formula — and the inverse pair giving cos θ and sin θ from exponentials?"
+    back: "$e^{j\\theta} = \\cos\\theta + j\\sin\\theta$;  $\\cos\\theta = \\frac{e^{j\\theta}+e^{-j\\theta}}{2}$,  $\\sin\\theta = \\frac{e^{j\\theta}-e^{-j\\theta}}{2j}$."
+  - id: c-convert
+    front: "Rectangular → polar: formulas for r and θ — and the one warning about θ?"
+    back: "$r = \\sqrt{a^2+b^2}$; θ = $\\tan^{-1}(b/a)$ PLUS a quadrant sketch — when a < 0, adjust by 180°. Principal range (−180°, 180°]."
+  - id: c-muldiv
+    front: "Multiplication and division laws in polar form?"
+    back: "Multiply: magnitudes multiply, angles add. Divide: magnitudes divide, angles subtract. (Addition and subtraction stay in rectangular — componentwise.)"
+  - id: c-conj
+    front: "The three conjugate identities used constantly (z = a + jb)?"
+    back: "$z^* = a - jb = re^{-j\\theta}$;  $zz^* = |z|^2$;  $z + z^* = 2\\operatorname{Re} z$. Division trick: multiply top and bottom by the denominator's conjugate."
+  - id: c-roots
+    front: "The N solutions of $z^N = 1$?"
+    back: "$z_k = e^{j2\\pi k/N}$ for k = 0, 1, …, N−1 — N points equally spaced around the unit circle. (They return in sampling and the DFT.)"

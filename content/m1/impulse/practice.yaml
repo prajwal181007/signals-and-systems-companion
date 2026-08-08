@@ -1,0 +1,84 @@
+predict:
+  kind: choice
+  prompt: |
+    The forge feeds unit-area pulses to one RC circuit. You will squeeze the width to zero
+    three times — once each with a rectangle, a triangle, and a Gaussian, the area meter
+    pinned at 1 throughout. **Commit before you watch:** what do the three limiting
+    responses look like?
+  choices:
+    - "Three different shapes — a circuit driven by a rectangle can't respond like one driven by a Gaussian"
+    - "One and the same shape — in the limit the circuit feels only the area, and all three areas are 1"
+    - "All three responses grow without bound — the pulses are getting infinitely tall"
+    - "All three responses shrink to zero — the pulses are getting infinitely thin"
+  answer: 1
+  resolution: |
+    All three converge to the same dashed curve — the impulse response. Once the pulse is
+    much narrower than the circuit's memory, the circuit stops resolving its shape and
+    integrates it: only the **area** (pinned at 1) survives. That shape-independence is
+    exactly why δ can be defined by behavior alone. The tempting wrong answers are the
+    height-watchers: "taller ⇒ bigger response" and "thinner ⇒ smaller response" both track
+    the wrong quantity. Height diverges and width vanishes, but their product — the punch —
+    never moves.
+
+quiz:
+  - id: q-sift
+    kind: numeric
+    tags: [checkpoint]
+    prompt: |
+      Evaluate $\int_{-\infty}^{\infty} (t^2 + 3)\,\delta(t-1)\,dt$.
+    answer: 4
+    tolerance: 0
+    explanation: "Sifting hands back the integrand's value at the impulse location: 1² + 3 = 4. Location inside the limits, argument already normalized — the ritual's easiest case."
+  - id: q-scale
+    kind: numeric
+    tags: [checkpoint]
+    prompt: |
+      Evaluate $\int_{-\infty}^{\infty} \delta(4t)\,dt$.
+    answer: 0.25
+    tolerance: 0.001
+    explanation: "δ(4t) = δ(t)/4 — compressing the impulse's clock dilutes its weight by |a|. If you answered 1, you used δ(at) = δ(t): the pictures look identical but the areas differ, and area is all δ has."
+  - id: q-product
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Simplify the product (no integral in sight): $\\cos(t)\\,\\delta(t-\\pi)$."
+    choices:
+      - "$-\\delta(t-\\pi)$ — an impulse with frozen weight $\\cos(\\pi) = -1$"
+      - "$-1$ — sifting gives the value at the location"
+      - "$\\delta(t-\\pi)$ — multiplying by a bounded signal doesn't change an impulse"
+      - "It cannot be simplified without integrating"
+    answer: 0
+    explanation: "Multiplication freezes the coefficient at the strike point but the impulse REMAINS: x(t)δ(t−t₀) = x(t₀)δ(t−t₀). Only an integral collapses it to the number −1 — answer two drops the δ, the classic one-mark leak."
+  - id: q-limits
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Evaluate $\\int_{0}^{3} e^{t}\\,\\delta(t-5)\\,dt$."
+    choices:
+      - "$e^{5}$"
+      - "0 — the impulse at $t=5$ lies outside $[0,3]$"
+      - "$e^{3}$ — clip to the nearest limit"
+      - "Undefined"
+    answer: 1
+    explanation: "Sifting only fires if the impulse location is inside the integration range. t = 5 ∉ [0,3], so nothing is sifted — the integrand is zero over the whole interval. Checking the location against the limits is step two of the ritual, and exams test it deliberately."
+  - id: q-area
+    kind: mcq
+    prompt: "A sketch shows a vertical arrow at $t=2$ labeled '3'. The 3 is the impulse's…"
+    choices:
+      - "height — the value the spike reaches"
+      - "area (weight) — what $\\int 3\\,\\delta(t-2)\\,dt$ evaluates to"
+      - "width in seconds"
+      - "value $\\delta(2)$"
+    answer: 1
+    explanation: "Impulses have no height — δ has no pointwise values at all. The label is the weight: the area the arrow delivers under any integral. δ(2), for that matter, is meaningless: at t = 2 the impulse δ(t−2) exists only under integrals."
+  - id: q-deriv
+    kind: mcq
+    tags: [checkpoint]
+    prompt: |
+      Interleave with elementary signals: $x(t) = 4u(t-1) - 4u(t-3)$ is a height-4 gate on $[1,3]$.
+      What is $\frac{dx}{dt}$?
+    choices:
+      - "$4\\,\\delta(t-1) - 4\\,\\delta(t-3)$ — an up-arrow at each opening, a down-arrow at each closing"
+      - "0 everywhere — the gate is flat wherever the derivative exists"
+      - "$4\\,\\delta(t-1) + 4\\,\\delta(t-3)$ — impulses are always positive"
+      - "$4u(t-1) - 4u(t-3)$ — steps are their own derivative"
+    answer: 0
+    explanation: "Each jump differentiates into an impulse whose weight is the jump height WITH sign: +4 at the rise, −4 at the fall. 'Zero everywhere' is classically true off the jumps but misses all the action — exactly the gap the distributional derivative fills."

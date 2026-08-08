@@ -1,0 +1,13 @@
+cards:
+  - id: c-quadrant
+    front: "The four time/amplitude signal classes — and which one 'digital' names."
+    back: "CT-analog, DT-analog (sampled), CT-digital (quantized, e.g. DAC staircase), DT-digital. Digital = BOTH time-discrete and amplitude-quantized."
+  - id: c-notation
+    front: "x(t) vs x[n] — what does each bracket style promise?"
+    back: "( ) ⇒ continuous time, defined for all real t. [ ] ⇒ sequence, defined only at integer n (undefined — not zero — between)."
+  - id: c-random
+    front: "What repeats across replays of a random signal?"
+    back: "Not its values — its STATISTICS: mean, power, power spectral density."
+  - id: c-duration
+    front: "Causal / right-sided / left-sided / two-sided signal — definitions."
+    back: "Causal: x = 0 for t < 0. Right-sided: 0 before some t₀. Left-sided: 0 after some t₀. Two-sided: extends both ways. (Feeds ROC shapes in Module 3.)"

@@ -1,0 +1,13 @@
+cards:
+  - id: c-defs
+    front: "Definitions of signal energy E and mean power P (CT)."
+    back: "$E=\\int_{-\\infty}^{\\infty}|x|^2dt$;  $P=\\lim_{T\\to\\infty}\\frac{1}{2T}\\int_{-T}^{T}|x|^2dt$. Energy signal: E finite (⇒P=0). Power signal: P finite ≠ 0 (⇒E=∞)."
+  - id: c-sin
+    front: "Mean power of A·cos(ω₀t + φ)?  RMS?"
+    back: "$P = A^2/2$ (any ω₀, any φ).  RMS $= A/\\sqrt{2}$."
+  - id: c-step
+    front: "u(t): energy signal or power signal, and the value?"
+    back: "Power signal, $P = 1/2$ (the two-sided window is only half-filled)."
+  - id: c-neither
+    front: "A signal that is neither energy- nor power-type?"
+    back: "$t\\,u(t)$ — accumulated energy grows ~T³; even the time-average diverges."

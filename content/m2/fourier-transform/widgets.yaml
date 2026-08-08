@@ -1,0 +1,8 @@
+widgets:
+  - id: bridge
+    type: FSFTBridge
+    title: "The FS→FT Limit Bridge — stretch the period, watch the transform emerge"
+    params: { T: 4 }
+    presets:
+      - { label: "T = 8: lines densify", params: { T: 8 } }
+      - { label: "T = 40: nearly continuous", params: { T: 40 } }

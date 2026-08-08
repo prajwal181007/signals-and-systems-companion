@@ -1,0 +1,8 @@
+widgets:
+  - id: mixer
+    type: WalshMixer
+    title: "Walsh vs Fourier — keep k terms and watch who compresses this signal better"
+    params: { target: square, kept: 3 }
+    presets:
+      - { label: "blocky target → Walsh wins", params: { target: square, kept: 3 } }
+      - { label: "smooth sine → the contest flips", params: { target: sine, kept: 5 } }

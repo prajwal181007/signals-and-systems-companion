@@ -1,0 +1,16 @@
+cards:
+  - id: c-recursion
+    front: "Hadamard recursion — seed and doubling rule?"
+    back: "$H_1 = [1]$, $\\;H_{2N} = \\begin{bmatrix} H_N & H_N \\\\ H_N & -H_N \\end{bmatrix}$ — copy, copy, copy, **negate bottom-right**. Rows are mutually orthogonal: $H_N H_N^{\\mathsf T} = N I_N$."
+  - id: c-coeff
+    front: "N-point Walsh–Hadamard coefficient of x on row $w_k$?"
+    back: "$c_k = \\tfrac{1}{N}\\sum_n x[n]\\,w_k[n]$ — signed sums only (entries are ±1), divided by the norm $\\lVert w_k\\rVert^2 = N$. Synthesis: $x[n] = \\sum_k c_k w_k[n]$."
+  - id: c-seq
+    front: "Sequency — definition, and the natural-order sequencies of $H_4$?"
+    back: "Number of sign changes along the row (the Walsh analog of frequency). Natural order of $H_4$: sequencies $0, 3, 1, 2$ — NOT sorted; reorder by counting when sequency order is asked."
+  - id: c-energy
+    front: "Walsh–Hadamard energy check?"
+    back: "$\\sum_n x[n]^2 = N\\sum_k c_k^2$ — Pythagoras from orthogonality. Use it (or reconstruction) to verify every hand computation."
+  - id: c-when
+    front: "When does Walsh beat Fourier — and what hardware advantage does it always keep?"
+    back: "Blocky/switching signals compress into few Walsh terms; smooth signals favor Fourier. Regardless of winner, Walsh coefficients need only add/subtract — no multiplier."

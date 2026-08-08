@@ -1,0 +1,84 @@
+predict:
+  kind: choice
+  prompt: |
+    In the bridge widget, one pulse is repeated every $T$ seconds and the rescaled
+    line spectrum $T c_k$ is plotted. You now **double the period** $T$.
+    **Commit before you drag the slider:** what happens to the picture?
+  choices:
+    - "The lines march down toward zero height — the spectrum is dying"
+    - "Twice as many lines, packed twice as densely, hugging the SAME envelope"
+    - "The envelope stretches to twice its width"
+    - "The envelope grows to twice its height"
+  answer: 1
+  resolution: |
+    Every rescaled line obeys $T c_k = X(jk\omega_0)$ — a sample of an envelope that
+    depends only on the single pulse, never on $T$. Doubling $T$ halves the spacing
+    $\omega_0 = 2\pi/T$, so the samples densify under an unmoved curve. The first
+    choice tempts because the RAW coefficients $c_k$ really do shrink like $1/T$ —
+    which is exactly why we plot $T c_k$ instead: heights die, but density survives,
+    and the surviving envelope IS the Fourier transform.
+
+quiz:
+  - id: q-envelope
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A pulse $x(t)$ has Fourier transform $X(j\\omega)$. Repeated every $T = 4$ s, the periodic version has FS coefficients $c_k$. What is $c_3$?"
+    choices:
+      - "$\\tfrac{1}{4}\\,X(j\\,3\\pi/2)$"
+      - "$X(j\\,3\\pi/2)$"
+      - "$4\\,X(j\\,3\\pi/2)$"
+      - "$\\tfrac{1}{4}\\,X(j3)$"
+    answer: 0
+    explanation: "The bridge reads $c_k = \\tfrac{1}{T}X(jk\\omega_0)$ with $\\omega_0 = 2\\pi/T = \\pi/2$, so $c_3 = \\tfrac{1}{4}X(j\\,3\\pi/2)$. Line spectra are sampled envelopes: $T$ sets the sample spacing, the single pulse sets the values."
+  - id: q-rect
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "$x(t) = 1$ for $|t| \\le 2$, zero elsewhere. Evaluate $X(j0)$ — no table needed."
+    answer: 4
+    tolerance: 0
+    explanation: "$X(0) = \\int x(t)\\,dt$ — the area under the signal — here $4$. This is the free sanity check to run on every transform you ever compute."
+  - id: q-ustep
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Which is the Fourier transform of the unit step $u(t)$?"
+    choices:
+      - "$\\dfrac{1}{j\\omega}$"
+      - "$\\pi\\,\\delta(\\omega) + \\dfrac{1}{j\\omega}$"
+      - "$2\\pi\\,\\delta(\\omega)$"
+      - "None — the integral diverges, so no transform of any kind exists"
+    answer: 1
+    explanation: "No *ordinary* transform exists (the integral truly diverges), but the extended pair is $\\pi\\delta(\\omega) + 1/j\\omega$: the impulse carries the DC average $\\tfrac12$, and $1/j\\omega$ carries the transition. Writing $1/j\\omega$ alone is the classic error — that is the transform of $\\tfrac12\\,\\mathrm{sgn}(t)$."
+  - id: q-cosarea
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "The FT of $\\cos(5t)$ is a pair of impulses at $\\omega = \\pm 5$. What is the AREA of the impulse at $\\omega = +5$?"
+    answer: 3.1416
+    tolerance: 0.01
+    explanation: "Each FS coefficient $\\tfrac12$ crosses the bridge with the $2\\pi$ synthesis factor: area $= 2\\pi \\cdot \\tfrac12 = \\pi$. Finite height belongs to the series; the transform concentrates that strength into zero bandwidth, which forces an impulse."
+  - id: q-expu
+    kind: numeric
+    prompt: "$x(t) = e^{-3t}u(t)$ has $X(j\\omega) = \\dfrac{1}{3+j\\omega}$. Compute $|X(j4)|$."
+    answer: 0.2
+    tolerance: 0.005
+    explanation: "$|X| = 1/\\sqrt{a^2+\\omega^2} = 1/\\sqrt{9+16} = 1/5$. Magnitude of a reciprocal is the reciprocal of the magnitude — a primers/complex-numbers reflex worth keeping warm."
+  - id: q-steps
+    kind: steporder
+    tags: [checkpoint]
+    prompt: "Order the FS→FT derivation — the argument a conceptual exam question asks you to reproduce."
+    choices:
+      - "Let $T \\to \\infty$: the strip width $\\omega_0 \\to 0$ and the Riemann sum becomes the synthesis integral"
+      - "Repeat the pulse every $T$ seconds to build a periodic scaffold $\\tilde{x}(t)$"
+      - "Compute the FS coefficients and recognize the envelope: $T c_k = X(jk\\omega_0)$"
+      - "Rewrite the synthesis sum as $\\tfrac{1}{2\\pi}\\sum X(jk\\omega_0)e^{jk\\omega_0 t}\\cdot \\omega_0$ — sample values times strip width"
+    answer: [1, 2, 3, 0]
+    explanation: "Scaffold → envelope → Riemann form → limit. The envelope equation in the middle is the load-bearing step; everything after it is bookkeeping."
+  - id: q-sift
+    kind: mcq
+    prompt: "To VERIFY the pair $e^{j\\omega_0 t} \\leftrightarrow 2\\pi\\,\\delta(\\omega-\\omega_0)$, you substitute the transform into the synthesis integral. Which Module-1 fact finishes the check in one line?"
+    choices:
+      - "The sifting property — the impulse picks out $e^{j\\omega t}$ at $\\omega = \\omega_0$"
+      - "The support rule for convolution"
+      - "Time invariance of LTI systems"
+      - "The unit-area property of limiting pulse families"
+    answer: 0
+    explanation: "$\\tfrac{1}{2\\pi}\\int 2\\pi\\delta(\\omega-\\omega_0)e^{j\\omega t}d\\omega = e^{j\\omega_0 t}$ — sifting, now working in the frequency variable. Every row of the distributional table is a one-line sifting check."

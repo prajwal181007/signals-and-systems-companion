@@ -1,0 +1,13 @@
+cards:
+  - id: c-three
+    front: "The three algebraic laws of convolution + their block-diagram meanings."
+    back: "Commutative x∗h = h∗x; associative (cascade ⇒ h₁∗h₂, order irrelevant); distributive (parallel ⇒ h₁+h₂)."
+  - id: c-identities
+    front: "x ∗ δ(t−t₀) = ?   x ∗ u(t) = ?"
+    back: "x(t−t₀) (copy & shift — no integral).  ∫_{−∞}^t x(τ)dτ (running accumulation)."
+  - id: c-deriv
+    front: "Derivative of a convolution?"
+    back: "$(x*h)' = x'*h = x*h'$ — lands on ONE factor. Basis of the pulse speedrun: differentiate → impulses → integrate back."
+  - id: c-scope
+    front: "When does cascade order matter?"
+    back: "Never for LTI blocks; always assume it matters for NONLINEAR blocks (clip-then-filter ≠ filter-then-clip)."

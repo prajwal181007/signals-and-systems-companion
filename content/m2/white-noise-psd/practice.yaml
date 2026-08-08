@@ -1,0 +1,96 @@
+predict:
+  kind: choice
+  prompt: |
+    The lab below estimates the PSD of white noise from ONE periodogram over the whole
+    record. Suppose you made the record 100× longer and recomputed a single periodogram.
+    **Commit before you press replay:** what happens to the jagged fluctuations?
+  choices:
+    - "They shrink about 100× — more data, proportionally better estimate"
+    - "They shrink about 10× — the √N law from the expectation primer"
+    - "They do not shrink at all — a longer record buys more frequency bins, each exactly as jagged; only averaging segments (Welch) calms them"
+    - "They vanish: with enough data the plot becomes the flat line N₀/2"
+  answer: 2
+  resolution: |
+    Each periodogram bin is effectively a one-shot estimate of the power at its frequency —
+    its standard deviation is about equal to its mean, no matter how long the record. Longer
+    record ⇒ finer frequency grid, same fur. The √N law is real, but it pays only when you
+    AVERAGE: Welch's method with $K$ segments cuts the fluctuation by $1/\sqrt{K}$ (at the
+    price of frequency resolution). That is why the second choice tempts — right law,
+    wrong place. Now drag the Welch slider and watch the law collect.
+
+quiz:
+  - id: q-rc-power
+    kind: numeric
+    tags: [checkpoint]
+    prompt: |
+      White noise with $N_0 = 4\times10^{-6}$ V²/Hz (two-sided PSD $N_0/2$) drives an RC
+      low-pass with $RC = 0.01$ s. Find the average output noise power in V².
+    answer: 0.0001
+    tolerance: 0.000002
+    explanation: "$P_y = \\frac{1}{2\\pi}\\int \\frac{N_0/2}{1+(\\omega RC)^2}d\\omega = \\frac{N_0}{4RC} = \\frac{4\\times10^{-6}}{0.04} = 10^{-4}$ V². The drill: statement line, $|H|^2$, arctan integral, $1/2\\pi$."
+  - id: q-lpf
+    kind: numeric
+    tags: [checkpoint]
+    prompt: |
+      The same noise ($N_0/2 = 2\times10^{-6}$ V²/Hz two-sided) passes an ideal unity-gain
+      low-pass of cutoff $B = 5$ kHz. Output power in V²?
+    answer: 0.02
+    tolerance: 0.0005
+    explanation: "Flat budget: a rectangle of height $N_0/2$ and width $2B$ Hz (both sides of zero): $P = \\frac{N_0}{2}\\cdot 2B = N_0B = 4\\times10^{-6}\\times5000 = 0.02$ V². No integral table needed when $|H|$ is a brick wall."
+  - id: q-white-meaning
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Which chain correctly characterizes WHITE noise?"
+    choices:
+      - "Flat PSD $N_0/2$ ⇔ $R(\\tau) = \\frac{N_0}{2}\\delta(\\tau)$ ⇔ values at any two distinct times are uncorrelated"
+      - "Flat PSD ⇔ $R(\\tau)$ constant for all τ ⇔ perfectly correlated samples"
+      - "Gaussian amplitude histogram ⇔ white"
+      - "Zero mean ⇔ white"
+    answer: 0
+    explanation: "Whiteness is second-order structure across time and frequency — flat spectrum, impulse correlation, no memory. The amplitude histogram is a separate property: noise can be Gaussian and colored, or uniform and white."
+  - id: q-welch
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "You Welch-average $K = 25$ segments instead of computing one periodogram. The fluctuation of the PSD estimate drops by about —"
+    choices:
+      - "25× — averaging K things divides the error by K"
+      - "5× — the √K law, at the price of coarser frequency resolution"
+      - "It does not drop — averaging cannot help a random spectrum"
+      - "It drops only if the total record also gets 25× longer"
+    answer: 1
+    explanation: "Averaging K roughly-uncorrelated estimates divides the standard deviation by √K = 5 — the expectation primer's law, now applied where it belongs (the MEASURED view). The cost: segments 25× shorter ⇒ 25× coarser frequency grid."
+  - id: q-impulse
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "For ideal white noise, $R(0)$ — the average input power — equals:"
+    choices:
+      - "$N_0/2$"
+      - "$N_0$"
+      - "No finite number: $R(\\tau) = \\frac{N_0}{2}\\delta(\\tau)$ is an impulse, so ideal white noise has infinite power — finite power appears only after filtering"
+      - "0, because the noise is zero-mean"
+    answer: 2
+    explanation: "δ is defined by its area under an integral, never by a value at 0 (m1/impulse). The model's infinite power is priced in honestly: every number you report is an OUTPUT power, computed after $|H|^2$ fences a finite band."
+  - id: q-phase
+    kind: mcq
+    prompt: "Filters A and B have identical $|H(j\\omega)|$ but very different phase responses. Driven by the same white noise, their average output powers are —"
+    choices:
+      - "Equal — the PSD law involves only $|H|^2$; phase never enters"
+      - "Different — steeper phase means more delay, hence more accumulated noise"
+      - "Impossible to compare without knowing the phase"
+      - "Equal only at DC"
+    answer: 0
+    explanation: "$S_y = \\frac{N_0}{2}|H|^2$ is blind to phase — an all-pass filter leaves noise power untouched. Phase shapes waveforms; power spectra never see it."
+  - id: q-sift
+    kind: mcq
+    tags: [checkpoint]
+    prompt: |
+      In the derivation, $R_y(\tau) = \iint h(a)h(b)R_x(\tau+a-b)\,da\,db$ collapsed to
+      $\frac{N_0}{2}\int h(a)h(a+\tau)\,da$ the moment the input became white. The tool
+      that did the collapsing is —
+    choices:
+      - "The sifting property of δ (Module 1) — the impulse in $R_x$ evaluates the b-integral at $b = \\tau + a$"
+      - "Parseval's theorem"
+      - "The time-scaling property of the Fourier transform"
+      - "The Cauchy–Schwarz inequality"
+    answer: 0
+    explanation: "$R_x(\\cdot) = \\frac{N_0}{2}\\delta(\\cdot)$ under an integral picks out the point where its argument vanishes — the sifting property, back on duty from Module 1. It is the same move that made convolution with $\\delta(t-t_0)$ a pure copy-and-shift."

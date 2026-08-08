@@ -1,0 +1,90 @@
+predict:
+  kind: choice
+  prompt: |
+    H(s) = (s - z)/((s+1)(s+2)) has poles at -1 and -2 and a zero at z = -3, and its
+    impulse response decays cleanly. Now the zero is dragged across the imaginary axis,
+    deep into the right half plane: z = +3.
+    **Commit before you drag:** what happens to h(t)?
+  choices:
+    - "It grows without bound — anything in the right half plane spells instability"
+    - "It still decays — stability lives in the poles; the zero only reweights the modes"
+    - "It turns into a sustained oscillation at the zero's frequency"
+    - "Nothing changes at all — zeros have no effect on h(t)"
+  answer: 1
+  resolution: |
+    The modes of h(t) are e^(-t) and e^(-2t) — dictated by the POLES, which never moved.
+    Dragging the zero changes only the residues: how much of each mode appears. "RHP means
+    unstable" is a rule about poles, and transplanting it to zeros is the most common
+    stability error in this module. The zero does leave a fingerprint — an RHP zero makes
+    the step response set off in the WRONG direction before recovering — but it cannot make
+    anything grow. The last choice overcorrects: zeros matter (they set the mix); they just
+    cannot create or destroy a mode.
+
+quiz:
+  - id: q-stability
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Causal system, H(s) = (s-2)/((s+1)(s+3)). A classmate points at the +2 in the numerator and declares the system unstable. Verdict?"
+    choices:
+      - "Unstable — the RHP zero at +2 creates a growing mode"
+      - "Stable — the poles are -1 and -3, both in the open LHP; zeros cannot create modes"
+      - "Marginally stable — the zero sits exactly on the stability boundary"
+      - "Undecidable without knowing the input"
+    answer: 1
+    explanation: "Stability is read from poles alone: h(t) is a mix of e^(-t) and e^(-3t), both decaying. The RHP zero makes the system non-minimum-phase — its step response starts backwards — which is interesting, but not unstable."
+  - id: q-zeta
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Systems A and B are standard second-order with the same damping ratio 0.4, but B has twice the natural frequency of A. Compare their unit-step responses."
+    choices:
+      - "B overshoots roughly twice as much"
+      - "Same shape and same overshoot — B just plays the response twice as fast"
+      - "B oscillates while A does not"
+      - "B settles to twice the final value"
+    answer: 1
+    explanation: "Shape and speed are orthogonal knobs on the map: the damping ratio (ray angle) alone fixes overshoot and wiggle count; the natural frequency (circle radius) only rescales the time axis. The overshoot formula contains no natural frequency at all."
+  - id: q-normalize
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "H(s) = 8/(2s^2 + 4s + 8). Find the natural frequency in rad/s."
+    answer: 2
+    tolerance: 0.01
+    explanation: "Normalize the leading coefficient FIRST: divide by 2 to get s^2 + 2s + 4, so the natural frequency is 2 (and the damping ratio 0.5). Matching against 2s^2 + 4s + 8 directly gives the classic wrong answer sqrt(8) = 2.83."
+  - id: q-ode
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A system obeys y'' + 5y' + 6y = 4x(t). Its transfer function is…"
+    choices:
+      - "4/(s^2 + 5s + 6)"
+      - "(s^2 + 5s + 6)/4"
+      - "4/(s^2 + 5s + 6), but only when x(t) is a step"
+      - "4s/(s^2 + 5s + 6)"
+    answer: 0
+    explanation: "With zero ICs each d/dt becomes a factor of s: (s^2 + 5s + 6)Y = 4X, so H = Y/X — input-independent, which is exactly what makes it a system description. Poles -2 and -3: stable, overdamped."
+  - id: q-hoft
+    kind: expression
+    tags: [checkpoint]
+    prompt: "H(s) = 1/((s+1)(s+2)) for a causal system. Write h(t) using the inverse-Laplace ritual."
+    answer: "e^(-t) u(t) - e^(-2t) u(t)"
+    vars: [t]
+    explanation: "Cover-up gives residue +1 at s = -1 and -1 at s = -2. The poles ARE the modes of h(t); the residues are their amounts — the previous concept, now working on the system itself."
+  - id: q-marginal
+    kind: mcq
+    prompt: "Causal system with H(s) = 1/(s^2 + 9). Stability verdict?"
+    choices:
+      - "Stable — no pole is in the RHP"
+      - "Marginally stable — a simple pole pair ON the jw axis; a 3 rad/s input drives it unbounded"
+      - "Unstable — imaginary poles always mean instability"
+      - "Stable — the poles are at -3 and +3"
+    answer: 1
+    explanation: "Poles at +3j and -3j sit ON the axis: h(t) is a sustained sin(3t) that neither decays nor grows. BIBO fails (drive it at 3 rad/s and the output grows like t — resonance), yet nothing explodes on its own: marginal. The word 'open' in 'open LHP' is not decoration. The last choice factored s^2 + 9 as if it were s^2 - 9."
+  - id: q-dominant
+    kind: mcq
+    prompt: "H(s) = 60/((s+2)(s+30)). Which first-order approximation is the right stand-in for slow inputs?"
+    choices:
+      - "2/(s+2) — keep the dominant pole at -2 and re-match the DC gain H(0) = 1"
+      - "60/(s+2) — keep the dominant pole and the original numerator"
+      - "1/(s+30) — keep the fast pole, it acts first"
+      - "30/(s+30) — the larger pole number dominates"
+    answer: 0
+    explanation: "The pole nearest the axis (-2) decays slowest and rules the response; -30 is 15 times further left and is gone almost instantly. But truncation must preserve H(0) = 60/60 = 1, so the stand-in is 2/(s+2). Keeping the raw numerator (DC gain 30) is the standard trap."

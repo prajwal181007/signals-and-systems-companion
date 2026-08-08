@@ -25,7 +25,7 @@ Each letter is one physical verb. The **unit step** is *switch on*: zero, then o
 
 ---
 @viz explorer {"signal":"rampsig","a":1,"b":2}
-The letters are related by calculus, and that is their real power. Set the explorer to $r(t-2)$: a ramp that waits until $t=2$ to start rising. Its slope is 0, then 1 — which is exactly a step that turns on at 2. Differentiating a ramp gives a step: $r'(t) = u(t)$ away from the corner. Run it backwards: integrating a step gives a ramp. The alphabet is a ladder, and differentiation moves you down one rung.
+The letters are related by calculus, and that is their real power. The explorer shows a delayed ramp: flat, then rising with slope 1 from $t=2$ (it levels off a second later — screens are finite; the pure $r(t-2)$ would climb forever). Read the slope: 0, then 1 — a step turning on at 2. Differentiating a ramp gives a step: $r'(t) = u(t)$ away from the corner. Run it backwards: integrating a step gives a ramp. The alphabet is a ladder; differentiation moves you down one rung.
 
 ---
 One rung remains. Differentiate the step: the slope is zero on both sides, but the jump at $t=0$ hides all the action. Steepen the jump — a ramp rising over a tiny width $\Delta$ — and its derivative is a thin rectangle of height $1/\Delta$: always area one, ever narrower. As $\Delta \to 0$ that unit-area spike stops being an ordinary function. It earns its own concept next: the impulse. The full chain is $r \to u \to \delta$, one differentiation per arrow, the last one in the limit sense.

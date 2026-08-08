@@ -1,0 +1,16 @@
+cards:
+  - id: c-def
+    front: "Three equivalent faces of the transfer function H(s)?"
+    back: "$H(s) = Y(s)/X(s)$ at zero ICs $= \\mathcal{L}\\{h(t)\\}$ = the eigenvalue scaling $e^{st}$ — LTI systems pass exponentials straight through, multiplied by $H(s)$."
+  - id: c-stability
+    front: "Stability rule for a causal LTI system from the pole map — and the verdict for axis poles?"
+    back: "BIBO stable iff EVERY pole has $\\mathrm{Re}\\{p\\} < 0$ (open LHP). Simple $j\\omega$-axis pair: marginal. Repeated axis poles: unstable. Zeros are irrelevant to the verdict."
+  - id: c-2ndform
+    front: "Standard second-order H(s) and its pole locations?"
+    back: "$H(s) = \\dfrac{\\omega_n^2}{s^2 + 2\\zeta\\omega_n s + \\omega_n^2}$; poles $p = -\\zeta\\omega_n \\pm j\\,\\omega_n\\sqrt{1-\\zeta^2}$ for $0 \\le \\zeta < 1$; ringing at $\\omega_d = \\omega_n\\sqrt{1-\\zeta^2}$."
+  - id: c-geometry
+    front: "Where do the second-order numbers live on the pole map (radius, angle)?"
+    back: "$|p| = \\omega_n$ — constant-$\\omega_n$ curves are circles about the origin. $\\cos\\theta = \\zeta$ with $\\theta$ measured from the NEGATIVE real axis — constant-$\\zeta$ curves are rays. Speed is a radius; damping is an angle."
+  - id: c-roles
+    front: "Poles vs zeros — one job each?"
+    back: "Poles decide WHICH modes $e^{p_i t}$ exist in $h(t)$; zeros decide HOW MUCH of each (they reweight residues). That asymmetry is why stability is pole-only."

@@ -1,0 +1,8 @@
+widgets:
+  - id: detector
+    type: PeriodicityDetector
+    title: "The periodicity detector — rational ratios and the DT surprise"
+    params: { f1: 1, f2: 1.5 }
+    presets:
+      - { label: "near-rational: huge T₀", params: { f1: 1, f2: 1.05 } }
+      - { label: "DT mode: cos(Ω₀n)", params: { mode: dt } }

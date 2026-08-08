@@ -1,0 +1,9 @@
+widgets:
+  - id: seesaw
+    type: UncertaintySeeSaw
+    title: "The Uncertainty See-Saw — squeeze the pulse, watch the spectrum pay; then change the ruler"
+    params: { family: gauss }
+    presets:
+      - { label: "Gaussian — rides the Δt·Δω = 1/2 floor", params: { family: gauss } }
+      - { label: "rect — sharp edges: RMS bandwidth DIVERGES", params: { family: rect } }
+      - { label: "one-sided exp — the cliff at t = 0 costs the same", params: { family: expu } }

@@ -1,0 +1,13 @@
+cards:
+  - id: c-def
+    front: "What two properties define LTI, and what miracle do they buy together?"
+    back: "Linearity (superposition) + time-invariance (shift commutes). Together: ONE experiment — the impulse response — determines the response to every input."
+  - id: c-eigen
+    front: "The eigenfunction property of LTI systems."
+    back: "$e^{st} \\mapsto H(s)\\,e^{st}$: complex exponentials pass through scaled by a constant. Hence sinusoid in ⇒ same-frequency sinusoid out; no new frequencies ever."
+  - id: c-sh
+    front: "Relation between step response and impulse response."
+    back: "$h(t) = ds/dt$;  $s(t) = \\int_{-\\infty}^t h(\\tau)\\,d\\tau$."
+  - id: c-distortion
+    front: "What does a harmonic at the output of a single-tone test prove?"
+    back: "The system is NOT linear — LTI systems cannot create frequencies. Harmonic distortion is the standard nonlinearity measurement."
