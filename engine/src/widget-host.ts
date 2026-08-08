@@ -22,7 +22,19 @@ export class WidgetHost {
   constructor(app: App) {
     this.app = app;
     this.onVisibility = this.onVisibility.bind(this);
+    this.onWindowResize = this.onWindowResize.bind(this);
     document.addEventListener('visibilitychange', this.onVisibility);
+    // A window resize re-lays-out every canvas (wiping them); redraw the
+    // visible widgets via their resume() once the resize settles.
+    addEventListener('resize', this.onWindowResize);
+  }
+
+  private resizeTimer: any = null;
+  private onWindowResize() {
+    clearTimeout(this.resizeTimer);
+    this.resizeTimer = setTimeout(() => {
+      for (const m of this.mounted.values()) if (m.visible) m.handle?.resume?.();
+    }, 180);
   }
 
   // Scan container for slots, wrap them in widget frames, arm lazy mounting.
@@ -107,6 +119,8 @@ export class WidgetHost {
 
   destroy() {
     document.removeEventListener('visibilitychange', this.onVisibility);
+    removeEventListener('resize', this.onWindowResize);
+    clearTimeout(this.resizeTimer);
     this.io?.disconnect();
     for (const m of this.mounted.values()) {
       try { m.handle?.destroy?.(); } catch (e) { console.error(e); }

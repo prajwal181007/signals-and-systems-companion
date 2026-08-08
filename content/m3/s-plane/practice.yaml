@@ -1,0 +1,57 @@
+predict:
+  kind: choice
+  prompt: |
+    A waveform rings about 5 times per second while its envelope halves every second.
+    **Commit:** where in the s-plane does its defining point s = σ + jω sit?
+  choices:
+    - "On the jω axis at ω ≈ 31"
+    - "Left half-plane: σ ≈ −0.69 (ln2 per second of halving), ω ≈ ±31 (2π·5)"
+    - "Right half-plane"
+    - "At the origin"
+  answer: 1
+  resolution: |
+    Two coordinates, two jobs: the halving envelope e^{σt} needs σ = −ln2 ≈ −0.69; five rings per
+    second needs ω = 2π·5 ≈ 31 rad/s. Every pole you meet from here on is read exactly this way —
+    real part = decay budget, imaginary part = spin rate. The plane is a map of behaviors.
+
+quiz:
+  - id: q-map
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A point deep in the LEFT half-plane, far from the axis, corresponds to a waveform that:"
+    choices:
+      - "grows quickly"
+      - "decays very fast (large |σ| = short time constant 1/|σ|)"
+      - "oscillates forever"
+      - "is constant"
+    answer: 1
+    explanation: "Left = dies; distance from the axis = speed of dying. Time constant = 1/|σ|."
+  - id: q-axis
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Points exactly ON the jω axis produce:"
+    choices:
+      - "decaying oscillations"
+      - "sustained, never-decaying oscillation (σ = 0: the marginal knife-edge)"
+      - "growing oscillations"
+      - "nothing"
+    answer: 1
+    explanation: "e^{0·t} = 1: the envelope neither grows nor dies. The axis is the stability boundary the whole course keeps returning to."
+  - id: q-conjugate
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Why do off-axis points come with a conjugate ghost at σ − jω?"
+    choices:
+      - "Symmetry aesthetics"
+      - "Real signals require conjugate pairs: e^{(σ+jω)t} + e^{(σ−jω)t} = 2e^{σt}cos(ωt) — the imaginary parts cancel"
+      - "Measurement error"
+      - "They don't"
+    answer: 1
+    explanation: "One complex exponential alone is complex-valued; the pair sums to a real decaying cosine. Real-world poles always hunt in conjugate pairs."
+  - id: q-tc
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "s = −4 + j10. The waveform's time constant (seconds)?"
+    answer: 0.25
+    tolerance: 0.001
+    explanation: "1/|σ| = 1/4 s (envelope e^{−4t}); it spins at 10 rad/s meanwhile. Read both coordinates, always."

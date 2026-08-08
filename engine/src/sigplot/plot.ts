@@ -45,7 +45,14 @@ export class Plot {
     this.ctx = this.canvas.getContext('2d')!;
     this.resize();
     if (typeof ResizeObserver !== 'undefined') {
-      this.ro = new ResizeObserver(() => { this.resize(); this.onResize?.(); });
+      // ResizeObserver always fires once on observe — resizing the backing
+      // store WIPES the canvas, so skip no-op fires or the first draw is lost.
+      this.ro = new ResizeObserver(() => {
+        const rect = this.canvas.getBoundingClientRect();
+        if (Math.abs(rect.width - this.w) < 1) return;
+        this.resize();
+        this.onResize?.();
+      });
       this.ro.observe(this.canvas);
     }
   }

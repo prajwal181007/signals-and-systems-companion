@@ -1,0 +1,10 @@
+cards:
+  - id: c-map
+    front: "The s-plane as a map: what do σ and ω each control?"
+    back: "σ (real): decay/growth — left dies (τ = 1/|σ|), right explodes, axis sustains. ω (imag): spin rate. Every pole-zero plot is read through this atlas."
+  - id: c-pair
+    front: "Why conjugate pairs for off-axis points?"
+    back: "Real signals: e^{(σ+jω)t} + conjugate = 2e^{σt}cos(ωt). Lone complex points give complex waveforms — physics demands the ghost."
+  - id: c-read
+    front: "Waveform for s = −0.7 ± j31?"
+    back: "≈5 Hz ringing (ω/2π) inside an envelope halving each second (e^{−0.69t}). Decay budget + spin rate, read off the coordinates."

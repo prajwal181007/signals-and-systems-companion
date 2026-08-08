@@ -1,0 +1,10 @@
+cards:
+  - id: c-ritual
+    front: "The Laplace ODE-solving ritual (5 steps)."
+    back: "Transform with ICs (sX − x(0⁻) etc.) → collect Y(s) → partial fractions → invert by table → audit endpoints (IVT/FVT after pole check)."
+  - id: c-zizs
+    front: "Zero-input vs zero-state response — where does each come from in Y(s)?"
+    back: "Zero-input: the IC terms in the numerator (stored energy draining). Zero-state: the input's transform through H(s). Y = both, added — superposition of causes."
+  - id: c-why
+    front: "Why does Laplace beat the classical (homogeneous + particular) method?"
+    back: "One algebraic pass carries the ICs automatically (no constant-matching at the end) and handles switched inputs via u(t−t₀) factors. Calculus becomes bookkeeping."

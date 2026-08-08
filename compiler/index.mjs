@@ -170,7 +170,7 @@ async function compileConcept({ group, name, dir, fail }) {
       // via a leading line "@viz widgetId {json-params}".
       facets.intuition = { blocks: await renderIntuitionBlocks(src, widgetIds, id) };
     } else if (fname === 'derivation') {
-      facets.derivation = { steps: await renderDerivationSteps(src, id) };
+      facets.derivation = await renderDerivationSteps(src, id); // { preambleHtml, list }
     } else if (fname === 'misconceptions') {
       facets.misconceptions = await renderMisconceptions(src, id);
     } else {
