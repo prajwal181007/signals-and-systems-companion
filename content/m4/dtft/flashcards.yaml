@@ -1,0 +1,13 @@
+cards:
+  - id: c-def
+    front: "DTFT pair + its inescapable structural property."
+    back: "X(e^{jΩ}) = Σx[n]e^{−jΩn}; x[n] = (1/2π)∫_{2π}Xe^{jΩn}dΩ. ALWAYS 2π-periodic; π = fastest (alternation); [−π,π] is everything."
+  - id: c-slice
+    front: "DTFT ↔ z-transform relation + existence."
+    back: "DTFT = X(z) on the unit circle; exists iff Σ|x| < ∞ ⇔ circle ∈ ROC."
+  - id: c-pair
+    front: "DTFT of aⁿu[n] + instant filter-character check."
+    back: "1/(1−ae^{−jΩ}), |a|<1. Spot values: Ω=0 gives DC gain Σx; Ω=π gives the HF gain. a>0 ⇒ LP, a<0 ⇒ HP."
+  - id: c-window
+    front: "Window length vs spectral resolution."
+    back: "Length-N window ⇒ mainlobe ≈ 4π/N: tones closer than ~2π/N merge. Zero-padding interpolates, never resolves — only more samples do."

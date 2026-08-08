@@ -1,0 +1,8 @@
+widgets:
+  - id: recon
+    type: SamplingLab
+    title: "Reconstruction bench — ideal sinc summing vs the ZOH staircase"
+    params: { f: 3, fs: 12, recon: ideal }
+    presets:
+      - { label: "the DAC staircase (ZOH)", params: { f: 3, fs: 12, recon: zoh } }
+      - { label: "sparse samples, still exact", params: { f: 2, fs: 5, recon: ideal } }

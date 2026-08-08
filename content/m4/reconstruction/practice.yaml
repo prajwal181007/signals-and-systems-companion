@@ -1,0 +1,68 @@
+predict:
+  kind: choice
+  prompt: |
+    Between two rising samples (1 then 2), where does the IDEAL band-limited reconstruction pass at
+    the midpoint? **Commit:**
+  choices:
+    - "Exactly 1.5 — halfway, like connecting the dots"
+    - "Above 1.5 — the sinc sum can legitimately overshoot a straight line"
+    - "Below 1.5"
+    - "Exactly 2"
+  answer: 1
+  resolution: |
+    The unique band-limited curve through the samples is a sum of sincs, and between rising samples
+    it typically runs ABOVE the chord (≈1.70 in the worked example). Linear interpolation adds
+    corners — high frequencies the original never had. Band-limited ≠ polygon; the dots constrain,
+    the sincs decide.
+
+quiz:
+  - id: q-formula
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Ideal reconstruction from samples is:"
+    choices:
+      - "connect the dots with lines"
+      - "$x(t) = \\sum_n x[n]\\,\\mathrm{sinc}((t - nT_s)/T_s)$ — every sample launches a sinc"
+      - "a spline fit"
+      - "hold each value (staircase)"
+    answer: 1
+    explanation: "= ideal low-pass at f_s/2 applied to the sample impulses. Frequency-side replica deletion and time-side sinc summing are the same operation."
+  - id: q-thread
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Why does the sinc sum pass EXACTLY through every sample?"
+    choices:
+      - "It's fitted to"
+      - "At each sample instant, its own sinc equals 1 and every other sinc is at one of its zeros"
+      - "Because of symmetry"
+      - "It doesn't, exactly"
+    answer: 1
+    explanation: "sinc(integer ≠ 0) = 0: the zero spacing equals T_s by construction. One voice per dot; interference between dots."
+  - id: q-zoh
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "The ZOH droop at f = f_s/2 is sinc(1/2) = 2/π of full gain. In dB, that is about: (enter positive number of dB of loss, one decimal)"
+    answer: 3.9
+    tolerance: 0.2
+    explanation: "20log₁₀(2/π) ≈ −3.9 dB. Real DACs pre-compensate this droop or accept it; and they ALWAYS follow with a smoothing filter for the surviving images."
+  - id: q-unreal
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Why is ideal reconstruction unrealizable in real time?"
+    choices:
+      - "Too expensive computationally"
+      - "The sinc kernel is noncausal and infinitely long — each output needs ALL future samples"
+      - "Sampling jitter"
+      - "It is realizable"
+    answer: 1
+    explanation: "Duality's price for a brick-wall spectrum. Truncating the sinc rings (Gibbs's cousin); practical kernels trade droop and guard bands for causality."
+  - id: q-smoothing
+    kind: mcq
+    prompt: "A DAC outputs a visible staircase. What removes the 'steps' in a real system?"
+    choices:
+      - "Nothing — they are inherent"
+      - "The analog smoothing (anti-image) filter after the DAC, which removes the surviving spectral replicas"
+      - "A faster CPU"
+      - "Oversampling alone, always"
+    answer: 1
+    explanation: "The corners ARE replica energy. The post-DAC filter eats it (and oversampling helps by pushing images further away, making that filter easy)."

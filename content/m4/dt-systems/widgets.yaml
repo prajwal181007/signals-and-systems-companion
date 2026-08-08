@@ -1,0 +1,11 @@
+widgets:
+  - id: dt-conv
+    type: ConvolutionMachine
+    title: "DT mode — the sliding dot-product, one table row per output sample"
+    params: { x: rect1, h: exp, view: slide, t: 2 }
+  - id: crank
+    type: DifferenceEquationMachine
+    title: "Feedback becomes h[n] — crank δ through the recursion"
+    params: { a1: 0.8, a2: 0, b0: 1, input: delta }
+    presets:
+      - { label: "unstable echo: a = 1.1", params: { a1: 1.1, a2: 0, b0: 1, input: delta } }

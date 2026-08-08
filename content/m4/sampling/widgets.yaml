@@ -1,0 +1,9 @@
+widgets:
+  - id: lab
+    type: SamplingLab
+    title: "The Sampling & Aliasing Laboratory — cross the Nyquist line and hear the theft"
+    params: { f: 3, fs: 10 }
+    presets:
+      - { label: "the impostor: f=3, fs=5", params: { f: 3, fs: 5 } }
+      - { label: "exam classic: f=7, fs=10 → hear 3", params: { f: 7, fs: 10 } }
+      - { label: "staircase reconstruction (ZOH)", params: { f: 3, fs: 12, recon: zoh } }

@@ -1,0 +1,8 @@
+widgets:
+  - id: explorer
+    type: DTFTExplorer
+    title: "The spectrum ribbon — one lap of the circle, repeated forever"
+    params: { seq: expn, a: 0.8 }
+    presets:
+      - { label: "alternating decay: high-pass", params: { seq: expn, a: -0.8 } }
+      - { label: "windowed cosine: resolution costs samples", params: { seq: coswin, len: 8 } }

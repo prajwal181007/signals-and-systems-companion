@@ -1,0 +1,74 @@
+predict:
+  kind: choice
+  prompt: |
+    A 7 kHz tone is sampled at 10 kHz (below its Nyquist rate of 14 kHz). The samples are fed to a
+    perfect reconstructor. **Commit:** what comes out?
+  choices:
+    - "A weakened 7 kHz tone"
+    - "A clean, full-amplitude 3 kHz tone — a confident impostor threading the same samples"
+    - "Noise"
+    - "Nothing — the reconstructor detects the violation"
+  answer: 1
+  resolution: |
+    |7 − 10| = 3 kHz: the folded frequency. The reconstruction is flawless-looking and wrong — the
+    7 kHz tone's samples are IDENTICAL to a 3 kHz tone's, so no downstream processing can ever tell.
+    Aliasing is identity theft, not degradation; the audio buttons let you hear the stolen identity.
+
+quiz:
+  - id: q-alias
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "A 60 Hz tone is sampled at 100 Hz. The apparent (aliased) frequency in Hz?"
+    answer: 40
+    tolerance: 0.1
+    explanation: "60 > 50 = f_s/2: fold by 100: |60 − 100| = 40 Hz. Write the k and the fold — the ritual is the marks."
+  - id: q-minfs
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "x(t) contains components at 10, 30, and 70 Hz. Minimum sampling rate (Hz) for NO aliasing (enter the strict bound)?"
+    answer: 140
+    tolerance: 0.1
+    explanation: "f_s > 2·f_max = 140 Hz (strictly). At 100 Hz the 70 folds onto 30 — colliding with genuine content: gone forever."
+  - id: q-replicas
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Why does sampling replicate the spectrum at multiples of f_s?"
+    choices:
+      - "Numerical error"
+      - "Multiplying by an impulse comb in time ⇔ convolving with a comb in frequency — and convolving with impulses copies"
+      - "The reconstructor adds copies"
+      - "Aliasing creates them"
+    answer: 1
+    explanation: "Two Module-2 properties composed: comb ↔ comb, ×↔∗. Nyquist is then pure geometry: keep the copies from touching (spacing f_s > width 2f_max)."
+  - id: q-order
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Where must the anti-aliasing filter sit, and why?"
+    choices:
+      - "After the sampler — clean up the digital signal"
+      - "BEFORE the sampler — after folding, the impostor is inside the legitimate band and no filter can separate it"
+      - "Either side works"
+      - "No filter is needed above Nyquist"
+    answer: 1
+    explanation: "Once frequencies fold onto each other, two different inputs share identical samples — the information is destroyed, not hidden. Order is everything."
+  - id: q-exact
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Sampling a sine at EXACTLY twice its frequency is:"
+    choices:
+      - "Perfectly safe — the theorem's magic number"
+      - "Unsafe — you may sample every zero crossing; amplitude/phase information is lost (the theorem demands STRICTLY greater)"
+      - "Twice as safe"
+      - "Impossible"
+    answer: 1
+    explanation: "sin(2πft) sampled at t = n/(2f) gives all zeros. Strict inequality + real-world margin (telephony: 6.8 kHz needed, 8 used) is the practice."
+  - id: q-transfer
+    kind: mcq
+    prompt: "A wagon wheel in a 24 fps film appears to spin slowly BACKWARDS. This is:"
+    choices:
+      - "an optical illusion unrelated to this course"
+      - "aliasing — the spoke frequency exceeds 12 Hz, folding to a small negative frequency"
+      - "motion blur"
+      - "the projector's fault"
+    answer: 1
+    explanation: "The camera samples at 24 fps; spoke rates above 12 Hz fold, and a fold past 0 reads as reverse rotation. The lab's strobe mathematics, at the cinema."

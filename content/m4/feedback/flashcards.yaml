@@ -1,0 +1,13 @@
+cards:
+  - id: c-formula
+    front: "Closed-loop transfer function for forward G, feedback H (negative feedback)."
+    back: "$\\frac{G}{1 + GH}$ — poles move to the roots of 1 + GH = 0; feedback's whole power is this pole relocation."
+  - id: c-first
+    front: "1/(s+1) with unity feedback, gain K: where does the pole go?"
+    back: "s = −(1+K): left, fast, stable for all K — first-order plants love gain."
+  - id: c-double
+    front: "Why can't gain alone stabilize 1/s²?"
+    back: "s² + K = 0 pins poles to the axis (±j√K) for every K — pure oscillation. Damping needs a ZERO (PD control) to bend the locus left."
+  - id: c-why
+    front: "The two deepest reasons feedback exists (beyond speed)."
+    back: "1) Sensitivity reduction: plant drift auto-corrected by the error signal. 2) Pole relocation: dynamics reshaped without rebuilding the plant. Danger: excess gain drives poles across the axis."

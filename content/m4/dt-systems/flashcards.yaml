@@ -1,0 +1,13 @@
+cards:
+  - id: c-sum
+    front: "The convolution sum + the two table checks."
+    back: "y[n] = Σₖ x[k]h[n−k]. Checks: length N+M−1; Σy = Σx·Σh; start indices add."
+  - id: c-dict
+    front: "DT dictionary: causal / BIBO / step response."
+    back: "Causal ⇔ h[n]=0, n<0. BIBO ⇔ Σ|h| < ∞ (⇔ poles in unit disk, causal). s[n] = running sum of h; h = first difference of s."
+  - id: c-workhorses
+    front: "The two canonical FIR filters and their characters."
+    back: "Moving average {⅓,⅓,⅓}: low-pass, smooths noise, blurs edges. First difference {1,−1}: high-pass, kills DC, amplifies jumps."
+  - id: c-geo
+    front: "Σ|aⁿu[n]| = ? and what it certifies."
+    back: "1/(1−|a|) for |a|<1 — finite ⇒ BIBO stable; diverges for |a|≥1. Geometric summability IS the pole criterion."

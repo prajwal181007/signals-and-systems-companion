@@ -1,0 +1,63 @@
+predict:
+  kind: choice
+  prompt: |
+    A motor plant $G(s) = \frac{1}{s(s+2)}$ sits in a unity-feedback loop with gain K. You crank K
+    higher and higher. **Commit:** what happens to the step response?
+  choices:
+    - "Always improves — more gain, more control"
+    - "Faster at first, then increasingly oscillatory: the closed-loop poles migrate toward the axis as K grows"
+    - "Slower"
+    - "Nothing changes — feedback fixes the poles"
+  answer: 1
+  resolution: |
+    Feedback RELOCATES poles, and the migration path (the locus you drew with the slider) heads
+    toward the imaginary axis for this plant: rising K trades damping for speed until ringing
+    dominates. "More gain is always better" is the instinct feedback theory exists to discipline.
+
+quiz:
+  - id: q-relocate
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "G(s) = 1/(s+1) with unity feedback and gain K = 4. The closed-loop pole is at s = ?  (enter the real value)"
+    answer: -5
+    tolerance: 0.01
+    explanation: "Closed loop: G/(1+KG) poles where 1 + K/(s+1) = 0 ⇒ s = −(1+K) = −5. Feedback moved the pole from −1 to −5 without touching the plant — its superpower in one line."
+  - id: q-double
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The double integrator 1/s² under unity feedback with any K > 0 is:"
+    choices:
+      - "stable for large K"
+      - "marginally stable for every K — poles pinned to the jω axis at ±j√K (pure oscillation); gain alone cannot damp it"
+      - "unstable only for small K"
+      - "stable"
+    answer: 1
+    explanation: "s² + K = 0 ⇒ s = ±j√K: on the axis for ALL K. You need a ZERO (PD control) to bend the locus leftward — gain alone changes the pitch of the ringing, never damps it."
+  - id: q-sensitivity
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Why does feedback reduce sensitivity to plant variations?"
+    choices:
+      - "It doesn't"
+      - "Closed-loop gain ≈ 1/H for large loop gain — the loop output is compared with the reference every instant, so plant drift is automatically corrected"
+      - "It filters noise"
+      - "It increases bandwidth only"
+    answer: 1
+    explanation: "Perturb the plant ±10% with the loop open: the output moves ±10%. Closed: the error signal absorbs it. Sensitivity reduction — not speed — is the deepest reason feedback exists."
+  - id: q-rhp
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A plant has a RIGHT-half-plane zero. Raising the loop gain K:"
+    choices:
+      - "always stabilizes"
+      - "eventually destabilizes — closed-loop poles are PULLED TOWARD zeros, and this zero lives in the RHP"
+      - "has no effect on stability"
+      - "cancels the zero"
+    answer: 1
+    explanation: "Locus ends at zeros as K → ∞. A RHP zero is a magnet on the wrong side — the cruelty of non-minimum-phase plants: more effort, worse outcome. (Its step response also dips the wrong way first.)"
+  - id: q-ss
+    kind: numeric
+    prompt: "Motor loop K·G = K/(s(s+2)), unity feedback, step input. The steady-state ERROR is: (FVT after the pole check)"
+    answer: 0
+    tolerance: 0.001
+    explanation: "E(s) = (1/s)/(1 + KG); sE = 1/(1+KG) → 1/(1+∞) = 0 as s→0 (the integrator makes |KG| → ∞ at DC). Type-1 plants track steps exactly — the FVT industrialized."

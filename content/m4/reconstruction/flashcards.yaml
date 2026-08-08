@@ -1,0 +1,10 @@
+cards:
+  - id: c-formula
+    front: "The ideal interpolation formula + why it threads the samples."
+    back: "$x(t) = \\sum x[n]\\,\\mathrm{sinc}((t-nT_s)/T_s)$; sinc(integer≠0) = 0, so at each instant only its own sinc speaks."
+  - id: c-equiv
+    front: "Time-domain and frequency-domain views of ideal reconstruction."
+    back: "Same operation: LPF at f_s/2 deleting replicas ⇔ every sample launching a scaled sinc. Unrealizable: sinc is noncausal, infinite."
+  - id: c-zoh
+    front: "Zero-order hold: what it is + its two spectral costs."
+    back: "Hold each sample flat (staircase) = convolve with a T_s rect. Costs: sinc(f/f_s) droop (−3.9 dB at f_s/2) + surviving images ⇒ smoothing filter after the DAC."

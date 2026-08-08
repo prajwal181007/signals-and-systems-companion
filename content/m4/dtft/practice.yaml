@@ -1,0 +1,67 @@
+predict:
+  kind: choice
+  prompt: |
+    In discrete time, which sequence oscillates FASTEST? **Commit:**
+  choices:
+    - "cos(0.9πn) — close to the alternation limit"
+    - "cos(2πn) — biggest number wins"
+    - "cos(10πn)"
+    - "cos(π n/2)"
+  answer: 0
+  resolution: |
+    Frequency lives on a circle: cos(2πn) = cos(10πn) = 1 for every n — DC in disguise! Wiggle speed
+    is nearness to π (mod 2π), and 0.9π is nearly alternation, the absolute speed limit. "Bigger Ω =
+    faster" is the CT instinct the circle breaks.
+
+quiz:
+  - id: q-periodic
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Why is every DTFT 2π-periodic?"
+    choices:
+      - "By convention"
+      - "e^{−j(Ω+2π)n} = e^{−jΩn} for integer n — whole turns are invisible to samples"
+      - "Because signals are periodic"
+      - "Because of windowing"
+    answer: 1
+    explanation: "The integers force it: the same arithmetic behind rational-only DT periodicity and aliasing. One period [−π, π] carries all the information."
+  - id: q-pair
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "x[n] = (0.5)ⁿu[n]. Evaluate |X(e^{j0})| (the DC gain)."
+    answer: 2
+    tolerance: 0.01
+    explanation: "1/(1−0.5) = 2 = Σx[n] ✓. Spot values at Ω = 0 and π characterize the filter in two lines — here LP (0.67 at π)."
+  - id: q-slice
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The DTFT is the z-transform evaluated where, and when is that legal?"
+    choices:
+      - "at z = 0; always"
+      - "on the unit circle z = e^{jΩ}; when the ROC contains the circle (Σ|x| < ∞)"
+      - "at z = 1 only"
+      - "on the real axis"
+    answer: 1
+    explanation: "The DT twin of 'Fourier = Laplace on the axis.' aⁿu[n] with |a| ≥ 1: z-transform exists, DTFT doesn't — the circle sits outside the ROC."
+  - id: q-flip
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "y[n] = (−1)ⁿ x[n] where x is a low-pass signal. Y is:"
+    choices:
+      - "still low-pass"
+      - "X shifted by π — the low-pass becomes HIGH-pass"
+      - "zero"
+      - "doubled"
+    answer: 1
+    explanation: "(−1)ⁿ = e^{jπn}: modulation slides the circle half a turn. The cheapest LP↔HP conversion in DSP — one sign flip per sample."
+  - id: q-resolution
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Two tones at Ω = 1.00 and 1.15 rad/sample must be resolved. With mainlobe width 4π/N, roughly what N is needed?"
+    choices:
+      - "N ≈ 10"
+      - "N ≈ 84 — need 2π/N ≲ 0.15/2-ish; resolution costs samples"
+      - "N = 4 with zero-padding to 1024"
+      - "any N with a good algorithm"
+    answer: 1
+    explanation: "Separation 0.15 needs lobes of ≈ that width: N ~ 4π/0.15 ≈ 84. Zero-padding redraws the SAME smear finely — cosmetic. Only observed samples buy resolution."

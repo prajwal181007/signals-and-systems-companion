@@ -1,0 +1,13 @@
+cards:
+  - id: c-theorem
+    front: "The sampling theorem — both clauses."
+    back: "A BAND-LIMITED signal (X = 0 beyond f_max) is perfectly recoverable iff f_s > 2f_max, STRICTLY. Nyquist rate = 2f_max."
+  - id: c-replicas
+    front: "Spectrum of a sampled signal?"
+    back: "$X_s = \\frac{1}{T_s}\\sum_k X(j(\\omega - k\\omega_s))$ — replicas at every multiple of ω_s. Nyquist = 'copies don't touch'."
+  - id: c-alias
+    front: "Alias frequency formula + the 60@100 example."
+    back: "Fold into [0, f_s/2]: f_a = |f − k·f_s|. 60 Hz @ 100 Hz → 40 Hz, indistinguishable sample-for-sample."
+  - id: c-order
+    front: "Anti-aliasing filter placement rule."
+    back: "BEFORE the sampler, cutoff f_s/2. After folding, the impostor is inside the band — irreversibly mixed. Losing highs deliberately beats corrupting lows forever."
