@@ -27,7 +27,7 @@ export function renderAtlas(app: App) {
   const svgNS = 'http://www.w3.org/2000/svg';
   const svg = document.createElementNS(svgNS, 'svg');
   svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-  svg.style.cssText = 'width:100%;height:auto;background:var(--bg-panel);border:1px solid var(--line);border-radius:8px';
+  svg.style.cssText = 'width:100%;height:auto;border:1px solid var(--line);border-radius:6px';
 
   // edges
   const edges: Array<{ from: string; to: string; kind: 'prereq' | 'cross' }> = [];
@@ -44,7 +44,7 @@ export function renderAtlas(app: App) {
     const mx = (a.x + b.x) / 2;
     path.setAttribute('d', `M ${a.x} ${a.y} C ${mx} ${a.y}, ${mx} ${b.y}, ${b.x} ${b.y}`);
     path.setAttribute('fill', 'none');
-    path.setAttribute('stroke', 'var(--line-strong)');
+    path.setAttribute('stroke', 'var(--line)');
     path.setAttribute('stroke-width', e.kind === 'prereq' ? '1.5' : '1');
     if (e.kind === 'cross') path.setAttribute('stroke-dasharray', '3 4');
     path.setAttribute('opacity', '0.6');
@@ -65,9 +65,10 @@ export function renderAtlas(app: App) {
   });
 
   // nodes
+  // One accent carries progress; monochrome otherwise (matches the sidebar dots).
   const STATUS_COLOR: Record<string, string> = {
-    untouched: 'var(--line-strong)', seen: 'var(--warn)', learned: 'var(--accent)',
-    secure: 'var(--good)', mastered: 'var(--good)',
+    untouched: 'var(--line)', seen: 'var(--ink-faint)', learned: 'var(--accent)',
+    secure: 'var(--accent)', mastered: 'var(--accent)',
   };
   for (const meta of registry.manifest.concepts) {
     const p = pos.get(meta.id);
@@ -81,7 +82,7 @@ export function renderAtlas(app: App) {
     rect.setAttribute('width', String(colW - 28));
     rect.setAttribute('height', '30');
     rect.setAttribute('rx', '7');
-    rect.setAttribute('fill', 'var(--bg-inset)');
+    rect.setAttribute('fill', 'var(--bg)');
     rect.setAttribute('stroke', STATUS_COLOR[status]);
     rect.setAttribute('stroke-width', meta.heroes ? '2.4' : '1.4');
     const label = document.createElementNS(svgNS, 'text');

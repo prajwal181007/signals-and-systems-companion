@@ -151,8 +151,7 @@ export function predictGate(container: HTMLElement, conceptKey: string, question
   const key = 'w:' + conceptKey;
   if (store?.state.predictions[key]) { onDone(); return; }
   const box = document.createElement('div');
-  box.className = 'panel';
-  box.style.borderColor = 'var(--accent)';
+  box.style.cssText = 'border-left:2px solid var(--accent);padding-left:1.2rem;margin:1.2rem 0';
   box.innerHTML = `<div style="font-weight:600;margin-bottom:.4rem">Predict first</div><div class="prose">${question}</div>`;
   const row = document.createElement('div');
   row.style.cssText = 'display:flex;flex-direction:column;gap:.35rem;margin-top:.5rem';

@@ -45,8 +45,8 @@ function boot() {
       ribbon = document.createElement('div');
       ribbon.id = 'error-ribbon';
       ribbon.style.cssText =
-        'position:fixed;bottom:0;left:0;right:0;z-index:99;background:var(--bad-soft);color:var(--ink);' +
-        'border-top:1px solid var(--bad);padding:.4rem 1rem;font-size:.8rem;display:flex;gap:1rem;align-items:center';
+        'position:fixed;bottom:0;left:0;right:0;z-index:99;background:var(--bg);color:var(--ink);' +
+        'border-top:2px solid var(--bad);padding:.4rem 1rem;font-size:.8rem;display:flex;gap:1rem;align-items:center';
       const dismiss = document.createElement('button');
       dismiss.textContent = 'dismiss';
       dismiss.className = 'btn btn-quiet';

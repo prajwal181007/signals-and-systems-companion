@@ -64,7 +64,12 @@ fs.writeFileSync(path.join(DIST, 'README.txt'),
 2. Your progress is stored by the BROWSER, not in this folder. Use the export
    button on the Today screen weekly (and before exams) to save a backup file.
 3. To move to another computer: copy this folder, then import your backup there.
+
+License: MIT (see LICENSE). Includes KaTeX (MIT) — see THIRD-PARTY-NOTICES.md.
 `);
+// The shipped folder carries its licenses.
+fs.copyFileSync(path.join(ROOT, 'LICENSE'), path.join(DIST, 'LICENSE'));
+fs.copyFileSync(path.join(ROOT, 'THIRD-PARTY-NOTICES.md'), path.join(DIST, 'THIRD-PARTY-NOTICES.md'));
 
 // ---------- 7. No-network audit (structural guarantee #1) ----------
 const { auditDist } = await import('./tooling/no-network-audit.mjs');

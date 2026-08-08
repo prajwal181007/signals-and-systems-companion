@@ -11,21 +11,23 @@ export interface PlotOpts {
   title?: string;
 }
 
-// Palette adapts to color scheme; ordered trace colors are stable app-wide:
-// 0 primary signal, 1 the sliding/secondary (amber = τ), 2 result, 3+ extras.
+// Trace colours CARRY INFORMATION and are stable app-wide: 0 = the primary
+// signal (the app's one accent blue), 1 = the sliding/secondary object
+// (amber — τ, by convention), 2 = the result (green). Everything else in the
+// plot chrome is monochrome: hairline grid, grey axes, grey text.
 const dark = () => matchMedia('(prefers-color-scheme: dark)').matches;
 export const palette = () => ({
   bg: 'transparent',
-  grid: dark() ? 'rgba(255,255,255,.07)' : 'rgba(0,0,0,.06)',
-  axis: dark() ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.35)',
-  text: dark() ? '#b3b9c2' : '#4b5563',
+  grid: dark() ? 'rgba(255,255,255,.06)' : 'rgba(0,0,0,.05)',
+  axis: dark() ? 'rgba(255,255,255,.32)' : 'rgba(0,0,0,.30)',
+  text: dark() ? '#a6aab0' : '#6b6f75',
   traces: dark()
-    ? ['#7aa5ff', '#e6a23c', '#4ade80', '#b794f6', '#f87171', '#4fd1c5']
-    : ['#1d4ed8', '#b45309', '#15803d', '#6d28d9', '#b91c1c', '#0f766e'],
-  fill: dark() ? 'rgba(122,165,255,.18)' : 'rgba(29,78,216,.12)',
-  fillWarm: dark() ? 'rgba(230,162,60,.20)' : 'rgba(180,83,9,.14)',
-  good: dark() ? '#4ade80' : '#15803d',
-  bad: dark() ? '#f87171' : '#b91c1c',
+    ? ['#7d9dee', '#d0a04a', '#4caf7d', '#9aa2ad', '#e57373', '#7c8590']
+    : ['#2451cc', '#9a6700', '#177245', '#82868c', '#b3261e', '#5c626a'],
+  fill: dark() ? 'rgba(125,157,238,.16)' : 'rgba(36,81,204,.09)',
+  fillWarm: dark() ? 'rgba(208,160,74,.18)' : 'rgba(154,103,0,.11)',
+  good: dark() ? '#4caf7d' : '#177245',
+  bad: dark() ? '#e57373' : '#b3261e',
 });
 
 export class Plot {

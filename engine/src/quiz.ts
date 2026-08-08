@@ -15,11 +15,12 @@ export function renderItem(app: App, item: any, onAnswer: (r: QuizResult) => voi
 
   const finish = (correct: boolean, given: any, note?: string) => {
     feedback.innerHTML = '';
+    // Colour appears only on the verdict word — signal, not decoration.
     feedback.appendChild(
-      el('div', { class: 'panel ' + (correct ? '' : ''), style: `border-color:var(--${correct ? 'good' : 'bad'});background:var(--${correct ? 'good' : 'bad'}-soft)` },
-        el('strong', {}, correct ? 'Right. ' : 'Not quite. '),
+      el('div', { class: 'feedback' },
+        el('span', { class: correct ? 'verdict-right' : 'verdict-wrong' }, correct ? 'Right. ' : 'Not quite. '),
         note ? el('span', {}, note + ' ') : '',
-        item.explanationHtml ? el('div', { class: 'prose', html: item.explanationHtml, style: 'margin-top:.4rem' }) : ''),
+        item.explanationHtml ? el('div', { class: 'prose', html: item.explanationHtml, style: 'margin-top:.35rem' }) : ''),
     );
     onAnswer({ correct, given });
   };

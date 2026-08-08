@@ -16,10 +16,10 @@ export function initSearchOverlay(app: App) {
     });
     const results = el('div', { style: 'max-height:60vh;overflow-y:auto;border-top:1px solid var(--line)' });
     const box = el('div', {
-      style: 'width:min(40rem,92vw);background:var(--bg-panel);border:1px solid var(--line-strong);border-radius:12px;box-shadow:0 18px 60px rgba(0,0,0,.35);overflow:hidden',
+      style: 'width:min(40rem,92vw);background:var(--bg);border:1px solid var(--line);border-radius:8px;overflow:hidden',
     }, input, results);
     overlay = el('div', {
-      style: 'position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.35);display:flex;justify-content:center;padding-top:12vh;align-items:flex-start',
+      style: 'position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.25);display:flex;justify-content:center;padding-top:12vh;align-items:flex-start',
       onclick: (e: Event) => { if (e.target === overlay) close(); },
     }, box);
     document.body.appendChild(overlay);

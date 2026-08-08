@@ -58,7 +58,8 @@ defineWidget('SystemTester', (root, params) => {
       chip.className = 'chip';
       const v = found[k];
       chip.textContent = `${label}: ${v || '?'}`;
-      chip.style.cssText = `font-size:.78rem;padding:.15rem .6rem;background:${v ? (v.startsWith('NO') ? 'var(--bad-soft)' : 'var(--good-soft)') : 'var(--bg-inset)'};color:${v ? (v.startsWith('NO') ? 'var(--bad)' : 'var(--good)') : 'var(--ink-faint)'}`;
+      // Plain text; colour only on a settled verdict — signal, not decoration.
+      chip.style.cssText = `font-size:.78rem;padding:0;background:none;text-transform:none;letter-spacing:0;font-weight:600;color:${v ? (v.startsWith('NO') ? 'var(--bad)' : 'var(--good)') : 'var(--ink-faint)'}`;
       scoreboard.appendChild(chip);
     }
   }

@@ -108,8 +108,8 @@ function renderReference(app: App, c: any, content: HTMLElement, host: WidgetHos
     } else if (key === 'misconceptions') {
       const sec = el('section', { id: 'facet-misconceptions' }, el('h2', {}, label));
       for (const m of f) {
-        sec.appendChild(el('div', { class: 'panel' },
-          el('div', { class: 'prose', style: 'color:var(--bad)', html: '<strong>Tempting but wrong:</strong> ' + m.wrongHtml }),
+        sec.appendChild(el('div', { style: 'margin: 0 0 1.4rem; padding-left:1rem; border-left:1px solid var(--line)' },
+          el('div', { class: 'prose', html: '<strong class="verdict-wrong">Tempting but wrong:</strong> ' + m.wrongHtml }),
           m.temptingHtml ? el('div', { class: 'prose muted', html: '<em>Why it tempts:</em> ' + m.temptingHtml }) : '',
           el('div', { class: 'prose', html: '<strong>The repair:</strong> ' + m.correctionHtml })));
       }
@@ -196,7 +196,8 @@ function renderArc(app: App, c: any, content: HTMLElement, host: WidgetHost) {
       case 1: { // Predict — commit before learning; never graded. Asked once:
         // a stored commitment (e.g. from an interrupted first pass) is honored.
         if (!c.predict || app.store.state.predictions[c.id]) { nextStage(); break; }
-        const sec = el('section', { class: 'panel', style: 'border-color:var(--accent)' },
+        // The commitment moment earns its hairline — a gate, not a box.
+        const sec = el('section', { style: 'border-left:2px solid var(--accent);padding-left:1.2rem;margin:2rem 0' },
           el('h2', { style: 'margin-top:0' }, 'Before we start — commit to a guess'),
           el('div', { class: 'prose', html: c.predict.promptHtml }));
         const done = (given: any) => {
