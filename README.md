@@ -1,7 +1,7 @@
 # Signals Companion
 
-A fully-offline learning companion for a university Signals & Systems course
-. One folder; open `index.html`; no internet, no install, no account —
+A fully-offline learning companion for a university Signals & Systems course.
+One folder; open `index.html`; no internet, no install, no account —
 for a whole semester.
 
 Built around a simple conviction: intuition before mathematics. Every concept
