@@ -1,0 +1,73 @@
+predict:
+  kind: choice
+  prompt: |
+    Two tones at 440 Hz and 442 Hz play together. **Commit:** how many beats per second do you hear?
+  choices:
+    - "1 per second — the envelope formula has Δf/2 in it"
+    - "2 per second — Δf; the |·| folds the envelope and halves its period"
+    - "4 per second"
+    - "441 per second"
+  answer: 1
+  resolution: |
+    Envelope: 2|cos(2πΔf·t/2)| with Δf = 2 Hz. The cosine inside runs at 1 Hz — but the absolute
+    value folds every negative lobe upward, so LOUDNESS MAXIMA arrive twice per cosine cycle: 2 per
+    second. Formula rate vs audible rate, separated by one |·| — the classic factor-of-2 trap.
+
+quiz:
+  - id: q-pairs
+    kind: expression
+    tags: [checkpoint]
+    prompt: "Write the Hilbert transform of $\\cos(5t)$ as a function of t."
+    answer: "sin(5t)"
+    vars: [t]
+    explanation: "Every positive-frequency component is delayed 90° of its own cycle: cos→sin. (And sin→−cos; applying twice gives −x.)"
+  - id: q-multiplier
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "In the frequency domain, the Hilbert transformer multiplies X(jω) by:"
+    choices:
+      - "$e^{-j\\omega t_0}$ (a delay)"
+      - "$-j\\,\\mathrm{sgn}(\\omega)$ — unit magnitude, ∓90° by sign of ω"
+      - "$j\\omega$"
+      - "$\\mathrm{sgn}(\\omega)$"
+    answer: 1
+    explanation: "All-pass with a quarter-turn phase flip per half-axis. NOT a time delay — that would be phase ∝ ω, not flat ±90°."
+  - id: q-analytic
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The spectrum of the analytic signal z = x + jx̂ is:"
+    choices:
+      - "the same as X"
+      - "2X for ω > 0, zero for ω < 0 — one-sided"
+      - "|X|²"
+      - "X shifted right"
+    answer: 1
+    explanation: "1 + j(−j sgn ω) = 1 + sgn ω: doubles the right half, kills the redundant mirror. The one-way corkscrew whose radius is the envelope."
+  - id: q-am
+    kind: expression
+    tags: [checkpoint]
+    prompt: "For $x = (3 + \\cos t)\\cos(40t)$ (slow positive envelope), what is |z(t)| — the recovered envelope? (function of t)"
+    answer: "3 + cos(t)"
+    vars: [t]
+    explanation: "Slow, positive a(t) rides through: x̂ = (3+cos t)sin(40t) and |z| = 3 + cos t exactly. The envelope detector's mathematical license — valid until a(t) crosses zero."
+  - id: q-instfreq
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "For the two-tone beat, the 'instantaneous frequency' dφ/dt near an envelope null:"
+    choices:
+      - "equals the average frequency, smoothly"
+      - "spikes and can go NEGATIVE — the question is ill-posed for multicomponent signals"
+      - "equals Δω"
+      - "is zero"
+    answer: 1
+    explanation: "Instantaneous frequency is honest only for single-component signals. At beat nulls the phase whips around — a warning, not a measurement."
+  - id: q-orth
+    kind: mcq
+    prompt: "How do x and x̂ compare in energy, and what is ∫x·x̂ dt?"
+    choices:
+      - "x̂ has half the energy; integral positive"
+      - "equal energy (|X̂|=|X|, Parseval); integral = 0 (orthogonal — 'quadrature')"
+      - "equal energy; integral = E"
+      - "cannot tell"
+    answer: 1
+    explanation: "All-pass ⇒ same |spectrum| ⇒ same energy. Orthogonality: the sgn(ω) integrand is odd against even |X|². Same energy, at right angles — the meaning of quadrature."

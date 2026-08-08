@@ -1,0 +1,8 @@
+widgets:
+  - id: demo
+    type: HilbertDemo
+    title: "Beats under the analytic lens — the envelope made honest"
+    params: { f0: 8, df: 1 }
+    presets:
+      - { label: "closer tones: slower beat", params: { f0: 8, df: 0.4 } }
+      - { label: "wider spacing: fast beat", params: { f0: 8, df: 2.5 } }

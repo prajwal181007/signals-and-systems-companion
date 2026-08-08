@@ -1,0 +1,13 @@
+cards:
+  - id: c-pair
+    front: "CTFT analysis and synthesis formulas."
+    back: "$X(j\\omega) = \\int x(t)e^{-j\\omega t}dt$;  $x(t) = \\frac{1}{2\\pi}\\int X(j\\omega)e^{j\\omega t}d\\omega$ — the 1/2π lives on the synthesis side."
+  - id: c-bridge
+    front: "How does the FS become the FT?"
+    back: "Stretch T₀ → ∞: line spacing ω₀ = 2π/T₀ → 0; the rescaled coefficients T₀cₖ sample a fixed envelope — that envelope IS X(jω)."
+  - id: c-rect
+    front: "FT of the rect pulse (width 2T, height 1)?"
+    back: "$\\frac{2\\sin(\\omega T)}{\\omega}$ — the sinc: first nulls at ω = ±π/T; narrower pulse ⇒ wider sinc."
+  - id: c-dist
+    front: "FT of u(t) and cos(ω₀t) — ordinary or distributional?"
+    back: "Distributional (they aren't absolutely integrable): u(t) ↔ 1/(jω) + πδ(ω); cos ω₀t ↔ π[δ(ω−ω₀)+δ(ω+ω₀)]."

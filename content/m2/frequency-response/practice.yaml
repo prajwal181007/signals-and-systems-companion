@@ -1,0 +1,70 @@
+predict:
+  kind: choice
+  prompt: |
+    An RC low-pass has its corner at ω_c. You drive it exactly AT the corner with a 10 V sinusoid.
+    **Commit:** the steady-state output amplitude is about…
+  choices:
+    - "10 V — the corner is where attenuation begins"
+    - "7.07 V — 1/√2, half the POWER"
+    - "5 V — half the amplitude"
+    - "0 V — cutoff means cut off"
+  answer: 1
+  resolution: |
+    |H(jω_c)| = 1/√2 ≈ 0.707: the −3 dB point is a half-POWER point, not a wall. And the phase there
+    is −45°. "Cutoff" is the most misleading word in filter vocabulary — the widget's sweep shows how
+    gentle a first-order corner really is.
+
+quiz:
+  - id: q-ss
+    kind: expression
+    tags: [checkpoint]
+    prompt: "H(j3) = 0.5·e^{−jπ/2}. Input: $8\\cos(3t)$. Write the steady-state output as a function of t (use sin or cos)."
+    answer: "4 sin(3t)"
+    vars: [t]
+    explanation: "Amplitude 8×0.5 = 4; phase −π/2 turns cos into sin; frequency stays 3. y = 4cos(3t − π/2) = 4sin(3t) — any equivalent form counts."
+  - id: q-corner
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "RC = 0.5 ms. The 3-dB corner frequency ω_c in rad/s?"
+    answer: 2000
+    tolerance: 1
+    explanation: "ω_c = 1/RC = 1/0.0005 = 2000 rad/s (≈ 318 Hz). Derived, not memorized: it's where ωRC = 1."
+  - id: q-composite
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "Input 4 + 6cos(20t) into H = 1/(1+jω/2). Output DC component?"
+    answer: 4
+    tolerance: 0.01
+    explanation: "H(0) = 1: DC passes untouched; the 20 rad/s term is crushed to ≈0.6. Filters treat each frequency independently — compute term by term."
+  - id: q-newfreq
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A student's answer shows a 5 rad/s input emerging at 10 rad/s from an RC filter. Verdict:"
+    choices:
+      - "Fine — filters can double frequencies"
+      - "Impossible for LTI: frequencies are scaled and shifted in phase, never created"
+      - "Possible if the gain is high"
+      - "Possible at resonance"
+    answer: 1
+    explanation: "The eigenfunction property forbids it. New frequencies ⇒ nonlinearity/time-variation. Instant sanity check on any steady-state answer."
+  - id: q-phase
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Two filters have identical flat |H| over the band; one has linear phase, one wildly nonlinear phase. A short pulse goes through each. The outputs:"
+    choices:
+      - "identical — magnitude decides everything"
+      - "the linear-phase one delays the pulse intact; the nonlinear one smears it (frequencies arrive at different times)"
+      - "both smear equally"
+      - "the nonlinear one amplifies"
+    answer: 1
+    explanation: "Phase is timing. Linear phase = pure delay; curvature in phase staggers arrival times and disperses the pulse. Magnitude-only thinking misses half the response."
+  - id: q-transfer
+    kind: mcq
+    prompt: "A square wave exits an RC low-pass with rounded corners. In spectrum language, what happened?"
+    choices:
+      - "The fundamental was removed"
+      - "The high harmonics — which build the sharp edges — were attenuated by |H(jkω₀)|"
+      - "The phase was linear"
+      - "Energy was added at high frequencies"
+    answer: 1
+    explanation: "Per-harmonic multiplication: low k pass, high k die. The rounding IS the missing treble — the FS and H stories composed."

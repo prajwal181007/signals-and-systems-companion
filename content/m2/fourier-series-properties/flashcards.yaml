@@ -1,0 +1,13 @@
+cards:
+  - id: c-shift
+    front: "FS shift property + what stays invariant."
+    back: "x(t−t₀) ↔ cₖe^{−jkω₀t₀}: linear phase ramp; |cₖ| shift-proof."
+  - id: c-diff-int
+    front: "FS differentiation & integration factors (+ the integration condition)."
+    back: "d/dt: ×jkω₀ (treble boost). ∫: ÷jkω₀, legal ONLY if c₀ = 0."
+  - id: c-reversal
+    front: "Time reversal — general law vs real-signal shortcut."
+    back: "x(−t) ↔ c₋ₖ always; equals cₖ* only for REAL x. Quote the general form first."
+  - id: c-halfperiod
+    front: "Effect of a half-period delay on cₖ?"
+    back: "×(−1)ᵏ — odd harmonics flip. (This is why half-wave symmetry kills even harmonics.)"

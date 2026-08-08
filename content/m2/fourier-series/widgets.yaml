@@ -1,0 +1,9 @@
+widgets:
+  - id: builder
+    type: FourierSeriesBuilder
+    title: "The Fourier Series Builder — add harmonics, click stems, watch the chord assemble"
+    params: { target: square, n: 1 }
+    presets:
+      - { label: "square, N = 15: the shape locks in", params: { target: square, n: 15 } }
+      - { label: "triangle: 1/k² decay (compare!)", params: { target: triangle, n: 9 } }
+      - { label: "half-rectified sine: DC + both families", params: { target: halfsin, n: 8 } }

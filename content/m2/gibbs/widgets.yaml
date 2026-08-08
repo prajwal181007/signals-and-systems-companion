@@ -1,0 +1,8 @@
+widgets:
+  - id: gibbs-scope
+    type: FourierSeriesBuilder
+    title: "The Gibbs magnifier — crank N and watch the horn narrow, not lower"
+    params: { target: square, n: 40 }
+    presets:
+      - { label: "N = 5: wide ringing", params: { target: square, n: 5 } }
+      - { label: "N = 60: crowded, same height", params: { target: square, n: 60 } }

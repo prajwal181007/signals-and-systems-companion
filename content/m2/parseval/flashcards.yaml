@@ -1,0 +1,13 @@
+cards:
+  - id: c-energy
+    front: "Parseval, energy form (+ the convention fine print)."
+    back: "$E = \\int|x|^2dt = \\frac{1}{2\\pi}\\int|X(j\\omega)|^2d\\omega$ — the 1/2π pairs with rad/s (absent in Hz)."
+  - id: c-density
+    front: "What is |X(jω)|², physically?"
+    back: "Energy spectral density — energy per unit frequency. Integrate over a band (+ mirror) for band energy. Phase-blind."
+  - id: c-mainlobe
+    front: "Fraction of a rect pulse's energy in its sinc main lobe?"
+    back: "≈ 90.3% — the number behind null-to-null bandwidth."
+  - id: c-both
+    front: "Which Parseval form for which signal class?"
+    back: "Energy form (∫|X|²/2π) for aperiodic energy signals; power form (Σ|cₖ|²) for periodic power signals. Module-1 classification decides."

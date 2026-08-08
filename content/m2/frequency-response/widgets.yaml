@@ -1,0 +1,7 @@
+widgets:
+  - id: probe
+    type: FreqResponseProbe
+    title: "The sweep bench — measure |H| one tone at a time, like a network analyzer"
+    params: { plant: rc }
+    presets:
+      - { label: "resonance: mass-spring-damper", params: { plant: msd } }

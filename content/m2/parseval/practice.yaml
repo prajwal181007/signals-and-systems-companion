@@ -1,0 +1,64 @@
+predict:
+  kind: choice
+  prompt: |
+    A rect pulse's sinc spectrum has a big main lobe and endless side lobes. **Commit to a number:**
+    roughly what fraction of the pulse's total energy lives inside the main lobe (out to the first
+    nulls)?
+  choices:
+    - "About 50%"
+    - "About 70%"
+    - "About 90%"
+    - "Nearly 100% — side lobes are cosmetic"
+  answer: 2
+  resolution: |
+    ≈ 90.3%. This single number justifies null-to-null bandwidth as a convention and quantifies what
+    a filter clipping the side lobes actually costs (≈ 10% of the energy, visible as edge softening).
+    Engineers carry this constant around; now you do too.
+
+quiz:
+  - id: q-form
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Which Parseval form applies to $x = e^{-t}u(t)$, and why?"
+    choices:
+      - "Power form Σ|cₖ|² — every signal has coefficients"
+      - "Energy form ∫|X|²/2π — it is an aperiodic finite-energy signal"
+      - "Either"
+      - "Neither"
+    answer: 1
+    explanation: "Module 1's classification decides: energy signal ⇒ energy form. Periodic ⇒ power form. Mixing them is the category error papers test."
+  - id: q-jump
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "Using Parseval with the pair rect(|ω|≤2) ↔ time-sinc: evaluate $\\frac{1}{2\\pi}\\int_{-2}^{2} 1\\, d\\omega$ — the energy of that time signal."
+    answer: 0.6366
+    tolerance: 0.01
+    explanation: "= 4/(2π) = 2/π ≈ 0.6366. The 'impossible' time-side sinc² integral was a width measurement in disguise."
+  - id: q-halfenergy
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "For $x = e^{-t}u(t)$ (E = 1/2), what FRACTION of the energy lies below the corner |ω| < 1? (decimal)"
+    answer: 0.5
+    tolerance: 0.02
+    explanation: "(1/2π)∫_{−1}^{1}dω/(1+ω²) = arctan(1)/π = 1/4; ratio (1/4)/(1/2) = 50%. The arctan band-energy pattern is the exam's favorite."
+  - id: q-phase
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "An all-pass filter (|H| = 1 everywhere, wild phase) processes x. The output energy is:"
+    choices:
+      - "less — phase distortion dissipates"
+      - "exactly E — energy is phase-blind"
+      - "more"
+      - "depends on the phase slope"
+    answer: 1
+    explanation: "|Y|² = |H|²|X|² = |X|². The waveform can look mangled; the joules don't move. Shape and energy are separate ledgers."
+  - id: q-2pi
+    kind: mcq
+    prompt: "A student computes E = ∫|X(jω)|²dω (no prefactor, ω in rad/s) and gets 6.28× the time-domain answer. The bug:"
+    choices:
+      - "wrong transform"
+      - "the missing 1/2π that pairs with rad/s"
+      - "phase ignored"
+      - "the signal is periodic"
+    answer: 1
+    explanation: "In rad/s the theorem carries 1/2π; in Hz it doesn't. The 2π-inflation is the fingerprint of the dropped factor."

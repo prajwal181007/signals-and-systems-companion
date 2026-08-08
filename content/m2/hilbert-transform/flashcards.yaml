@@ -1,0 +1,13 @@
+cards:
+  - id: c-mult
+    front: "Hilbert transform: frequency-domain definition + the two standard pairs."
+    back: "X̂ = −j·sgn(ω)·X (all-pass, ±90°/component). cos ω₀t → sin ω₀t; sin ω₀t → −cos ω₀t. H² = −1."
+  - id: c-analytic
+    front: "Analytic signal — definition, spectrum, and what its magnitude/angle mean."
+    back: "z = x + jx̂; Z = 2X (ω>0), 0 (ω<0). |z| = envelope, ∠z = phase (d∠z/dt meaningful only for single-component signals)."
+  - id: c-beats
+    front: "Two tones, spacing Δω: envelope formula and AUDIBLE beat rate."
+    back: "Envelope 2|cos(Δω·t/2)|; audible rate = Δω (the |·| halves the period). Formula rate ≠ heard rate."
+  - id: c-props
+    front: "Energy and orthogonality of x vs x̂."
+    back: "Equal energy (all-pass + Parseval); ∫x·x̂ dt = 0 — quadrature companions."

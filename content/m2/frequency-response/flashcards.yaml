@@ -1,0 +1,13 @@
+cards:
+  - id: c-ss
+    front: "Sinusoidal steady-state rule through H(jω)."
+    back: "A·cos(ω₀t+φ) → A|H(jω₀)|·cos(ω₀t + φ + ∠H(jω₀)) — amplitude ×, phase +, frequency UNCHANGED."
+  - id: c-rc
+    front: "RC low-pass H(jω), and the three corner facts."
+    back: "H = 1/(1+jω/ω_c), ω_c = 1/RC. At the corner: |H| = 1/√2 (−3 dB = half POWER), phase = −45°, rolloff −20 dB/dec beyond."
+  - id: c-filter
+    front: "What is filtering, in one line?"
+    back: "Per-frequency multiplication: Y(jω) = H(jω)X(jω). A filter is a shaped multiplication window over the spectrum."
+  - id: c-exists
+    front: "When does H(jω) exist / when is the sweep measurable?"
+    back: "Stable systems (∫|h| < ∞). Unstable systems have no steady state — the measurement itself diverges. (ROC ⊇ jω-axis, in Module 3 language.)"

@@ -1,0 +1,16 @@
+cards:
+  - id: c-core
+    front: "The four everyday FT properties: shift / modulate / scale / convolve."
+    back: "x(t−t₀)↔e^{−jωt₀}X;  x·cos ω_c t ↔ ½X(ω∓ω_c) split;  x(at)↔X(jω/a)/|a| (reciprocal);  x∗h↔XH."
+  - id: c-crossed
+    front: "Multiplication in time corresponds to what in frequency?"
+    back: "CONVOLUTION ÷ 2π: x·y ↔ (X∗Y)/2π. The pairing is crossed — each domain's product is the other's convolution."
+  - id: c-int
+    front: "FT of an integral (and the term everyone drops)."
+    back: "∫x ↔ X/(jω) + πX(0)δ(ω). The δ carries the DC; witness u(t) ↔ 1/(jω) + πδ(ω)."
+  - id: c-duality
+    front: "Duality property + its most famous consequence."
+    back: "X(t) ↔ 2π·x(−ω). Sinc↔rect for free ⇒ ideal filters have sinc (noncausal, infinite) impulse responses: unrealizable."
+  - id: c-seeds
+    front: "The four seed pairs that generate the table."
+    back: "e^{−at}u(t)↔1/(a+jω); rect↔sinc; δ↔1; Gaussian↔Gaussian."

@@ -1,0 +1,81 @@
+predict:
+  kind: choice
+  prompt: |
+    You play a recording at double speed: $y(t) = x(2t)$. **Commit:** what happened to its spectrum?
+  choices:
+    - "Compressed to half the bandwidth — everything shrank"
+    - "Stretched to double the bandwidth, at half the height"
+    - "Unchanged — speed is a time-domain affair"
+    - "Shifted up by a factor of 2"
+  answer: 1
+  resolution: |
+    Reciprocal stretching: x(2t) ↔ ½X(jω/2) — twice as wide, half as tall. Chipmunk-voice playback
+    is literally this property: all formants slide up. "Everything shrank" is the natural first
+    guess, and it is exactly backwards — fast events demand wide bandwidth.
+
+quiz:
+  - id: q-mod
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "x(t) has spectrum X concentrated near ω = 0. The spectrum of $x(t)\\cos(100t)$ is:"
+    choices:
+      - "X shifted to +100 only"
+      - "½X at ω = +100 and ½X at ω = −100"
+      - "X squared"
+      - "X convolved with itself"
+    answer: 1
+    explanation: "cos = half e^{+j100t} + half e^{−j100t}: two half-copies parked at ±100. This split-and-slide IS amplitude modulation."
+  - id: q-conv
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "y = x ∗ h in time. In frequency:"
+    choices:
+      - "$Y = X * H$"
+      - "$Y = X \\cdot H$ — convolution becomes multiplication"
+      - "$Y = X + H$"
+      - "$Y = X/H$"
+    answer: 1
+    explanation: "The convolution theorem — the reason transforms exist. (And the crossed twin: time-multiplication ⇔ frequency-convolution ÷ 2π.)"
+  - id: q-int-delta
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The transform of $u(t) = \\int_{-\\infty}^t \\delta$ is:"
+    choices:
+      - "$1/(j\\omega)$"
+      - "$1/(j\\omega) + \\pi\\delta(\\omega)$ — the δ carries the accumulated DC"
+      - "$\\pi\\delta(\\omega)$"
+      - "$j\\omega$"
+    answer: 1
+    explanation: "Integration = ÷jω PLUS πX(0)δ(ω). Dropping the impulse is the most-baited properties error on papers — u(t) has a nonzero average, and the δ is where it lives."
+  - id: q-genpair
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Using the seed $e^{-at}u(t) \\leftrightarrow \\frac{1}{a+j\\omega}$, the transform of $e^{-a(t-2)}u(t-2)$ is:"
+    choices:
+      - "$\\frac{e^{-j2\\omega}}{a+j\\omega}$ — shift property, phase factor only"
+      - "$\\frac{1}{a+j(\\omega-2)}$"
+      - "$\\frac{2}{a+j\\omega}$"
+      - "$\\frac{e^{+j2\\omega}}{a+j\\omega}$"
+    answer: 0
+    explanation: "Delay by t₀ = 2 ⇒ multiply by e^{−jωt₀} = e^{−j2ω}; magnitude untouched. Frequency-shifting the pole (option B) would be the MODULATION property — a different lever."
+  - id: q-dual
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The ideal low-pass filter (rect spectrum) has impulse response:"
+    choices:
+      - "a rect in time"
+      - "a sinc in time — noncausal and infinitely long, hence unrealizable"
+      - "an impulse"
+      - "a decaying exponential"
+    answer: 1
+    explanation: "Duality on rect↔sinc. The sinc extends to t = −∞: the 'ideal' filter would need to respond before the input — a one-line unrealizability proof via properties."
+  - id: q-crossed
+    kind: mcq
+    prompt: "Windowing a signal (multiplying by a short time window) does what to its spectrum?"
+    choices:
+      - "Nothing"
+      - "Multiplies it by a window"
+      - "Convolves (smears) it with the window's transform, ÷2π"
+      - "Shifts it"
+    answer: 2
+    explanation: "Time-multiplication ⇔ frequency-convolution. Short windows have wide transforms ⇒ heavy smearing — why short observations blur spectral lines (and why DTFT resolution costs samples)."

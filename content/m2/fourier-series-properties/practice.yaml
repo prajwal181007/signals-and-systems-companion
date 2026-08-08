@@ -1,0 +1,70 @@
+predict:
+  kind: choice
+  prompt: |
+    You delay a periodic signal by a quarter period. **Commit:** what happens to its magnitude
+    spectrum |cₖ|?
+  choices:
+    - "Every stem shrinks by cos(π/4)"
+    - "Nothing — magnitudes are shift-proof; only phases tilt (linearly in k)"
+    - "Stems move to new frequencies"
+    - "Odd harmonics flip sign"
+  answer: 1
+  resolution: |
+    Shift multiplies cₖ by the unit-magnitude factor e^{−jkω₀t₀}: pure phase ramp, steeper for higher
+    k. The magnitude spectrum is the shift-invariant fingerprint — this is why spectrum analyzers can
+    identify waveforms without knowing when they started.
+
+quiz:
+  - id: q-shift-factor
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "x(t − T₀/2) has coefficients:"
+    choices:
+      - "$c_k e^{-jk\\pi}$ = $(-1)^k c_k$"
+      - "$c_k e^{+jk\\pi/2}$"
+      - "$c_{-k}$"
+      - "$c_k/2$"
+    answer: 0
+    explanation: "t₀ = T₀/2 ⇒ phase e^{−jkω₀T₀/2} = e^{−jkπ} = (−1)ᵏ. Half-period delay flips odd harmonics — which is exactly the half-wave-symmetry story."
+  - id: q-diff
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "y = dx/dt (x continuous, periodic). Coefficients of y:"
+    choices: ["$c_k/(jk\\omega_0)$", "$jk\\omega_0\\,c_k$", "$-c_k$", "$c_{k-1}$"]
+    answer: 1
+    explanation: "Termwise differentiation multiplies by jkω₀ — a treble boost growing with k. (Integration divides, and needs c₀ = 0.)"
+  - id: q-int-legal
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "When is the integration property cₖ → cₖ/(jkω₀) legal?"
+    choices:
+      - "Always"
+      - "Only when c₀ = 0 — otherwise the integral has a growing ramp and is not periodic"
+      - "Only for even signals"
+      - "Only in discrete time"
+    answer: 1
+    explanation: "The k = 0 slot divides by zero for a reason: DC integrates into a ramp. Check the average first."
+  - id: q-parseval
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "A real periodic signal has c₀ = 0, |c₁| = 1, |c₃| = 0.5 (and conjugate partners), all else 0. P = ?"
+    answer: 2.5
+    tolerance: 0.01
+    explanation: "P = Σ|cₖ|² over ALL k: 1 + 1 + 0.25 + 0.25 = 2.5. Forgetting the negative-k mirror is the classic half-answer."
+  - id: q-reversal
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The general time-reversal property is x(−t) ↔ ?"
+    choices: ["$c_k^*$", "$c_{-k}$ (which equals $c_k^*$ only for real x)", "$-c_k$", "$|c_k|$"]
+    answer: 1
+    explanation: "Index reversal is the law; conjugation is its real-signal shadow. Quote the general rule — the shortcut assumes realness silently."
+  - id: q-transfer
+    kind: mcq
+    prompt: "Differentiating a noisy sensor signal made the noise explode. Which property predicted this?"
+    choices:
+      - "Time shift"
+      - "Differentiation: ×jkω₀ amplifies high harmonics in proportion to k — noise lives up there"
+      - "Parseval"
+      - "Reversal"
+    answer: 1
+    explanation: "d/dt is a treble boost. High-frequency noise gains the most — why practical differentiators always pair with low-pass filtering."

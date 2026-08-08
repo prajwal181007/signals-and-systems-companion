@@ -1,0 +1,67 @@
+predict:
+  kind: choice
+  prompt: |
+    A square wave is built from sinusoids. **Commit before adding harmonics:** which harmonics does
+    it need?
+  choices:
+    - "All of them — square corners need everything"
+    - "Only odd harmonics (1st, 3rd, 5th…), falling off as 1/k"
+    - "Only even harmonics"
+    - "Just the fundamental, strongly amplified"
+  answer: 1
+  resolution: |
+    The square wave is odd AND half-wave symmetric: cosines die (odd), even harmonics die (half-wave).
+    What survives: odd sines with the famous 4/πk weights. Declaring symmetry before integrating is
+    both the insight and the exam mark — half of every coefficient computation is decided before any
+    integral is written.
+
+quiz:
+  - id: q-symmetry
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "A periodic signal is even with half-wave symmetry. Which coefficients can be nonzero?"
+    choices:
+      - "All aₖ and bₖ"
+      - "Odd-k cosines only"
+      - "Odd-k sines only"
+      - "Even-k cosines only"
+    answer: 1
+    explanation: "Even ⇒ sines die; half-wave ⇒ even harmonics die. Survivors: a₁, a₃, a₅… Symmetry does half the exam question."
+  - id: q-dc
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "x(t) is a pulse train: value 3 for one-quarter of each period, 0 otherwise. What is c₀?"
+    answer: 0.75
+    tolerance: 0.001
+    explanation: "c₀ is the average: 3 × (1/4) = 0.75. The DC term never needs an integral — it's the mean, read off the sketch."
+  - id: q-square-b3
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "For the standard ±1 square wave, the trig coefficient b₃ = ?  (Use the 4/πk law; three decimals.)"
+    answer: 0.4244
+    tolerance: 0.01
+    explanation: "b₃ = 4/(3π) ≈ 0.4244. Odd harmonics only, weight 4/πk — the series every EE eventually memorizes."
+  - id: q-midpoint
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "At a jump from −1 to +1, the full (infinite) Fourier series converges to:"
+    choices: ["−1", "+1", "0 — the midpoint", "it diverges there"]
+    answer: 2
+    explanation: "Dirichlet: at a discontinuity the series lands on the average of the two one-sided limits. State it whenever the signal jumps."
+  - id: q-shift
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "x(t) is delayed by T₀/4. What happens to its spectrum?"
+    choices:
+      - "|cₖ| shrinks"
+      - "|cₖ| unchanged; each cₖ gains phase e^{−jkω₀T₀/4} — phases tilt linearly in k"
+      - "harmonics shift to new frequencies"
+      - "even harmonics appear"
+    answer: 1
+    explanation: "Time shift is a pure phase ramp. Magnitude answers 'what ingredients'; phase answers 'how aligned'. Frequencies never move for a periodic signal."
+  - id: q-parseval-power
+    kind: numeric
+    prompt: "A real signal has c₀ = 1, |c₁| = |c₋₁| = 2, all else zero. Its average power P = ?"
+    answer: 9
+    tolerance: 0.01
+    explanation: "Power form of Parseval: P = Σ|cₖ|² = 1 + 4 + 4 = 9. (Counts BOTH ±k stems — the classic slip is writing 5.)"

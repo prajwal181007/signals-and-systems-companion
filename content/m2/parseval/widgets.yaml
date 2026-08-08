@@ -1,0 +1,7 @@
+widgets:
+  - id: ledger
+    type: CTFTExplorer
+    title: "The energy ledger — drag the band edge, watch the fraction accumulate"
+    params: { signal: rect, band: 3 }
+    presets:
+      - { label: "first-order pulse: 50% below the corner", params: { signal: expu, band: 1 } }

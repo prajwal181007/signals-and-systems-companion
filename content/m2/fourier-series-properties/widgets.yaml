@@ -1,0 +1,7 @@
+widgets:
+  - id: props-builder
+    type: FourierSeriesBuilder
+    title: "Property lab — shift the wave, watch magnitudes freeze and phases tilt"
+    params: { target: square, n: 9 }
+    presets:
+      - { label: "triangle = integrated square (1/k²)", params: { target: triangle, n: 9 } }

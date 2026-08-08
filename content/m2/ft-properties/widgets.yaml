@@ -1,0 +1,8 @@
+widgets:
+  - id: explorer
+    type: CTFTExplorer
+    title: "Property levers — shift, scale, modulate, and watch the spectrum respond"
+    params: { signal: rect }
+    presets:
+      - { label: "Gaussian: the self-transform", params: { signal: gauss } }
+      - { label: "one-sided exponential seed", params: { signal: expu } }

@@ -1,0 +1,63 @@
+predict:
+  kind: choice
+  prompt: |
+    At N = 40 terms, the square-wave partial sum overshoots each jump by about 9%.
+    **Commit:** what happens to that overshoot at N = 400?
+  choices:
+    - "It shrinks to about 0.9%"
+    - "It disappears — convergence"
+    - "Same ≈9% height, but squeezed into a narrower sliver at the jump"
+    - "It grows"
+  answer: 2
+  resolution: |
+    The horns narrow toward the jump but their height converges to ≈8.95% of the jump — a theorem
+    with a closed-form constant, not an error that patience fixes. "More terms will flatten it" is
+    the instinct every student brings here; non-uniform convergence is what replaces it.
+
+quiz:
+  - id: q-height
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "A signal jumps from 0 V to 10 V. Roughly what peak does the truncated series reach near the jump (in V)?"
+    answer: 10.9
+    tolerance: 0.15
+    explanation: "Overshoot ≈ 9% of the jump height Δ = 10: peak ≈ 10.9 V. For hardware with 10.5 V absolute maximum, that's a violation — Gibbs is a spec issue."
+  - id: q-midpoint
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "The same signal jumps from 0 to 10. What value does the series converge to AT the jump instant?"
+    answer: 5
+    tolerance: 0.01
+    explanation: "Midpoint of the two one-sided limits — Dirichlet's convergence result, independent of N."
+  - id: q-mechanism
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "Why does truncation ring? Because keeping |k| ≤ N is equivalent to:"
+    choices:
+      - "sampling the signal"
+      - "convolving with a rippled (sinc-like) kernel whose side-lobe proportions don't shrink with N"
+      - "adding noise"
+      - "phase distortion"
+    answer: 1
+    explanation: "Boxcar in frequency ⇔ Dirichlet kernel in time. Its side lobes get swallowed as the running sum crosses a jump — the horns. Narrower with N, same proportions."
+  - id: q-cure
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The engineering cure for Gibbs ringing is:"
+    choices:
+      - "many more terms"
+      - "taper the coefficients (windowing) — trade slightly softer edges for vanishing side lobes"
+      - "shift the signal"
+      - "increase the amplitude margin by 9% forever"
+    answer: 1
+    explanation: "Gentle truncation kills the ripples at the cost of edge sharpness. (Margining by 9% is a real fallback in hardware — but it treats the symptom.)"
+  - id: q-transfer
+    kind: mcq
+    prompt: "Halo-like ripples around sharp edges in a heavily compressed image are:"
+    choices:
+      - "sensor noise"
+      - "Gibbs — the compressor discarded high-frequency terms with a hard cutoff"
+      - "aliasing"
+      - "motion blur"
+    answer: 1
+    explanation: "Discarding high-frequency content sharply = truncating a 2-D Fourier representation: edges ring. Same theorem, different domain."

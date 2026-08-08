@@ -1,0 +1,13 @@
+cards:
+  - id: c-facts
+    front: "Gibbs phenomenon — the three facts."
+    back: "Overshoot → ≈9% (0.0895) of the jump height; narrows but NEVER lowers as N grows; series hits the MIDPOINT at the jump."
+  - id: c-why
+    front: "Mechanism of Gibbs in one line."
+    back: "Truncation = convolution with the rippled Dirichlet kernel; its fixed-proportion side lobes overshoot as they cross a jump."
+  - id: c-cure
+    front: "Cure for Gibbs ringing?"
+    back: "Taper, don't chop: window the coefficients (Hann/Fejér) — side lobes vanish, edges soften slightly, convergence becomes uniform."
+  - id: c-uniform
+    front: "What convergence concept does Gibbs illustrate?"
+    back: "Pointwise but NON-UNIFORM convergence: every fixed point converges, yet the worst-case error near the jump never improves."
