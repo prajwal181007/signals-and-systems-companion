@@ -55,7 +55,15 @@ katexCss = katexCss.replace(/src:[^;}]+/g, (srcDecl) => {
 fs.writeFileSync(path.join(DIST, 'app/styles/katex.css'), katexCss);
 
 // ---------- 6. Shell ----------
-const shell = fs.readFileSync(path.join(ROOT, 'engine/src/shell.html'), 'utf8');
+// Build stamp: content hash of the engine bundle — changes exactly when the
+// app changes, so every asset URL busts the cache on a new build.
+import { createHash } from 'node:crypto';
+const buildStamp = createHash('sha256')
+  .update(fs.readFileSync(path.join(DIST, 'app/engine.js')))
+  .update(fs.readFileSync(path.join(DIST, 'app/widgets.js')))
+  .digest('hex').slice(0, 10);
+const shell = fs.readFileSync(path.join(ROOT, 'engine/src/shell.html'), 'utf8')
+  .replaceAll('{{BUILD}}', buildStamp);
 fs.writeFileSync(path.join(DIST, 'index.html'), shell);
 fs.writeFileSync(path.join(DIST, 'README.txt'),
 `Signals Companion — EC2102 Signals and Systems (offline learning app)

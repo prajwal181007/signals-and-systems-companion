@@ -73,7 +73,7 @@ defineWidget('PhasePortrait', (root, params) => {
         const m = Math.hypot(vx, vy) || 1;
         const s = 0.22;
         const ctx2 = pp.ctx;
-        ctx2.strokeStyle = p.grid === 'rgba(255,255,255,.07)' ? 'rgba(255,255,255,.22)' : 'rgba(0,0,0,.18)';
+        ctx2.strokeStyle = 'rgba(0,0,0,.18)';
         ctx2.beginPath();
         ctx2.moveTo(pp.toX(i), pp.toY(j));
         ctx2.lineTo(pp.toX(i + s * vx / m), pp.toY(j + s * vy / m));

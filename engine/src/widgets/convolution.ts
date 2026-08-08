@@ -31,8 +31,8 @@ defineWidget('ConvolutionMachine', (root, params, ctx) => {
 
   root.appendChild(annotation(
     'One idea, two views. <b>Flip & slide</b> is the bookkeeping; <b>echoes</b> is the reason it works. ' +
-    'Colors are fixed app-wide: <span style="color:var(--blue)">x lives in blue</span>, ' +
-    '<span style="color:var(--amber)">the flipped, sliding h(t−τ) in amber</span>, and the result in green.'));
+    'Colors are fixed app-wide: <span style="color:#2451cc">x lives in blue</span>, ' +
+    '<span style="color:#9a6700">the flipped, sliding h(t−τ) in amber</span>, and the result in green.'));
 
   // ---------- panes ----------
   const paneTop = document.createElement('div');
@@ -115,7 +115,7 @@ defineWidget('ConvolutionMachine', (root, params, ctx) => {
     const nShown = Math.max(2, Math.min(yS.y.length, Math.round(((t - yS.t0) / yS.dt))));
     const ts = Array.from({ length: yS.y.length }, (_, i) => yS.t0 + i * yS.dt);
     top.canvas.style.cursor = 'crosshair';
-    bot.trace(ts, yS.y, { color: p.grid === 'rgba(255,255,255,.07)' ? 'rgba(255,255,255,.25)' : 'rgba(0,0,0,.18)', width: 1.2 });
+    bot.trace(ts, yS.y, { color: 'rgba(0,0,0,.18)', width: 1.2 });
     bot.trace(ts.slice(0, nShown), Array.from(yS.y.slice(0, nShown)), { color: p.traces[2], width: 2.2 });
     const yNow = yS.y[Math.min(yS.y.length - 1, Math.max(0, nShown - 1))] || 0;
     bot.marker(t, yNow, { shape: 'dot', color: p.traces[2], label: yNow.toFixed(2) });

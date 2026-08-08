@@ -60,6 +60,10 @@ export class Registry {
 }
 
 export function injectScript(src: string): Promise<void> {
+  // Version-stamp lazy loads too — a replaced app folder must never be
+  // shadowed by cached concept data from a previous build.
+  const v = (window as any).__SC_BUILD;
+  if (v) src += (src.includes('?') ? '&' : '?') + 'v=' + v;
   return new Promise((resolve, reject) => {
     const s = document.createElement('script');
     const timer = setTimeout(() => {

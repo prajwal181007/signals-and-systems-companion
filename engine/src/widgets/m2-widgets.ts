@@ -509,7 +509,7 @@ defineWidget('FreqResponseProbe', (root, params) => {
     mag.setYRange(0, Math.max(1.4, peak * 1.15));
     mag.begin();
     const ws = Array.from({ length: 300 }, (_, i) => 0.1 * Math.pow(100, i / 299));
-    mag.trace(ws, ws.map((w) => H(w).g), { color: p.grid === 'rgba(255,255,255,.07)' ? 'rgba(255,255,255,.25)' : 'rgba(0,0,0,.2)', width: 1.2, dash: [4, 4] });
+    mag.trace(ws, ws.map((w) => H(w).g), { color: 'rgba(0,0,0,.2)', width: 1.2, dash: [4, 4] });
     for (const m of measured) mag.marker(m.w, m.g, { shape: 'dot', color: p.traces[2], size: 4 });
     mag.marker(wIn, g, { shape: 'o', color: p.traces[1], size: 6 });
     info.set(`ω = ${wIn.toFixed(2)}: gain = ${g.toFixed(3)} (amplitude ratio), phase = ${(ph * 180 / Math.PI).toFixed(0)}° (lag read from the zero-crossing offset). ` +

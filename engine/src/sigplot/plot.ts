@@ -15,19 +15,17 @@ export interface PlotOpts {
 // signal (the app's one accent blue), 1 = the sliding/secondary object
 // (amber — τ, by convention), 2 = the result (green). Everything else in the
 // plot chrome is monochrome: hairline grid, grey axes, grey text.
-const dark = () => matchMedia('(prefers-color-scheme: dark)').matches;
+// One theme: light ground, always (the design's home; no auto-dark variant).
 export const palette = () => ({
   bg: 'transparent',
-  grid: dark() ? 'rgba(255,255,255,.06)' : 'rgba(0,0,0,.05)',
-  axis: dark() ? 'rgba(255,255,255,.32)' : 'rgba(0,0,0,.30)',
-  text: dark() ? '#a6aab0' : '#6b6f75',
-  traces: dark()
-    ? ['#7d9dee', '#d0a04a', '#4caf7d', '#9aa2ad', '#e57373', '#7c8590']
-    : ['#2451cc', '#9a6700', '#177245', '#82868c', '#b3261e', '#5c626a'],
-  fill: dark() ? 'rgba(125,157,238,.16)' : 'rgba(36,81,204,.09)',
-  fillWarm: dark() ? 'rgba(208,160,74,.18)' : 'rgba(154,103,0,.11)',
-  good: dark() ? '#4caf7d' : '#177245',
-  bad: dark() ? '#e57373' : '#b3261e',
+  grid: 'rgba(0,0,0,.05)',
+  axis: 'rgba(0,0,0,.30)',
+  text: '#6b6f75',
+  traces: ['#2451cc', '#9a6700', '#177245', '#82868c', '#b3261e', '#5c626a'],
+  fill: 'rgba(36,81,204,.09)',
+  fillWarm: 'rgba(154,103,0,.11)',
+  good: '#177245',
+  bad: '#b3261e',
 });
 
 export class Plot {
