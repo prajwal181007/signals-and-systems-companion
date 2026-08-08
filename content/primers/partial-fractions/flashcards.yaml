@@ -1,0 +1,13 @@
+cards:
+  - id: c-coverup
+    front: "Cover-up method — what it computes and how."
+    back: "Residue at a simple pole: cover the factor (s−p), evaluate the rest at s = p. Also gives the TOP layer of a repeated pole."
+  - id: c-improper
+    front: "First check before any partial-fraction expansion?"
+    back: "Degrees: if deg N ≥ deg D, LONG-DIVIDE first (quotient → δ-terms on inversion). Expansion of an improper fraction is illegal."
+  - id: c-repeated
+    front: "Expansion form for (s−p)^m in the denominator, and what it buys in time."
+    back: "ALL layers A₁/(s−p) + … + A_m/(s−p)^m. Each extra layer buys a factor of t: 1/(s+a)² ↔ t·e^{−at}u(t)."
+  - id: c-complex
+    front: "Fast route for an irreducible quadratic s² + bs + c?"
+    back: "Complete the square → (s+α)² + β²: the e^{−αt}cos(βt)/sin(βt) templates. Two lines instead of complex simultaneous equations."

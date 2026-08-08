@@ -1,0 +1,13 @@
+cards:
+  - id: c-p12
+    front: "Patterns 1 & 2: ∫₀^∞ e^{−at}dt and ∫₀^∞ tⁿe^{−at}dt (+ conditions)."
+    back: "1/a and n!/a^{n+1}, both for Re(a) > 0 — the condition becomes the ROC."
+  - id: c-p3
+    front: "∫₀^∞ e^{−at}cos(bt)dt and the slick route."
+    back: "a/(a²+b²) = Re{1/(a−jb)}; sine gives b/(a²+b²) = Im part. One complex integral, two table rows."
+  - id: c-parts
+    front: "By-parts assignment rule for polynomial × exponential."
+    back: "DIFFERENTIATE the polynomial (it dies), integrate the exponential. Boundary terms die because exp beats polynomial — say it for the mark."
+  - id: c-zero
+    front: "The integral came out zero — worried?"
+    back: "Check parity first: odd × even over symmetric limits = 0 is CORRECT and common (half of all Fourier coefficients)."

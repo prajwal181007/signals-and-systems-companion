@@ -25,5 +25,7 @@
  "m4/interconnections",
  "primers/complex-numbers",
  "primers/expectation",
- "primers/linear-algebra"
+ "primers/integration-toolkit",
+ "primers/linear-algebra",
+ "primers/partial-fractions"
 ]

@@ -1,0 +1,62 @@
+predict:
+  kind: choice
+  prompt: |
+    You must expand $\dfrac{s^2 + 3s + 1}{(s+1)(s+2)}$. **Commit to the first move:**
+  choices:
+    - "Cover-up at s = −1"
+    - "Write A/(s+1) + B/(s+2) and clear denominators"
+    - "Long division — the fraction is improper (degrees are equal)"
+    - "Complete the square"
+  answer: 2
+  resolution: |
+    Degree 2 over degree 2: improper. Partial fractions is illegal until you divide out the constant
+    (here: 1 − (something proper)). Divers who skip the degree check produce expansions that cannot
+    be right — and the check takes three seconds. Always look at the degrees first.
+
+quiz:
+  - id: q-coverup
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "In $\\frac{s+3}{(s+1)(s+2)} = \\frac{A}{s+1} + \\frac{B}{s+2}$, find A by cover-up."
+    answer: 2
+    tolerance: 0
+    explanation: "Cover (s+1), evaluate at s = −1: (−1+3)/(−1+2) = 2. B similarly = −1."
+  - id: q-layers
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "The correct expansion FORM of $\\frac{s}{(s+1)^2(s+3)}$ is:"
+    choices:
+      - "$\\frac{A}{(s+1)^2} + \\frac{B}{s+3}$"
+      - "$\\frac{A_1}{s+1} + \\frac{A_2}{(s+1)^2} + \\frac{B}{s+3}$"
+      - "$\\frac{A}{s+1} + \\frac{B}{s+3}$"
+      - "$\\frac{As+B}{(s+1)^2} + \\frac{C}{s+3}$"
+    answer: 1
+    explanation: "Repeated poles need EVERY layer up to the multiplicity. (Option D is algebraically workable but nonstandard for the table; option A is the classic dropped-layer error.)"
+  - id: q-repeated
+    kind: numeric
+    tags: [checkpoint]
+    prompt: "For $\\frac{s}{(s+1)^2} = \\frac{A_1}{s+1} + \\frac{A_2}{(s+1)^2}$: find A₂ (the top layer)."
+    answer: -1
+    tolerance: 0
+    explanation: "Cover the whole (s+1)² and evaluate the remaining numerator s at s = −1: A₂ = −1. Then s = 0 gives 0 = A₁ + A₂ ⇒ A₁ = 1."
+  - id: q-complex
+    kind: mcq
+    tags: [checkpoint]
+    prompt: "$\\frac{s+1}{s^2+2s+5}$: the fastest exam route to a time signal is:"
+    choices:
+      - "Solve for complex residues with simultaneous equations"
+      - "Complete the square: $(s+1)^2 + 4$ — it IS the damped-cosine template"
+      - "Long division"
+      - "Cover-up at the complex roots, by hand, in rectangular form"
+    answer: 1
+    explanation: "s² + 2s + 5 = (s+1)² + 2², and the numerator is already (s+1): pure e^{−t}cos(2t) shape. Template recognition beats grinding — though the complex-residue route is valid and sometimes asked."
+  - id: q-check
+    kind: mcq
+    prompt: "You finished an expansion. The 10-second insurance before moving on:"
+    choices:
+      - "Redo the whole thing"
+      - "Substitute one easy s-value (like 0) into both sides and compare"
+      - "Differentiate both sides"
+      - "Nothing — cover-up can't be wrong"
+    answer: 1
+    explanation: "One spot value catches sign slips and dropped layers immediately. Markers see the check and award method marks even when arithmetic slipped."
